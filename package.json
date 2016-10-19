@@ -1,0 +1,23 @@
+{
+    "name":"Aquapoos",
+    "version":"1.1.0",
+    "description":"Web Introduction for Aquapoos products",
+    "devDependencies" : {
+        "babel-core":"*",
+        "babel-loader":"*",
+        "webpack":"*",
+        "babel-preset-react":"*"
+   },
+   "dependencies" : {
+        "express":"*",
+        "body-parser":"*",
+        "compression":"*",
+        "ejs":"*",
+        "express-session":"*",
+        "mongoose":"*",
+        "react":"*",
+        "react-dom":"*",
+        "connect-mongo":"*",
+        "winston":"*"
+   }
+}
