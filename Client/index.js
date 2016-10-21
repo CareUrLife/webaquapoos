@@ -1,7 +1,6 @@
-import Nav from './Module/index.nav.js';
-import react, {Component} from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-
+import Nav from './Module/index.nav.js';
 class Index extends Component {
     constructor(props) {
         super(props);
@@ -9,8 +8,8 @@ class Index extends Component {
 
     render() {
         return(
-            <Nav items={{link:'#', name: 'Đăng ký'}, {link:'#', name: 'Blog'}, {link:'#', name: 'Phản hồi'}, {link:'#', name: 'Về chúng tôi'}}/>
-        )
+            <Nav items={[{link:'#', name: 'Đăng ký', key: "dk"}, {link:'#', name: 'Blog', key: "bl"}, {link:'#', name: 'Phản hồi', key: "fb"}, {link:'#', name: 'Về chúng tôi', key: 'am'}]}/>
+        );
     }
 }
 

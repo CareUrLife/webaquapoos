@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
 
 
 class Nav extends Component {
@@ -9,26 +9,30 @@ class Nav extends Component {
 
     render() {
         return (
-            <nav class="navbar navbar-default">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="">
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
+            <nav className="navbar navbar-default">
+                <div className="container-fluid">
+                    <div className="navbar-header">
+                        <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="">
+                            <span className="icon-bar"></span>
+                            <span className="icon-bar"></span>
+                            <span className="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#">AquapoOS</a>
+                        <a className="navbar-brand" href="#">AquapoOS</a>
                     </div>
-                    <div class="collapse narbar-collapse" id="navbar-content">
-                        <li class="active"><a href="#">Home</a></li>
-                        {this.props.items.map(function(item, i) {
-                            return (
-                                <li><a href={item.link}>{item.name}</a></li>
-                            ); 
-                        })}
+                    <div className="collapse navbar-collapse" id="navbar-content">
+                        <ul className="nav navbar-nav">
+                            <li className="active"><a href="#">Home</a></li>
+                            {this.props.items.map(function(item, i) {
+                                return (
+                                    <li key={item.key}><a href={item.link}>{item.name}</a></li>
+                                ); 
+                            })}
+                        </ul>
                     </div>
                 </div>
             </nav>
         );
     }
 }
+
+export default Nav;
