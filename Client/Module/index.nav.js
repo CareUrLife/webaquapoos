@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 
 
 class Nav extends Component {
@@ -18,6 +18,14 @@ class Nav extends Component {
                             <span class="icon-bar"></span>
                         </button>
                         <a class="navbar-brand" href="#">AquapoOS</a>
+                    </div>
+                    <div class="collapse narbar-collapse" id="navbar-content">
+                        <li class="active"><a href="#">Home</a></li>
+                        {this.props.items.map(function(item, i) {
+                            return (
+                                <li><a href={item.link}>{item.name}</a></li>
+                            ); 
+                        })}
                     </div>
                 </div>
             </nav>
