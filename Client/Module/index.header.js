@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 
-class Footer extends Component {
+class Header extends Component {
 
     constructor(props) {
         super(props);
@@ -11,9 +11,9 @@ class Footer extends Component {
     render() {
         var media;
         if(this.props.media.mType === "video") {
-            media = (<iframe src={this.props.media.mSrc} frameborder=0 webkitallowfullscreen mozallowfullscreen allowfullscreen ></iframe>);
-        }else if(this.props.media.mType === "") {
-            media = (<img src={this.props.media.mSrc}>);
+            media = (<iframe src={this.props.media.mSrc} frameborder={0} webkitallowfullscreen mozallowfullscreen allowfullscreen ></iframe>);
+        }else if(this.props.media.mType === "image") {
+            media = (<img src={this.props.media.mSrc}/>);
         }
         return (
             <header>
@@ -32,3 +32,6 @@ class Footer extends Component {
         );
     }
 } 
+ 
+
+export default Header;

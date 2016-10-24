@@ -67,6 +67,10 @@
 
 	var _indexNav2 = _interopRequireDefault(_indexNav);
 
+	var _indexHeader = __webpack_require__(174);
+
+	var _indexHeader2 = _interopRequireDefault(_indexHeader);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -87,7 +91,12 @@
 	    _createClass(Index, [{
 	        key: 'render',
 	        value: function render() {
-	            return _react2.default.createElement(_indexNav2.default, { items: [{ link: '#', name: 'Đăng ký', key: "dk" }, { link: '#', name: 'Blog', key: "bl" }, { link: '#', name: 'Phản hồi', key: "fb" }, { link: '#', name: 'Về chúng tôi', key: 'am' }] });
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(_indexNav2.default, { items: [{ link: '#', name: 'Đăng ký', key: "dk" }, { link: '#', name: 'Blog', key: "bl" }, { link: '#', name: 'Phản hồi', key: "fb" }, { link: '#', name: 'Về chúng tôi', key: 'am' }] }),
+	                _react2.default.createElement(_indexHeader2.default, { media: { mType: "image", mSrc: "Images/header.jpg" } })
+	            );
 	        }
 	    }]);
 
@@ -21558,6 +21567,87 @@
 	}(_react.Component);
 
 	exports.default = Nav;
+
+/***/ },
+/* 174 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Header = function (_Component) {
+	    _inherits(Header, _Component);
+
+	    function Header(props) {
+	        _classCallCheck(this, Header);
+
+	        return _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).call(this, props));
+	    }
+
+	    _createClass(Header, [{
+	        key: "render",
+	        value: function render() {
+	            var media;
+	            if (this.props.media.mType === "video") {
+	                media = _react2.default.createElement("iframe", { src: this.props.media.mSrc, frameborder: 0, webkitallowfullscreen: true, mozallowfullscreen: true, allowfullscreen: true });
+	            } else if (this.props.media.mType === "image") {
+	                media = _react2.default.createElement("img", { src: this.props.media.mSrc });
+	            }
+	            return _react2.default.createElement(
+	                "header",
+	                null,
+	                _react2.default.createElement(
+	                    "div",
+	                    { className: "videowrap" },
+	                    _react2.default.createElement(
+	                        "div",
+	                        { className: "wrap" },
+	                        _react2.default.createElement(
+	                            "div",
+	                            { className: "half" },
+	                            _react2.default.createElement(
+	                                "h2",
+	                                null,
+	                                "Aquapo-OS"
+	                            ),
+	                            _react2.default.createElement(
+	                                "p",
+	                                null,
+	                                "Brevity Introduction Sentence about Aquapo-OS"
+	                            )
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        "div",
+	                        { className: "mediabox" },
+	                        media
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return Header;
+	}(_react.Component);
+
+	exports.default = Header;
 
 /***/ }
 /******/ ]);
