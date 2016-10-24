@@ -1,0 +1,63 @@
+body {
+    overflow-x: hidden;
+    font-family: "Roboto Slab", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    /*webkit-tap-highlight-color: #3c763d*/
+    /*background: url("http://i.imgur.com/HgflTDf.jpg") 50% fixed;*/
+    background-size: cover;
+    height: 100vh;
+}
+
+header {
+    /*background-image: url(../img/header-pg.jpg);*/
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    text-align: center;
+    color: #fff;
+    position: relative;
+    
+}
+
+header .mediabox {
+    height : inherit;
+    width : inherit;
+    position : relative;
+}
+
+header .mediabox img {
+    height : inherit;
+    width : 100%;
+}
+/*
+.container {
+    margin-left: 100px;
+    margin-right: 100px;
+    position : relative;
+
+}
+*/
+.overlay {
+    position : absolute;
+    z-index : 1;
+    top : 0;
+    left : 0;
+}
+
+.half {
+    height : inherit;
+    width : 50%;
+}
+
+.navbar-custom {
+    margin: 0;
+}
+
+@media(min-width: 1300px) {
+    .container {
+        min-width : 1300px;
+    }
+}

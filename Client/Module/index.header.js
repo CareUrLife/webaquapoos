@@ -16,19 +16,21 @@ class Header extends Component {
             media = (<img src={this.props.media.mSrc}/>);
         }
         return (
-            <header>
-                <div className="videowrap">
-                    <div className="wrap">
-                        <div className="half">
-                            <h2>Aquapo-OS</h2>
-                            <p>Brevity Introduction Sentence about Aquapo-OS</p>
+            <div className="container">
+                <header>
+                        <div className="videowrap">
+                            <div className="mediabox">
+                                {media}
+                            </div>
                         </div>
-                    </div>
-                    <div className="mediabox">
-                        {media}
-                    </div>
-                </div> 
-            </header>
+                        <div className="overlay">
+                            <div className="half">
+                                <h2>Aquapo-OS</h2>
+                                <p>Brevity Introduction Sentence about Aquapo-OS</p>
+                            </div>
+                        </div>
+                </header>
+            </div>
         );
     }
 } 

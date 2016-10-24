@@ -21509,53 +21509,57 @@
 	        key: "render",
 	        value: function render() {
 	            return _react2.default.createElement(
-	                "nav",
-	                { className: "navbar navbar-default" },
+	                "div",
+	                { className: "container" },
 	                _react2.default.createElement(
-	                    "div",
-	                    { className: "container-fluid" },
+	                    "nav",
+	                    { className: "navbar navbar-default navbar-custom" },
 	                    _react2.default.createElement(
 	                        "div",
-	                        { className: "navbar-header" },
+	                        { className: "container-fluid" },
 	                        _react2.default.createElement(
-	                            "button",
-	                            { type: "button", className: "navbar-toggle", "data-toggle": "collapse", "data-target": "" },
-	                            _react2.default.createElement("span", { className: "icon-bar" }),
-	                            _react2.default.createElement("span", { className: "icon-bar" }),
-	                            _react2.default.createElement("span", { className: "icon-bar" })
+	                            "div",
+	                            { className: "navbar-header" },
+	                            _react2.default.createElement(
+	                                "button",
+	                                { type: "button", className: "navbar-toggle", "data-toggle": "collapse", "data-target": "" },
+	                                _react2.default.createElement("span", { className: "icon-bar" }),
+	                                _react2.default.createElement("span", { className: "icon-bar" }),
+	                                _react2.default.createElement("span", { className: "icon-bar" })
+	                            ),
+	                            _react2.default.createElement(
+	                                "a",
+	                                { className: "navbar-brand", href: "#" },
+	                                "AquapoOS"
+	                            )
 	                        ),
 	                        _react2.default.createElement(
-	                            "a",
-	                            { className: "navbar-brand", href: "#" },
-	                            "AquapoOS"
-	                        )
-	                    ),
-	                    _react2.default.createElement(
-	                        "div",
-	                        { className: "collapse navbar-collapse", id: "navbar-content" },
-	                        _react2.default.createElement(
-	                            "ul",
-	                            { className: "nav navbar-nav" },
+	                            "div",
+	                            { className: "collapse navbar-collapse", id: "navbar-content" },
 	                            _react2.default.createElement(
-	                                "li",
-	                                { className: "active" },
+	                                "ul",
+	                                { className: "nav navbar-nav" },
 	                                _react2.default.createElement(
-	                                    "a",
-	                                    { href: "#" },
-	                                    "Home"
-	                                )
-	                            ),
-	                            this.props.items.map(function (item, i) {
-	                                return _react2.default.createElement(
 	                                    "li",
-	                                    { key: item.key },
+	                                    { className: "active" },
 	                                    _react2.default.createElement(
 	                                        "a",
-	                                        { href: item.link },
-	                                        item.name
+	                                        { href: "#" },
+	                                        "Home"
 	                                    )
-	                                );
-	                            })
+	                                ),
+	                                this.props.items.map(function (item, i) {
+	                                    return _react2.default.createElement(
+	                                        "li",
+	                                        { key: item.key },
+	                                        _react2.default.createElement(
+	                                            "a",
+	                                            { href: item.link },
+	                                            item.name
+	                                        )
+	                                    );
+	                                })
+	                            )
 	                        )
 	                    )
 	                )
@@ -21611,14 +21615,23 @@
 	                media = _react2.default.createElement("img", { src: this.props.media.mSrc });
 	            }
 	            return _react2.default.createElement(
-	                "header",
-	                null,
+	                "div",
+	                { className: "container" },
 	                _react2.default.createElement(
-	                    "div",
-	                    { className: "videowrap" },
+	                    "header",
+	                    null,
 	                    _react2.default.createElement(
 	                        "div",
-	                        { className: "wrap" },
+	                        { className: "videowrap" },
+	                        _react2.default.createElement(
+	                            "div",
+	                            { className: "mediabox" },
+	                            media
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        "div",
+	                        { className: "overlay" },
 	                        _react2.default.createElement(
 	                            "div",
 	                            { className: "half" },
@@ -21633,11 +21646,6 @@
 	                                "Brevity Introduction Sentence about Aquapo-OS"
 	                            )
 	                        )
-	                    ),
-	                    _react2.default.createElement(
-	                        "div",
-	                        { className: "mediabox" },
-	                        media
 	                    )
 	                )
 	            );
