@@ -69,6 +69,10 @@ header .mediabox img {
     
 }
 
+.navbar-custom .container-fluid {
+    padding-right: 0px;
+}
+
 .container-root {
   padding-right: 0px;
   padding-left: 0px;

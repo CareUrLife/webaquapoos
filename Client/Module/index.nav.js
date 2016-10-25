@@ -28,6 +28,7 @@ class Nav extends Component {
                                         <li key={item.key} className={item.className}><a href={item.link}>{item.name}</a></li>
                                     ); 
                                 })}
+                                <li><a className="fa fa-shopping-basket fa-stack-2x " aria-hidden="true" style={{color: "#006B3C"}}></a></li>
                             </ul>
                         </div>
                     </div>

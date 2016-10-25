@@ -21560,7 +21560,12 @@
 	                                        item.name
 	                                    )
 	                                );
-	                            })
+	                            }),
+	                            _react2.default.createElement(
+	                                "li",
+	                                null,
+	                                _react2.default.createElement("a", { className: "fa fa-shopping-basket fa-stack-2x ", "aria-hidden": "true", style: { color: "#006B3C" } })
+	                            )
 	                        )
 	                    )
 	                )
