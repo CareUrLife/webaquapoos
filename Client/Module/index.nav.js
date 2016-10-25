@@ -25,7 +25,7 @@ class Nav extends Component {
                                 <li className="active"><a href="#">Home</a></li>
                                 {this.props.items.map(function(item, i) {
                                     return (
-                                        <li key={item.key}><a href={item.link}>{item.name}</a></li>
+                                        <li key={item.key} className={item.className}><a href={item.link}>{item.name}</a></li>
                                     ); 
                                 })}
                             </ul>

@@ -12,7 +12,7 @@ header {
     /*background-image: url(../img/header-pg.jpg);*/
     background-repeat: no-repeat;
     background-attachment: scroll;
-    background-position: center center;
+    background-position: center ;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
@@ -54,12 +54,19 @@ header .mediabox img {
 
 .navbar-custom {
     margin: 0;
-    
     color: transparent;
 }
 
 .navbar-custom .nav-custom {
     font-size : 20px;
+}
+    
+.nav-custom li.nav-special>a {
+    color : #007FFF;
+}
+
+.nav-custom li.nav-normal {
+    
 }
 
 .container-root {

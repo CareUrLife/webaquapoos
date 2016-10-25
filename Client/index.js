@@ -10,7 +10,7 @@ class Index extends Component {
     render() {
         return(
             <div className="container-root">
-                <Nav items={[{link:'#', name: 'Đăng ký', key: "dk"}, {link:'#', name: 'Blog', key: "bl"}, {link:'#', name: 'Phản hồi', key: "fb"}, {link:'#', name: 'Về chúng tôi', key: 'am'}]}/>
+                <Nav items={[{link:'#', name: 'Tính năng', key: "dk", className: "nav-normal"}, {link:'#', name: 'Blog', key: "bl", className: "nav-normal"}, {link:'#', name: 'Về chúng tôi', key: "fb", className: "nav-normal"}, {link:'#', name: 'Đặt hàng', key: 'am', className: "nav-special"}]}/>
                 <Header media={{mType : "image", mSrc : "Images/header.jpg"}}/>
             </div>
         );

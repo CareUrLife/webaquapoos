@@ -94,7 +94,7 @@
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'container-root' },
-	                _react2.default.createElement(_indexNav2.default, { items: [{ link: '#', name: 'Đăng ký', key: "dk" }, { link: '#', name: 'Blog', key: "bl" }, { link: '#', name: 'Phản hồi', key: "fb" }, { link: '#', name: 'Về chúng tôi', key: 'am' }] }),
+	                _react2.default.createElement(_indexNav2.default, { items: [{ link: '#', name: 'Tính năng', key: "dk", className: "nav-normal" }, { link: '#', name: 'Blog', key: "bl", className: "nav-normal" }, { link: '#', name: 'Về chúng tôi', key: "fb", className: "nav-normal" }, { link: '#', name: 'Đặt hàng', key: 'am', className: "nav-special" }] }),
 	                _react2.default.createElement(_indexHeader2.default, { media: { mType: "image", mSrc: "Images/header.jpg" } })
 	            );
 	        }
@@ -21553,7 +21553,7 @@
 	                            this.props.items.map(function (item, i) {
 	                                return _react2.default.createElement(
 	                                    "li",
-	                                    { key: item.key },
+	                                    { key: item.key, className: item.className },
 	                                    _react2.default.createElement(
 	                                        "a",
 	                                        { href: item.link },
