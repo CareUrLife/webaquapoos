@@ -93,7 +93,7 @@
 	        value: function render() {
 	            return _react2.default.createElement(
 	                'div',
-	                null,
+	                { className: 'container-root' },
 	                _react2.default.createElement(_indexNav2.default, { items: [{ link: '#', name: 'Đăng ký', key: "dk" }, { link: '#', name: 'Blog', key: "bl" }, { link: '#', name: 'Phản hồi', key: "fb" }, { link: '#', name: 'Về chúng tôi', key: 'am' }] }),
 	                _react2.default.createElement(_indexHeader2.default, { media: { mType: "image", mSrc: "Images/header.jpg" } })
 	            );
@@ -21509,57 +21509,58 @@
 	        key: "render",
 	        value: function render() {
 	            return _react2.default.createElement(
-	                "div",
-	                { className: "container" },
+	                "nav",
+	                { className: "navbar navbar-default navbar-custom" },
 	                _react2.default.createElement(
-	                    "nav",
-	                    { className: "navbar navbar-default navbar-custom" },
+	                    "div",
+	                    { className: "container-fluid" },
 	                    _react2.default.createElement(
 	                        "div",
-	                        { className: "container-fluid" },
+	                        { className: "navbar-header" },
 	                        _react2.default.createElement(
-	                            "div",
-	                            { className: "navbar-header" },
+	                            "button",
+	                            { type: "button", className: "navbar-toggle hidden-lg-up", "data-toggle": "collapse", "data-target": ".navbar-collapse" },
 	                            _react2.default.createElement(
-	                                "button",
-	                                { type: "button", className: "navbar-toggle", "data-toggle": "collapse", "data-target": "" },
-	                                _react2.default.createElement("span", { className: "icon-bar" }),
-	                                _react2.default.createElement("span", { className: "icon-bar" }),
-	                                _react2.default.createElement("span", { className: "icon-bar" })
+	                                "span",
+	                                { className: "sr-only" },
+	                                "Toggle Navigation"
 	                            ),
-	                            _react2.default.createElement(
-	                                "a",
-	                                { className: "navbar-brand", href: "#" },
-	                                "AquapoOS"
-	                            )
+	                            _react2.default.createElement("span", { className: "icon-bar" }),
+	                            _react2.default.createElement("span", { className: "icon-bar" }),
+	                            _react2.default.createElement("span", { className: "icon-bar" })
 	                        ),
 	                        _react2.default.createElement(
-	                            "div",
-	                            { className: "collapse navbar-collapse", id: "navbar-content" },
+	                            "a",
+	                            { className: "navbar-brand", href: "#" },
+	                            "AquapoOS"
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        "div",
+	                        { className: "collapse navbar-collapse ", id: "navbar-content" },
+	                        _react2.default.createElement(
+	                            "ul",
+	                            { className: "nav navbar-nav nav-custom navbar-right" },
 	                            _react2.default.createElement(
-	                                "ul",
-	                                { className: "nav navbar-nav" },
+	                                "li",
+	                                { className: "active" },
 	                                _react2.default.createElement(
+	                                    "a",
+	                                    { href: "#" },
+	                                    "Home"
+	                                )
+	                            ),
+	                            this.props.items.map(function (item, i) {
+	                                return _react2.default.createElement(
 	                                    "li",
-	                                    { className: "active" },
+	                                    { key: item.key },
 	                                    _react2.default.createElement(
 	                                        "a",
-	                                        { href: "#" },
-	                                        "Home"
+	                                        { href: item.link },
+	                                        item.name
 	                                    )
-	                                ),
-	                                this.props.items.map(function (item, i) {
-	                                    return _react2.default.createElement(
-	                                        "li",
-	                                        { key: item.key },
-	                                        _react2.default.createElement(
-	                                            "a",
-	                                            { href: item.link },
-	                                            item.name
-	                                        )
-	                                    );
-	                                })
-	                            )
+	                                );
+	                            })
 	                        )
 	                    )
 	                )
@@ -21615,11 +21616,11 @@
 	                media = _react2.default.createElement("img", { src: this.props.media.mSrc });
 	            }
 	            return _react2.default.createElement(
-	                "div",
-	                { className: "container" },
+	                "header",
+	                null,
 	                _react2.default.createElement(
-	                    "header",
-	                    null,
+	                    "div",
+	                    { className: "container-fluid" },
 	                    _react2.default.createElement(
 	                        "div",
 	                        { className: "videowrap" },

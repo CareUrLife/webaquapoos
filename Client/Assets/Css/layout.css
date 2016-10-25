@@ -1,6 +1,7 @@
+
 body {
     overflow-x: hidden;
-    font-family: "Roboto Slab", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Dosis", sans-serif;
     /*webkit-tap-highlight-color: #3c763d*/
     /*background: url("http://i.imgur.com/HgflTDf.jpg") 50% fixed;*/
     background-size: cover;
@@ -19,7 +20,6 @@ header {
     text-align: center;
     color: #fff;
     position: relative;
-    
 }
 
 header .mediabox {
@@ -54,10 +54,45 @@ header .mediabox img {
 
 .navbar-custom {
     margin: 0;
+    
+    color: transparent;
 }
 
-@media(min-width: 1300px) {
-    .container {
-        min-width : 1300px;
+.navbar-custom .nav-custom {
+    font-size : 20px;
+}
+
+.container-root {
+  padding-right: 0px;
+  padding-left: 0px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+header .container-fluid {
+    padding-left : 0px;
+    padding-right : 0px;
+}
+@media (min-width: 768px) {
+    .container-root {
+        width: 750px;
     }
 }
+@media (min-width: 992px) {
+    .container-root {
+        width: 970px;
+    }
+}
+@media (min-width: 1200px) {
+    .container-root {
+        width: 1170px;
+    }
+}
+
+@media (min-width:1500px) {
+    .container-root {
+        width: 1300px;
+    }    
+}
+
+

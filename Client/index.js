@@ -9,7 +9,7 @@ class Index extends Component {
 
     render() {
         return(
-            <div>
+            <div className="container-root">
                 <Nav items={[{link:'#', name: 'Đăng ký', key: "dk"}, {link:'#', name: 'Blog', key: "bl"}, {link:'#', name: 'Phản hồi', key: "fb"}, {link:'#', name: 'Về chúng tôi', key: 'am'}]}/>
                 <Header media={{mType : "image", mSrc : "Images/header.jpg"}}/>
             </div>

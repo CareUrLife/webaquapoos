@@ -16,8 +16,8 @@ class Header extends Component {
             media = (<img src={this.props.media.mSrc}/>);
         }
         return (
-            <div className="container">
                 <header>
+                    <div className="container-fluid">
                         <div className="videowrap">
                             <div className="mediabox">
                                 {media}
@@ -29,8 +29,8 @@ class Header extends Component {
                                 <p>Brevity Introduction Sentence about Aquapo-OS</p>
                             </div>
                         </div>
+                    </div>
                 </header>
-            </div>
         );
     }
 } 

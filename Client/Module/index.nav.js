@@ -9,19 +9,19 @@ class Nav extends Component {
 
     render() {
         return (
-            <div className="container">
                 <nav className="navbar navbar-default navbar-custom">
                     <div className="container-fluid">
                         <div className="navbar-header">
-                            <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="">
+                            <button type="button" className="navbar-toggle hidden-lg-up" data-toggle="collapse" data-target=".navbar-collapse">
+                                <span className="sr-only">Toggle Navigation</span>
                                 <span className="icon-bar"></span>
                                 <span className="icon-bar"></span>
                                 <span className="icon-bar"></span>
                             </button>
                             <a className="navbar-brand" href="#">AquapoOS</a>
                         </div>
-                        <div className="collapse navbar-collapse" id="navbar-content">
-                            <ul className="nav navbar-nav">
+                        <div className="collapse navbar-collapse " id="navbar-content">
+                            <ul className="nav navbar-nav nav-custom navbar-right">
                                 <li className="active"><a href="#">Home</a></li>
                                 {this.props.items.map(function(item, i) {
                                     return (
@@ -32,7 +32,6 @@ class Nav extends Component {
                         </div>
                     </div>
                 </nav>
-            </div>
         );
     }
 }
