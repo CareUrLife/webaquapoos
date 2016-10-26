@@ -22,6 +22,7 @@
     <script src="Js/jquery-3.1.1.min.js"></script>
     <script src="Js/bootstrap.min.js"></script>
     <script src="Js/Lib/isInViewport.js"></script>
+    <script src="Js/Lib/jquery.nicescroll.min.js"></script>
     <link href="Css/layout.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Josefin+Slab">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato">
@@ -33,7 +34,7 @@
             var scroll = $(window).scrollTop();
             if (scroll != 0){
                 $('div.mNav').addClass('fixable');
-                var paddingW = $('div.mNav').outerWidth() - $('div.mNav-branch').outerWidth() - $('div.mNav-cart').outerWidth() - $('div.mNav-about').outerWidth();
+                var paddingW = $('div.row.mNav-root').width() - $('div.mNav-branch').outerWidth() - $('div.mNav-cart').outerWidth() - $('div.mNav-about').outerWidth();
                 console.log($('div.mNav').width() + " " + $('div.mNav-branch').width() + " " + $('div.mNav-cart').width() + " " + $('div.mNav-about').width());
                 $('div#padding').outerWidth(paddingW);
                 $('div#padding').show();
@@ -42,6 +43,19 @@
                 $('div#padding').hide();
             }
         });
+        $(document).ready(function(){
+             $('body').bind('mousewheel', function(e){
+                if(e.originalEvent.wheelDelta /120 > 0) {
+                    console.log('scrolling up !');
+                }
+             else{
+                    console.log('scrolling down !');
+            }
+        });
+});
+    //$(document).ready(function() {
+       // $("html").niceScroll(); 
+    //});
     </script>
 </body>
 </html>

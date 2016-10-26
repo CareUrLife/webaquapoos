@@ -23,10 +23,10 @@ class Header extends Component {
                                 {media}
                             </div>
                         </div>
-                        <div className="overlay">
+                        <div className="shortintro">
                             <div className="half">
                                 <h2>Aquapo-OS</h2>
-                                <p>Brevity Introduction Sentence about Aquapo-OS</p>
+                                <h3>Brevity Introduction Sentence about Aquapo-OS</h3>
                             </div>
                         </div>
                     </div>

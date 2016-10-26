@@ -21520,7 +21520,7 @@
 	                    { className: "container-fluid" },
 	                    _react2.default.createElement(
 	                        "div",
-	                        { className: "row" },
+	                        { className: "mNav-root row" },
 	                        _react2.default.createElement(
 	                            "div",
 	                            { className: "mNav-branch col-md-1 items " },
@@ -21643,7 +21643,7 @@
 	                    ),
 	                    _react2.default.createElement(
 	                        "div",
-	                        { className: "overlay" },
+	                        { className: "shortintro" },
 	                        _react2.default.createElement(
 	                            "div",
 	                            { className: "half" },
@@ -21653,7 +21653,7 @@
 	                                "Aquapo-OS"
 	                            ),
 	                            _react2.default.createElement(
-	                                "p",
+	                                "h3",
 	                                null,
 	                                "Brevity Introduction Sentence about Aquapo-OS"
 	                            )

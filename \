@@ -44,27 +44,9 @@ header .mediabox img {
 .shortintro {
     position : absolute;
     z-index : 1;
-    top : 130px;
-    left : 100px;
-    width : 50%;
+    top : 0;
+    left : 0;
 }
-
-.shortintro h2 {
-    font-size : 50px;
-    font-weight : bold;
-    text-align : left;
-    color : #006600;
-    opacity : 0.8;
-}
-
-.shortintro h3 {
-    font-size : 30px;
-    text-align : left;
-    color : #006600;
-    opacity : 0.8;
-}
-
-.shortintro 
 
 .half {
     height : inherit;
@@ -137,7 +119,6 @@ header .container-fluid {
 
 .mNav {
     width : 100%;
-    background-color : #db7070;
 }
 
 .mNav .container-fluid {
@@ -167,9 +148,8 @@ header .container-fluid {
     margin : 0;
 }
 
-.mNav div.mNav-root.row  {
+.mNav div.row {
     height : 60px;
-    border-right : 1px solid #db7070;
 }
 
 .mNav div.icon>a>span {
@@ -181,7 +161,6 @@ header .container-fluid {
 
 .mNav .icon {
     padding-right : 0px;
-    float : left;
 }
 
 .mNav .mNav-cart {
@@ -201,6 +180,34 @@ header .container-fluid {
     color : #3399ff;
 }
 
+.mNav.fixable {
+    position : fixed;
+    transition : translateX(-50%);
+    z-index : 32;
+    width : 1300px;
+}
+
+.mNav.fixable div.items {
+    text-align : center;
+    padding-top : 0px;
+    border-right : 1px solid rgba(0,0,0,0.1);
+}
+
+.mNav.fixable div.row {
+    height : 28px;
+}
+
+.mNav.fixable .icon i.fa-2x {
+    display : none;
+}
+
+.mNav.fixable .icon i.fa-1x {
+    display : block;
+}
+
+.mNav.fixable .icon .fa-stack {
+    padding-top : 5px;
+}
 
 .mNav .items.mNav-branch>a {
     color : white;
@@ -233,45 +240,16 @@ header .container-fluid {
 
     .mNav.fixable .items.mNav-branch>a {
         color : #fff;
-        font-size : 15px;
+        font-size : 13px;
         display : block;
         font-family : ;
         font-weight : bold;
     }
 
     .mNav.fixable .items.mNav-branch {
-        padding-top : 7px;
+        padding-top : 5px;
         background-color : #006600;
     }
-    .mNav.fixable {
-        position : fixed;
-        transition : translateX(-50%);
-        z-index : 32;
-        width : 1300px;
-    }
-
-    .mNav.fixable div.items {
-        text-align : center;
-        padding-top : 5px;
-        border-right : 1px solid rgba(0,0,0,0.1);
-    }
-
-    .mNav.fixable div.row {
-        height : 38px;
-    }
-
-    .mNav.fixable .icon i.fa-2x {
-        display : none;
-    }
-
-    .mNav.fixable .icon i.fa-1x {
-        display : block;
-    }
-
-    .mNav.fixable .icon .fa-stack {
-        padding-top : 9.5px;
-    }
-
 }
 
 

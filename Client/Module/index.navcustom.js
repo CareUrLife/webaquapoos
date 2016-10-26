@@ -11,7 +11,7 @@ class Nav extends Component {
         return (
             <div className="mNav">
                 <div className="container-fluid">
-                    <div className="row">
+                    <div className="mNav-root row">
                         <div className="mNav-branch col-md-1 items ">
                             <a className="navbar-brach">AquapoOS</a> 
                         </div>
