@@ -63,13 +63,17 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _indexNav = __webpack_require__(173);
+	var _indexNavcustom = __webpack_require__(173);
 
-	var _indexNav2 = _interopRequireDefault(_indexNav);
+	var _indexNavcustom2 = _interopRequireDefault(_indexNavcustom);
 
 	var _indexHeader = __webpack_require__(174);
 
 	var _indexHeader2 = _interopRequireDefault(_indexHeader);
+
+	var _indexViewStick = __webpack_require__(175);
+
+	var _indexViewStick2 = _interopRequireDefault(_indexViewStick);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -94,7 +98,7 @@
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'container-root' },
-	                _react2.default.createElement(_indexNav2.default, { items: [{ link: '#', name: 'Tính năng', key: "dk", className: "nav-normal" }, { link: '#', name: 'Blog', key: "bl", className: "nav-normal" }, { link: '#', name: 'Về chúng tôi', key: "fb", className: "nav-normal" }, { link: '#', name: 'Đặt hàng', key: 'am', className: "nav-special" }] }),
+	                _react2.default.createElement(_indexNavcustom2.default, { items: [{ link: '#', name: 'Tính năng', key: "dk", className: "nav-normal col-md-2 items" }, { link: '#', name: 'Blog', key: "bl", className: "nav-normal col-md-1 items" }, { link: '#', name: 'Về chúng tôi', key: "fb", className: "nav-normal col-md-2 items" }] }),
 	                _react2.default.createElement(_indexHeader2.default, { media: { mType: "image", mSrc: "Images/header.jpg" } })
 	            );
 	        }
@@ -21509,50 +21513,29 @@
 	        key: "render",
 	        value: function render() {
 	            return _react2.default.createElement(
-	                "nav",
-	                { className: "navbar navbar-default navbar-custom" },
+	                "div",
+	                { className: "mNav" },
 	                _react2.default.createElement(
 	                    "div",
 	                    { className: "container-fluid" },
 	                    _react2.default.createElement(
 	                        "div",
-	                        { className: "navbar-header" },
+	                        { className: "row" },
 	                        _react2.default.createElement(
-	                            "button",
-	                            { type: "button", className: "navbar-toggle hidden-lg-up", "data-toggle": "collapse", "data-target": ".navbar-collapse" },
+	                            "div",
+	                            { className: "mNav-branch col-md-1 items " },
 	                            _react2.default.createElement(
-	                                "span",
-	                                { className: "sr-only" },
-	                                "Toggle Navigation"
-	                            ),
-	                            _react2.default.createElement("span", { className: "icon-bar" }),
-	                            _react2.default.createElement("span", { className: "icon-bar" }),
-	                            _react2.default.createElement("span", { className: "icon-bar" })
+	                                "a",
+	                                { className: "navbar-brach" },
+	                                "AquapoOS"
+	                            )
 	                        ),
 	                        _react2.default.createElement(
-	                            "a",
-	                            { className: "navbar-brand", href: "#" },
-	                            "AquapoOS"
-	                        )
-	                    ),
-	                    _react2.default.createElement(
-	                        "div",
-	                        { className: "collapse navbar-collapse ", id: "navbar-content" },
-	                        _react2.default.createElement(
-	                            "ul",
-	                            { className: "nav navbar-nav nav-custom navbar-right" },
-	                            _react2.default.createElement(
-	                                "li",
-	                                { className: "active" },
-	                                _react2.default.createElement(
-	                                    "a",
-	                                    { href: "#" },
-	                                    "Home"
-	                                )
-	                            ),
+	                            "div",
+	                            { className: "mNav-about col-md-9 row" },
 	                            this.props.items.map(function (item, i) {
 	                                return _react2.default.createElement(
-	                                    "li",
+	                                    "div",
 	                                    { key: item.key, className: item.className },
 	                                    _react2.default.createElement(
 	                                        "a",
@@ -21560,11 +21543,34 @@
 	                                        item.name
 	                                    )
 	                                );
-	                            }),
+	                            })
+	                        ),
+	                        _react2.default.createElement("div", { id: "padding" }),
+	                        _react2.default.createElement(
+	                            "div",
+	                            { className: "mNav-cart col-md-2 row" },
 	                            _react2.default.createElement(
-	                                "li",
-	                                null,
-	                                _react2.default.createElement("a", { className: "fa fa-shopping-basket fa-stack-2x ", "aria-hidden": "true", style: { color: "#006B3C" } })
+	                                "div",
+	                                { className: "nav-special col-md-6 items" },
+	                                _react2.default.createElement(
+	                                    "a",
+	                                    null,
+	                                    "Order"
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                "div",
+	                                { className: "icon col-md-6" },
+	                                _react2.default.createElement(
+	                                    "a",
+	                                    { className: "text-center" },
+	                                    _react2.default.createElement(
+	                                        "span",
+	                                        { className: "fa-stack fa-lg" },
+	                                        _react2.default.createElement("i", { className: "fa fa-shopping-basket fa-2x ", "aria-hidden": "true", style: { color: "#fff" } }),
+	                                        _react2.default.createElement("i", { className: "fa fa-shopping-basket fa-1x ", "aria-hidden": "true", style: { color: "#fff" } })
+	                                    )
+	                                )
 	                            )
 	                        )
 	                    )
@@ -21662,6 +21668,51 @@
 	}(_react.Component);
 
 	exports.default = Header;
+
+/***/ },
+/* 175 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ViewStick = function (_Component) {
+	    _inherits(ViewStick, _Component);
+
+	    function ViewStick(props) {
+	        _classCallCheck(this, ViewStick);
+
+	        return _possibleConstructorReturn(this, (ViewStick.__proto__ || Object.getPrototypeOf(ViewStick)).call(this, props));
+	    }
+
+	    _createClass(ViewStick, [{
+	        key: "render",
+	        value: function render() {
+	            return _react2.default.createElement("div", { className: "viewStick" });
+	        }
+	    }]);
+
+	    return ViewStick;
+	}(_react.Component);
+
+	exports.default = ViewStick;
 
 /***/ }
 /******/ ]);

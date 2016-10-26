@@ -20,6 +20,7 @@ header {
     text-align: center;
     color: #fff;
     position: relative;
+    box-sizing: content-box;
 }
 
 header .mediabox {
@@ -55,6 +56,7 @@ header .mediabox img {
 .navbar-custom {
     margin: 0;
     color: transparent;
+    border: 0px;
 }
 
 .navbar-custom .nav-custom {
@@ -63,6 +65,15 @@ header .mediabox img {
     
 .nav-custom li.nav-special>a {
     color : #007FFF;
+}
+
+.nav-custom li.icon>a {
+    padding-top : 0px;
+    padding-bottom : 0px;
+    padding-left : 0px;
+    padding-right : 0px;
+    background-color : #8DB600;
+    border-color : #8DB600;
 }
 
 .nav-custom li.nav-normal {
@@ -105,5 +116,102 @@ header .container-fluid {
         width: 1300px;
     }    
 }
+
+.mNav {
+    width : 100%;
+}
+
+.mNav .container-fluid {
+    padding-left : 0px;
+    padding-right : 0px;
+    background-color : #f8f8f8;
+}
+
+.mNav div.items {
+    text-align : center;
+    padding-top : 16px;
+}
+
+.mNav div.items:hover {
+    background-color : #e0e0e0;
+}
+.mNav .items>a {
+    color : #777;
+    font-size : 20px;
+    display : block;
+}
+
+.mNav .row {
+    margin : 0;
+}
+
+.mNav div.row {
+    height : 60px;
+}
+
+.mNav div.icon>a>span {
+    height : 100%;
+    width : 100%;
+    padding-top: 12px;
+    background-color: red;
+}
+
+.mNav .icon {
+    padding-right : 0px;
+}
+
+.mNav .mNav-cart {
+    padding-right : 0px;
+    float : right;
+}
+
+.mNav .icon i.fa-2x {
+    display : block;
+}
+
+.mNav .icon i.fa-1x {
+    display : none;
+}
+
+.mNav.fixable {
+    position : fixed;
+    transition : translateX(-50%);
+    z-index : 32;
+    width : 1300px;
+}
+
+.mNav.fixable div.items {
+    text-align : center;
+    padding-top : 0px;
+}
+
+.mNav.fixable div.row {
+    height : 28px;
+}
+
+.mNav.fixable .icon i.fa-2x {
+    display : none;
+}
+
+.mNav.fixable .icon i.fa-1x {
+    display : block;
+}
+
+.mNav.fixable .icon .fa-stack {
+    padding-top : 8px;
+}
+
+@media (min-width : 992px) {
+    .mNav.fixable .col-md-2 {
+        width : 14%;
+        max-width : 14%;
+    }
+
+    .mNav.fixable .col-md-1 {
+        width : 7%; 
+        max-width : 7%;
+    }
+}
+
 
 

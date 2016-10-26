@@ -11,7 +11,7 @@
     <title>AquapoOS</title>
     <link href="Css/bootstrap.css" rel="stylesheet">
     <link href="Css/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet"> 
-    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css" type="text/css" >
 </head>
 <body>
     <div id="root">
@@ -21,10 +21,27 @@
     <script src="Utils/index.react.js"></script>
     <script src="Js/jquery-3.1.1.min.js"></script>
     <script src="Js/bootstrap.min.js"></script>
+    <script src="Js/Lib/isInViewport.js"></script>
     <link href="Css/layout.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Josefin+Slab">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Dosis:medium">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Josefin+Sans">
+
+    <script>
+        $(window).scroll(function() {
+            var scroll = $(window).scrollTop();
+            if (scroll != 0){
+                $('div.mNav').addClass('fixable');
+                var paddingW = $('div.mNav').outerWidth() - $('div.mNav-branch').outerWidth() - $('div.mNav-cart').outerWidth() - $('div.mNav-about').outerWidth();
+                console.log($('div.mNav').width() + " " + $('div.mNav-branch').width() + " " + $('div.mNav-cart').width() + " " + $('div.mNav-about').width());
+                $('div#padding').outerWidth(paddingW);
+                $('div#padding').show();
+            } else {
+                $('div.mNav').removeClass('fixable');
+                $('div#padding').hide();
+            }
+        });
+    </script>
 </body>
 </html>
