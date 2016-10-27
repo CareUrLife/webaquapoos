@@ -11,10 +11,14 @@ var _windowSize = {height : 0, width : 0}; //collection of todo items
  * @param {string} text The content of the TODO
  */
 
-function updateSize(newSize) {
+function updateWindowSize(newSize) {
     //Using the current timestamp in place of a real id.
     _windowSize.height = newSize.height;
     _windowSize.width = newSize.width;
+}
+
+function getWindowSize() {
+    return _windowSize;
 }
 
 /**
@@ -48,12 +52,12 @@ var ResizeStore = assign({}, EventEmitter.prototype, {
     },
 
     dispatcherIndex: IndexDispatcher.register(function(payload) {
-        var newSize = payload.windowSize;
+            var newSize = payload.windowSize;
 
-        IndexTodoStore.emitChange();
-        updateSize(newSize);
-        return true;
+            IndexTodoStore.emitChange();
+            updateSize(newSize);
+            return true;
         })
-});
+    });
 
 module.exports = ResizeStore;

@@ -1,11 +1,35 @@
 import React, {Component} from 'react';
+var ResizeStore = require('../Flux/Stores/resize.store.js');
+import Update from 'react-addons-update';
 
+function getWindowSize {
+    return ResizeStore.getWindowSize();
+}
 
 class Nav extends Component {
 
     constructor(props) {
         super(props);
     } 
+
+    getInitialState() {
+        return {
+            windowSize : getWindowSize();
+        }
+    }
+
+    componentDidMount() {
+        ResizeStore.addChangeListener(this._onChange);
+    }
+
+    componentWillUnmount() {
+        ResizeStore.removeChangeListener(this._onChange);
+    }
+
+    _onChange() {
+        var newState = Update(this.state, {$set : {windowSize : getWindowSize()}}); 
+        this.setState(newState);
+    }
 
     render() {
         return (

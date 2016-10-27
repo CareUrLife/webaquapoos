@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import Update from 'react-addons-update';
 import Nav from './Module/index.navcustom.js';
 import Header from './Module/index.header.js';
-import ViewStick from './Module/index.viewStick.js';
+var ResizeActions = require('./Flux/Actions/resize.actions.js');
+
 class Index extends Component {
     constructor(props) {
         super(props);
@@ -21,10 +22,12 @@ class Index extends Component {
 
     componentWillMount () {
         this.updateWindowSize();
+        ResizeActions.setWindowSize(this.state.windowSize);
     }
 
     componentDidMount () {
         window.addEventListener("resize", this.updateWindowSize());
+        ResizeActions.setWindowSize(this.state.windowSize);
     }
 
     componentWillUnmount () {
