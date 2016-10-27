@@ -11,7 +11,7 @@ class Index extends Component {
     render() {
         return(
             <div className="container-root">
-                <Nav items={[{link:'#', name: 'Tính năng', key: "dk", className: "nav-normal col-md-2 items"}, {link:'#', name: 'Blog', key: "bl", className: "nav-normal col-md-1 items"}, {link:'#', name: 'Về chúng tôi', key: "fb", className: "nav-normal col-md-2 items"}]}/>
+                <Nav items={[{link:'#', name: 'Tính năng', key: "dk", className: "nav-normal col-md-2 col-lg-2 col-sm-3 items"}, {link:'#', name: 'Blog', key: "bl", className: "nav-normal col-md-1 col-lg-1 col-sm-3 items"}, {link:'#', name: 'Về chúng tôi', key: "fb", className: "nav-normal col-md-2 col-lg-2 col-sm-3 items"}]}/>
                 <Header media={{mType : "image", mSrc : "Images/header.jpg"}}/>
             </div>
         );

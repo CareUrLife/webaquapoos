@@ -98,7 +98,7 @@
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'container-root' },
-	                _react2.default.createElement(_indexNavcustom2.default, { items: [{ link: '#', name: 'Tính năng', key: "dk", className: "nav-normal col-md-2 items" }, { link: '#', name: 'Blog', key: "bl", className: "nav-normal col-md-1 items" }, { link: '#', name: 'Về chúng tôi', key: "fb", className: "nav-normal col-md-2 items" }] }),
+	                _react2.default.createElement(_indexNavcustom2.default, { items: [{ link: '#', name: 'Tính năng', key: "dk", className: "nav-normal col-md-2 col-lg-2 col-sm-3 items" }, { link: '#', name: 'Blog', key: "bl", className: "nav-normal col-md-1 col-lg-1 col-sm-3 items" }, { link: '#', name: 'Về chúng tôi', key: "fb", className: "nav-normal col-md-2 col-lg-2 col-sm-3 items" }] }),
 	                _react2.default.createElement(_indexHeader2.default, { media: { mType: "image", mSrc: "Images/header.jpg" } })
 	            );
 	        }
@@ -21523,7 +21523,7 @@
 	                        { className: "mNav-root row" },
 	                        _react2.default.createElement(
 	                            "div",
-	                            { className: "mNav-branch col-md-1 items " },
+	                            { className: "mNav-branch col-md-1 col-lg-1 col-sm-2 col-xs-3 items " },
 	                            _react2.default.createElement(
 	                                "a",
 	                                { className: "navbar-brach" },
@@ -21532,7 +21532,7 @@
 	                        ),
 	                        _react2.default.createElement(
 	                            "div",
-	                            { className: "mNav-about col-md-9 row" },
+	                            { className: "mNav-about col-md-9 col-lg-9 col-sm-7 col-xs-5 row" },
 	                            this.props.items.map(function (item, i) {
 	                                return _react2.default.createElement(
 	                                    "div",
@@ -21548,19 +21548,19 @@
 	                        _react2.default.createElement("div", { id: "padding" }),
 	                        _react2.default.createElement(
 	                            "div",
-	                            { className: "mNav-cart col-md-2 row" },
+	                            { className: "mNav-cart col-md-2 col-sm-3 col-lg-2 col-xs-4 row" },
 	                            _react2.default.createElement(
 	                                "div",
-	                                { className: "nav-special col-md-6 items" },
+	                                { className: "nav-special col-md-6 col-lg-6 col-sm-6 items" },
 	                                _react2.default.createElement(
 	                                    "a",
 	                                    null,
-	                                    "Order"
+	                                    "\u0110\u1EB7t h\xE0ng"
 	                                )
 	                            ),
 	                            _react2.default.createElement(
 	                                "div",
-	                                { className: "icon col-md-6" },
+	                                { className: "icon col-md-6 col-lg-6 col-sm-6" },
 	                                _react2.default.createElement(
 	                                    "a",
 	                                    { className: "text-center" },

@@ -12,10 +12,10 @@ class Nav extends Component {
             <div className="mNav">
                 <div className="container-fluid">
                     <div className="mNav-root row">
-                        <div className="mNav-branch col-md-1 items ">
+                        <div className="mNav-branch col-md-1 col-lg-1 col-sm-2 col-xs-3 items ">
                             <a className="navbar-brach">AquapoOS</a> 
                         </div>
-                        <div className="mNav-about col-md-9 row">
+                        <div className="mNav-about col-md-9 col-lg-9 col-sm-7 col-xs-5 row">
                                 {this.props.items.map(function(item, i) {
                                     return (
                                         <div key={item.key} className={item.className}><a href={item.link}>{item.name}</a></div>
@@ -24,9 +24,9 @@ class Nav extends Component {
                         </div>
                         <div id="padding">
                         </div>
-                        <div className="mNav-cart col-md-2 row">
-                            <div className="nav-special col-md-6 items"><a>Order</a></div>
-                            <div className="icon col-md-6">
+                        <div className="mNav-cart col-md-2 col-sm-3 col-lg-2 col-xs-4 row">
+                            <div className="nav-special col-md-6 col-lg-6 col-sm-6 items"><a>Đặt hàng</a></div>
+                            <div className="icon col-md-6 col-lg-6 col-sm-6">
                                 <a className="text-center">
                                     <span className="fa-stack fa-lg">
                                         <i className="fa fa-shopping-basket fa-2x " aria-hidden="true" style={{color: "#fff"}}></i>
