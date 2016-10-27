@@ -8,7 +8,8 @@
         "webpack":"*",
         "babel-preset-react":"*",
         "babel-preset-es2015":"*",
-        "react-addons-update" : "*"
+        "react-addons-update" : "*",
+        "object-assign" : "*"
    },
    "dependencies" : {
         "express":"*",
