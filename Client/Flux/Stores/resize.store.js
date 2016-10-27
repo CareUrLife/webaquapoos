@@ -28,7 +28,7 @@ function getWindowSize() {
 
 
 var ResizeStore = assign({}, EventEmitter.prototype, {
-    getSize: function() {
+    getWindowSize: function() {
         return _windowSize;
     },
 
@@ -51,11 +51,11 @@ var ResizeStore = assign({}, EventEmitter.prototype, {
         this.removeListener(CHANGE_EVENT, callback);
     },
 
-    dispatcherIndex: IndexDispatcher.register(function(payload) {
+    dispatcherResize: ResizeDispatcher.register(function(payload) {
             var newSize = payload.windowSize;
 
-            IndexTodoStore.emitChange();
-            updateSize(newSize);
+            ResizeStore.emitChange();
+            updateWindowSize(newSize);
             return true;
         })
     });

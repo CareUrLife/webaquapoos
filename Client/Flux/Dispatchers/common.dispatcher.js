@@ -32,7 +32,7 @@ Dispatcher.prototype = assign({}, Dispatcher.prototype, {
             });
         });
 
-        _callback.forEach(function(callback, i) {
+        _callbacks.forEach(function(callback, i) {
             // Callback can return an obj, to resolve, or a promise, to chain.
             // See waitFor() for why this might be useful.
             Promise.resolve(callback(payload)).then(function() {

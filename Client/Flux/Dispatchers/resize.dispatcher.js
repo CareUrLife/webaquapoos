@@ -10,9 +10,9 @@ var ResizeDispatcher = assign({}, Dispatcher.prototype, {
 
     handleViewAction: function(resize) {
         this.dispatch({
-            windowSize {
-                height : resize.height;
-                width : resize.width;
+            windowSize  :{
+                height : resize.height,
+                width : resize.width
             }
         });
     }

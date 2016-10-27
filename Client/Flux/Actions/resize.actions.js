@@ -1,7 +1,8 @@
 var ResizeDispatcher = require('../Dispatchers/resize.dispatcher.js');
 
 function setWindowSize(windowSize) {
-    ResizeDispatcher.dispatch(windowSize); 
+    ResizeDispatcher.handleViewAction(windowSize); 
+    console.log("action ");
 }
 
-module.exports = ResizeDispatcher;
+exports.setWindowSize = setWindowSize;

@@ -8,7 +8,8 @@ var ResizeActions = require('./Flux/Actions/resize.actions.js');
 class Index extends Component {
     constructor(props) {
         super(props);
-        this.state.windowSize = {};
+        this.state = {windowSize : {}};
+        this.updateWindowSize = this.updateWindowSize.bind(this);
     } 
 
     updateWindowSize() {
@@ -18,20 +19,19 @@ class Index extends Component {
             height = w.innerHeight || documentElement.clientHeight || body.clientHeight;
         var newState = Update(this.state, {windowSize: {$set: {width: width, height : height}}});
         this.setState(newState);
+        ResizeActions.setWindowSize(this.state.windowSize);
     }
 
     componentWillMount () {
         this.updateWindowSize();
-        ResizeActions.setWindowSize(this.state.windowSize);
     }
 
     componentDidMount () {
-        window.addEventListener("resize", this.updateWindowSize());
-        ResizeActions.setWindowSize(this.state.windowSize);
+        window.addEventListener('resize', this.updateWindowSize);
     }
 
     componentWillUnmount () {
-        window.removeEventListener("resize", this.updateWindowSize());
+        window.removeEventListener('resize', this.updateWindowSize);
     }
 
     render() {
