@@ -149,6 +149,8 @@ header .container-fluid {
 .mNav div.items {
     text-align : center;
     padding-top : 16px;
+    padding-left : 10px;
+    padding-right : 10px;
     border-right : 1px solid rgba(0,0,0,0.1);
 }
 
@@ -177,6 +179,8 @@ header .container-fluid {
     width : 100%;
     padding-top: 12px;
     background-color: #db7070;
+    padding-left : 10px;
+    padding-right : 10px;
 }
 
 .mNav .icon {
@@ -211,7 +215,7 @@ header .container-fluid {
     background-color : #006600;
 }
 
-@media (min-width : 992px) {
+@media (min-width : 0px) {
     .mNav.fixable .col-md-2 {
         width : 12%;
         max-width : 12%;
@@ -245,9 +249,8 @@ header .container-fluid {
     }
     .mNav.fixable {
         position : fixed;
-        transition : translateX(-50%);
         z-index : 32;
-        width : 1300px;
+        width : inherit;
     }
 
     .mNav.fixable div.items {

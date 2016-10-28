@@ -10,10 +10,28 @@ class Nav extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {windowSize : getWindowSize()};
+        this.state = {windowSize : getWindowSize(), subMenuVisible : false};
         this._onChange = this._onChange.bind(this);
     } 
 
+    componentWillMount() {
+        
+    }
+
+    updatePadding() {
+        setTimeout(function () {
+            window.requestAnimationFrame(function() {
+                var paddingW = $('div.row.mNav-root').width() - $('div.mNav-branch').outerWidth() - $('div.mNav-cart').outerWidth() - $('div.mNav-about').outerWidth();
+                $('div#padding').outerWidth(paddingW); 
+                console.log("nav padding " + paddingW);
+
+            })
+        }, 0)
+    }
+
+    componentDidUpdate() {
+        this.updatePadding();
+    }
 
     componentDidMount() {
         ResizeStore.addChangeListener(this._onChange);
@@ -26,24 +44,44 @@ class Nav extends Component {
     _onChange() {
         var newState = Update(this.state, {$set : {windowSize : getWindowSize()}}); 
         this.setState(newState);
-        console.log(newState.windowSize);
     }
 
+    
+
     render() {
-        
+
+        var submenu;
+
+        if(this.state.windowSize.width < 768 && this.state.subMenuVisible) {
+            submenu = <NavMenu items={this.props.aboutItems}/>
+        }else{
+            submenu = <div></div>
+        }
+
+        var navAboutItem;
+
+        if(this.state.windowSize.width < 768) {
+            navAboutItem = [{reflink:'#', text: 'Menu', key: 'menu', className: "nav-normal items", onClick : () => {var newState = Update(this.state, {$set : {subMenuVisible : !this.state.subMenuVisible}}); this.setState(newState); }}] 
+        }else {
+            navAboutItem = this.props.aboutItems;
+        }
         return (
             <div className="mNav">
                 <div className="container-fluid">
                     <div className="mNav-root row">
-                        <div className="mNav-branch col-md-1 col-lg-1 col-sm-2 col-xs-3 items ">
+                        <div className="mNav-branch items ">
                             <a className="navbar-brach">AquapoOS</a> 
                         </div>
-                        <NavAbout className="mNav-about col-md-9 col-lg-9 col-sm-7 col-xs-6 row" items={this.props.aboutItems}/>
-                        <div className="mNav-cart col-md-2 col-sm-3 col-lg-2 col-xs-3 row">
-                            <NavItem className="nav-special col-md-6 col-lg-6 col-sm-6 col-xs-7 items" text="Đặt hàng" reflink="#"/>
+                        <NavAbout className="mNav-about row" 
+                            items={navAboutItem}/>
+                        <div id="padding">
+                        </div>
+                        <div className="mNav-cart  row">
+                            <NavItem className="nav-special  items" text="Đặt hàng" reflink="#"/>
                             <NavCart/>
                         </div>
                     </div>
+                    {submenu}
                 </div>
             </div> 
         );
@@ -57,7 +95,7 @@ class NavItem extends Component {
 
     render() {
         return (
-            <div className={this.props.className} onClick={this.props.onClick}>
+            <div className={this.props.className} onClick={this.props.onClick} style={this.props.style}>
                 <a href={this.props.reflink}>{this.props.text}</a>
             </div> 
         );
@@ -71,7 +109,7 @@ class NavCart extends Component {
 
     render() {
         return (
-            <div className="icon col-md-6 col-lg-6 col-sm-6 col-xs-5">
+            <div className="icon ">
                 <a className="text-center">
                     <span className="fa-stack fa-lg">
                         <i className="fa fa-shopping-basket fa-2x " aria-hidden="true" style={{color: "#fff"}}></i>
@@ -101,6 +139,32 @@ class NavAbout extends Component {
             </div> 
         );
          
+    }
+}
+
+class NavMenu extends Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        var style = {
+            height : "40px"
+        };
+
+        var navStyle = {
+            borderRight : "0px",
+            paddingTop : "9px"
+        };
+        return (
+            <div className="row" style={style}>
+                {this.props.items.map(function(item, i) {
+                    return (
+                        <NavItem className={item.className} onClick={item.onClick} key={item.key} reflink={item.reflink} text={item.text} style={navStyle}/>
+                    );
+                })}
+            </div>
+        )
     }
 }
 

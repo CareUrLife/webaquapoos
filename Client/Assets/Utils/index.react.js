@@ -109,17 +109,13 @@
 	                height = w.innerHeight || documentElement.clientHeight || body.clientHeight;
 	            var newState = (0, _reactAddonsUpdate2.default)(this.state, { windowSize: { $set: { width: width, height: height } } });
 	            this.setState(newState);
-	            ResizeActions.setWindowSize(this.state.windowSize);
-	        }
-	    }, {
-	        key: 'componentWillMount',
-	        value: function componentWillMount() {
-	            this.updateWindowSize();
+	            ResizeActions.setWindowSize(newState.windowSize);
 	        }
 	    }, {
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
 	            window.addEventListener('resize', this.updateWindowSize);
+	            this.updateWindowSize();
 	        }
 	    }, {
 	        key: 'componentWillUnmount',
@@ -132,7 +128,7 @@
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'container-root' },
-	                _react2.default.createElement(_indexNavcustom2.default, { aboutItems: [{ reflink: '#', text: 'Tính năng', key: "dk", className: "nav-normal col-md-2 col-lg-2 col-sm-3 items" }, { reflink: '#', text: 'Blog', key: "bl", className: "nav-normal col-md-1 col-lg-1 col-sm-3 items" }, { reflink: '#', text: 'Về chúng tôi', key: "fb", className: "nav-normal col-md-2 col-lg-2 col-sm-3 items" }] }),
+	                _react2.default.createElement(_indexNavcustom2.default, { aboutItems: [{ reflink: '#', text: 'Tính năng', key: "dk", className: "nav-normal  items" }, { reflink: '#', text: 'Blog', key: "bl", className: "nav-normal items" }, { reflink: '#', text: 'Về chúng tôi', key: "fb", className: "nav-normal items" }] }),
 	                _react2.default.createElement(_indexHeader2.default, { media: { mType: "image", mSrc: "Images/header.jpg" } })
 	            );
 	        }
@@ -142,6 +138,9 @@
 	}(_react.Component);
 
 	_reactDom2.default.render(_react2.default.createElement(Index, null), document.getElementById('root'));
+
+	var paddingW = $('div.row.mNav-root').width() - $('div.mNav-branch').outerWidth() - $('div.mNav-cart').outerWidth() - $('div.mNav-about').outerWidth();
+	$('div#padding').outerWidth(paddingW);
 
 /***/ },
 /* 2 */
@@ -21678,12 +21677,31 @@
 
 	        var _this = _possibleConstructorReturn(this, (Nav.__proto__ || Object.getPrototypeOf(Nav)).call(this, props));
 
-	        _this.state = { windowSize: getWindowSize() };
+	        _this.state = { windowSize: getWindowSize(), subMenuVisible: false };
 	        _this._onChange = _this._onChange.bind(_this);
 	        return _this;
 	    }
 
 	    _createClass(Nav, [{
+	        key: 'componentWillMount',
+	        value: function componentWillMount() {}
+	    }, {
+	        key: 'updatePadding',
+	        value: function updatePadding() {
+	            setTimeout(function () {
+	                window.requestAnimationFrame(function () {
+	                    var paddingW = $('div.row.mNav-root').width() - $('div.mNav-branch').outerWidth() - $('div.mNav-cart').outerWidth() - $('div.mNav-about').outerWidth();
+	                    $('div#padding').outerWidth(paddingW);
+	                    console.log("nav padding " + paddingW);
+	                });
+	            }, 0);
+	        }
+	    }, {
+	        key: 'componentDidUpdate',
+	        value: function componentDidUpdate() {
+	            this.updatePadding();
+	        }
+	    }, {
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
 	            ResizeStore.addChangeListener(this._onChange);
@@ -21698,12 +21716,29 @@
 	        value: function _onChange() {
 	            var newState = (0, _reactAddonsUpdate2.default)(this.state, { $set: { windowSize: getWindowSize() } });
 	            this.setState(newState);
-	            console.log(newState.windowSize);
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var _this2 = this;
 
+	            var submenu;
+
+	            if (this.state.windowSize.width < 768 && this.state.subMenuVisible) {
+	                submenu = _react2.default.createElement(NavMenu, { items: this.props.aboutItems });
+	            } else {
+	                submenu = _react2.default.createElement('div', null);
+	            }
+
+	            var navAboutItem;
+
+	            if (this.state.windowSize.width < 768) {
+	                navAboutItem = [{ reflink: '#', text: 'Menu', key: 'menu', className: "nav-normal items", onClick: function onClick() {
+	                        var newState = (0, _reactAddonsUpdate2.default)(_this2.state, { $set: { subMenuVisible: !_this2.state.subMenuVisible } });_this2.setState(newState);
+	                    } }];
+	            } else {
+	                navAboutItem = this.props.aboutItems;
+	            }
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'mNav' },
@@ -21715,21 +21750,24 @@
 	                        { className: 'mNav-root row' },
 	                        _react2.default.createElement(
 	                            'div',
-	                            { className: 'mNav-branch col-md-1 col-lg-1 col-sm-2 col-xs-3 items ' },
+	                            { className: 'mNav-branch items ' },
 	                            _react2.default.createElement(
 	                                'a',
 	                                { className: 'navbar-brach' },
 	                                'AquapoOS'
 	                            )
 	                        ),
-	                        _react2.default.createElement(NavAbout, { className: 'mNav-about col-md-9 col-lg-9 col-sm-7 col-xs-6 row', items: this.props.aboutItems }),
+	                        _react2.default.createElement(NavAbout, { className: 'mNav-about row',
+	                            items: navAboutItem }),
+	                        _react2.default.createElement('div', { id: 'padding' }),
 	                        _react2.default.createElement(
 	                            'div',
-	                            { className: 'mNav-cart col-md-2 col-sm-3 col-lg-2 col-xs-3 row' },
-	                            _react2.default.createElement(NavItem, { className: 'nav-special col-md-6 col-lg-6 col-sm-6 col-xs-7 items', text: '\u0110\u1EB7t h\xE0ng', reflink: '#' }),
+	                            { className: 'mNav-cart  row' },
+	                            _react2.default.createElement(NavItem, { className: 'nav-special  items', text: '\u0110\u1EB7t h\xE0ng', reflink: '#' }),
 	                            _react2.default.createElement(NavCart, null)
 	                        )
-	                    )
+	                    ),
+	                    submenu
 	                )
 	            );
 	        }
@@ -21752,7 +21790,7 @@
 	        value: function render() {
 	            return _react2.default.createElement(
 	                'div',
-	                { className: this.props.className, onClick: this.props.onClick },
+	                { className: this.props.className, onClick: this.props.onClick, style: this.props.style },
 	                _react2.default.createElement(
 	                    'a',
 	                    { href: this.props.reflink },
@@ -21779,7 +21817,7 @@
 	        value: function render() {
 	            return _react2.default.createElement(
 	                'div',
-	                { className: 'icon col-md-6 col-lg-6 col-sm-6 col-xs-5' },
+	                { className: 'icon ' },
 	                _react2.default.createElement(
 	                    'a',
 	                    { className: 'text-center' },
@@ -21820,6 +21858,39 @@
 	    }]);
 
 	    return NavAbout;
+	}(_react.Component);
+
+	var NavMenu = function (_Component5) {
+	    _inherits(NavMenu, _Component5);
+
+	    function NavMenu(props) {
+	        _classCallCheck(this, NavMenu);
+
+	        return _possibleConstructorReturn(this, (NavMenu.__proto__ || Object.getPrototypeOf(NavMenu)).call(this, props));
+	    }
+
+	    _createClass(NavMenu, [{
+	        key: 'render',
+	        value: function render() {
+	            var style = {
+	                height: "40px"
+	            };
+
+	            var navStyle = {
+	                borderRight: "0px",
+	                paddingTop: "9px"
+	            };
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'row', style: style },
+	                this.props.items.map(function (item, i) {
+	                    return _react2.default.createElement(NavItem, { className: item.className, onClick: item.onClick, key: item.key, reflink: item.reflink, text: item.text, style: navStyle });
+	                })
+	            );
+	        }
+	    }]);
+
+	    return NavMenu;
 	}(_react.Component);
 
 	exports.default = Nav;
@@ -21884,9 +21955,8 @@
 
 	    dispatcherResize: ResizeDispatcher.register(function (payload) {
 	        var newSize = payload.windowSize;
-
-	        ResizeStore.emitChange();
 	        updateWindowSize(newSize);
+	        ResizeStore.emitChange();
 	        return true;
 	    })
 	});
@@ -23368,13 +23438,12 @@
 /* 185 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	var ResizeDispatcher = __webpack_require__(177);
 
 	function setWindowSize(windowSize) {
 	    ResizeDispatcher.handleViewAction(windowSize);
-	    console.log("action ");
 	}
 
 	exports.setWindowSize = setWindowSize;

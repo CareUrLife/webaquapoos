@@ -19,15 +19,13 @@ class Index extends Component {
             height = w.innerHeight || documentElement.clientHeight || body.clientHeight;
         var newState = Update(this.state, {windowSize: {$set: {width: width, height : height}}});
         this.setState(newState);
-        ResizeActions.setWindowSize(this.state.windowSize);
+        ResizeActions.setWindowSize(newState.windowSize);
     }
 
-    componentWillMount () {
-        this.updateWindowSize();
-    }
 
     componentDidMount () {
         window.addEventListener('resize', this.updateWindowSize);
+        this.updateWindowSize();
     }
 
     componentWillUnmount () {
@@ -37,7 +35,7 @@ class Index extends Component {
     render() {
         return(
             <div className="container-root">
-                <Nav aboutItems={[{reflink:'#', text: 'Tính năng', key: "dk", className: "nav-normal col-md-2 col-lg-2 col-sm-3 items"}, {reflink:'#', text: 'Blog', key: "bl", className: "nav-normal col-md-1 col-lg-1 col-sm-3 items"}, {reflink:'#', text: 'Về chúng tôi', key: "fb", className: "nav-normal col-md-2 col-lg-2 col-sm-3 items"}]}/>
+                <Nav aboutItems={[{reflink:'#', text: 'Tính năng', key: "dk", className: "nav-normal  items"}, {reflink:'#', text: 'Blog', key: "bl", className: "nav-normal items"}, {reflink:'#', text: 'Về chúng tôi', key: "fb", className: "nav-normal items"}]}/>
                 <Header media={{mType : "image", mSrc : "Images/header.jpg"}}/>
             </div>
         );
@@ -47,4 +45,5 @@ class Index extends Component {
 
 ReactDOM.render(<Index/>, document.getElementById('root'));
 
-
+var paddingW = $('div.row.mNav-root').width() - $('div.mNav-branch').outerWidth() - $('div.mNav-cart').outerWidth() - $('div.mNav-about').outerWidth();
+$('div#padding').outerWidth(paddingW);

@@ -53,9 +53,8 @@ var ResizeStore = assign({}, EventEmitter.prototype, {
 
     dispatcherResize: ResizeDispatcher.register(function(payload) {
             var newSize = payload.windowSize;
-
-            ResizeStore.emitChange();
             updateWindowSize(newSize);
+            ResizeStore.emitChange();
             return true;
         })
     });
