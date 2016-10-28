@@ -253,7 +253,6 @@ header .container-fluid {
     .mNav.fixable div.items {
         text-align : center;
         padding-top : 5px;
-        border-right : 1px solid rgba(0,0,0,0.1);
     }
 
     .mNav.fixable div.row {
@@ -289,13 +288,7 @@ header .container-fluid {
         padding-left : 0px;
     }
 
-    .mNav .nav-special {
-        width : 50%;
-    }
 
-    .mNav .icon {
-        width : 49.7%;
-    }
 }
 
 

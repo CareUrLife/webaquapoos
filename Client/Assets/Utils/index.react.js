@@ -132,7 +132,7 @@
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'container-root' },
-	                _react2.default.createElement(_indexNavcustom2.default, { items: [{ link: '#', name: 'Tính năng', key: "dk", className: "nav-normal col-md-2 col-lg-2 col-sm-3 items" }, { link: '#', name: 'Blog', key: "bl", className: "nav-normal col-md-1 col-lg-1 col-sm-3 items" }, { link: '#', name: 'Về chúng tôi', key: "fb", className: "nav-normal col-md-2 col-lg-2 col-sm-3 items" }] }),
+	                _react2.default.createElement(_indexNavcustom2.default, { aboutItems: [{ reflink: '#', text: 'Tính năng', key: "dk", className: "nav-normal col-md-2 col-lg-2 col-sm-3 items" }, { reflink: '#', text: 'Blog', key: "bl", className: "nav-normal col-md-1 col-lg-1 col-sm-3 items" }, { reflink: '#', text: 'Về chúng tôi', key: "fb", className: "nav-normal col-md-2 col-lg-2 col-sm-3 items" }] }),
 	                _react2.default.createElement(_indexHeader2.default, { media: { mType: "image", mSrc: "Images/header.jpg" } })
 	            );
 	        }
@@ -21703,6 +21703,7 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
+
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'mNav' },
@@ -21721,48 +21722,12 @@
 	                                'AquapoOS'
 	                            )
 	                        ),
+	                        _react2.default.createElement(NavAbout, { className: 'mNav-about col-md-9 col-lg-9 col-sm-7 col-xs-6 row', items: this.props.aboutItems }),
 	                        _react2.default.createElement(
 	                            'div',
-	                            { className: 'mNav-about col-md-9 col-lg-9 col-sm-7 col-xs-5 row' },
-	                            this.props.items.map(function (item, i) {
-	                                return _react2.default.createElement(
-	                                    'div',
-	                                    { key: item.key, className: item.className },
-	                                    _react2.default.createElement(
-	                                        'a',
-	                                        { href: item.link },
-	                                        item.name
-	                                    )
-	                                );
-	                            })
-	                        ),
-	                        _react2.default.createElement('div', { id: 'padding' }),
-	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'mNav-cart col-md-2 col-sm-3 col-lg-2 col-xs-4 row' },
-	                            _react2.default.createElement(
-	                                'div',
-	                                { className: 'nav-special col-md-6 col-lg-6 col-sm-6 items' },
-	                                _react2.default.createElement(
-	                                    'a',
-	                                    null,
-	                                    '\u0110\u1EB7t h\xE0ng'
-	                                )
-	                            ),
-	                            _react2.default.createElement(
-	                                'div',
-	                                { className: 'icon col-md-6 col-lg-6 col-sm-6' },
-	                                _react2.default.createElement(
-	                                    'a',
-	                                    { className: 'text-center' },
-	                                    _react2.default.createElement(
-	                                        'span',
-	                                        { className: 'fa-stack fa-lg' },
-	                                        _react2.default.createElement('i', { className: 'fa fa-shopping-basket fa-2x ', 'aria-hidden': 'true', style: { color: "#fff" } }),
-	                                        _react2.default.createElement('i', { className: 'fa fa-shopping-basket fa-1x ', 'aria-hidden': 'true', style: { color: "#fff" } })
-	                                    )
-	                                )
-	                            )
+	                            { className: 'mNav-cart col-md-2 col-sm-3 col-lg-2 col-xs-3 row' },
+	                            _react2.default.createElement(NavItem, { className: 'nav-special col-md-6 col-lg-6 col-sm-6 col-xs-7 items', text: '\u0110\u1EB7t h\xE0ng', reflink: '#' }),
+	                            _react2.default.createElement(NavCart, null)
 	                        )
 	                    )
 	                )
@@ -21771,6 +21736,90 @@
 	    }]);
 
 	    return Nav;
+	}(_react.Component);
+
+	var NavItem = function (_Component2) {
+	    _inherits(NavItem, _Component2);
+
+	    function NavItem(props) {
+	        _classCallCheck(this, NavItem);
+
+	        return _possibleConstructorReturn(this, (NavItem.__proto__ || Object.getPrototypeOf(NavItem)).call(this, props));
+	    }
+
+	    _createClass(NavItem, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                { className: this.props.className, onClick: this.props.onClick },
+	                _react2.default.createElement(
+	                    'a',
+	                    { href: this.props.reflink },
+	                    this.props.text
+	                )
+	            );
+	        }
+	    }]);
+
+	    return NavItem;
+	}(_react.Component);
+
+	var NavCart = function (_Component3) {
+	    _inherits(NavCart, _Component3);
+
+	    function NavCart(props) {
+	        _classCallCheck(this, NavCart);
+
+	        return _possibleConstructorReturn(this, (NavCart.__proto__ || Object.getPrototypeOf(NavCart)).call(this, props));
+	    }
+
+	    _createClass(NavCart, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'icon col-md-6 col-lg-6 col-sm-6 col-xs-5' },
+	                _react2.default.createElement(
+	                    'a',
+	                    { className: 'text-center' },
+	                    _react2.default.createElement(
+	                        'span',
+	                        { className: 'fa-stack fa-lg' },
+	                        _react2.default.createElement('i', { className: 'fa fa-shopping-basket fa-2x ', 'aria-hidden': 'true', style: { color: "#fff" } }),
+	                        _react2.default.createElement('i', { className: 'fa fa-shopping-basket fa-1x ', 'aria-hidden': 'true', style: { color: "#fff" } })
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return NavCart;
+	}(_react.Component);
+
+	var NavAbout = function (_Component4) {
+	    _inherits(NavAbout, _Component4);
+
+	    function NavAbout(props) {
+	        _classCallCheck(this, NavAbout);
+
+	        return _possibleConstructorReturn(this, (NavAbout.__proto__ || Object.getPrototypeOf(NavAbout)).call(this, props));
+	    }
+
+	    _createClass(NavAbout, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                { className: this.props.className },
+	                this.props.items.map(function (item, i) {
+	                    return _react2.default.createElement(NavItem, { className: item.className, onClick: item.onClick, key: item.key, reflink: item.reflink, text: item.text });
+	                })
+	            );
+	        }
+	    }]);
+
+	    return NavAbout;
 	}(_react.Component);
 
 	exports.default = Nav;
