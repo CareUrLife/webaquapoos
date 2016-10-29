@@ -107,6 +107,7 @@ header .mediabox img {
   padding-left: 0px;
   margin-right: auto;
   margin-left: auto;
+  width : 100%;
 }
 
 header .container-fluid {
@@ -163,7 +164,7 @@ header .container-fluid {
     background-color : #e0e0e0;
 }
 .mNav .items>a {
-    color : #777;
+    color : #333;
     font-size : 20px;
     display : block;
     text-decoration : none;
@@ -231,7 +232,7 @@ header .container-fluid {
 @media (min-width : 0px) {
     
     .mNav.fixable .items>a {
-        color : #777;
+        color : #333;
         font-size : 17.5px;
         display : block;
     }

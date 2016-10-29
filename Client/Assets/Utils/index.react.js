@@ -21711,7 +21711,7 @@
 	            var navAboutItem;
 
 	            if (this.state.windowSize.width < 768) {
-	                navAboutItem = [{ reflink: '', text: 'Menu', key: 'menu', className: "nav-normal items", onClick: function onClick() {
+	                navAboutItem = [{ reflink: '#', text: 'Menu', key: 'menu', className: "nav-normal items", onClick: function onClick() {
 	                        var newState = (0, _reactAddonsUpdate2.default)(_this2.state, { $set: { subMenuVisible: !_this2.state.subMenuVisible } });_this2.setState(newState);
 	                    } }];
 	            } else {
@@ -21834,18 +21834,33 @@
 	        key: 'render',
 	        value: function render() {
 	            var style = {
-	                height: "40px"
+	                height: "40px",
+	                width: "inherit",
+	                backgroundColor: "white ",
+	                opacity: "0.7"
 	            };
 
 	            var navStyle = {
 	                borderRight: "0px",
-	                paddingTop: "9px"
+	                paddingTop: "9px",
+	                float: "left",
+	                color: "black"
+	            };
+
+	            var ulStyle = {
+	                listStyleType: "none",
+	                margin: "0",
+	                padding: "0 0 0 0"
 	            };
 	            return _react2.default.createElement(
 	                'div',
-	                { className: 'row', style: style },
+	                { style: style },
 	                this.props.items.map(function (item, i) {
-	                    return _react2.default.createElement(NavItem, { className: item.className, onClick: item.onClick, key: item.key, reflink: item.reflink, text: item.text, style: navStyle });
+	                    return _react2.default.createElement(
+	                        'ul',
+	                        { style: ulStyle },
+	                        _react2.default.createElement(NavItem, { className: item.className, onClick: item.onClick, key: item.key, reflink: item.reflink, text: item.text, style: navStyle })
+	                    );
 	                })
 	            );
 	        }

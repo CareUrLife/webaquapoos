@@ -46,7 +46,7 @@ class Nav extends Component {
         var navAboutItem;
 
         if(this.state.windowSize.width < 768) {
-            navAboutItem = [{reflink:'', text: 'Menu', key: 'menu', className: "nav-normal items", onClick : () => {var newState = Update(this.state, {$set : {subMenuVisible : !this.state.subMenuVisible}}); this.setState(newState); }}] 
+            navAboutItem = [{reflink:'#', text: 'Menu', key: 'menu', className: "nav-normal items", onClick : () => {var newState = Update(this.state, {$set : {subMenuVisible : !this.state.subMenuVisible}}); this.setState(newState); }}] 
         }else {
             navAboutItem = this.props.aboutItems;
         }
@@ -122,18 +122,31 @@ class NavMenu extends Component {
 
     render() {
         var style = {
-            height : "40px"
+            height : "40px",
+            width : "inherit",
+            backgroundColor : "white ",
+            opacity : "0.7"
         };
 
         var navStyle = {
             borderRight : "0px",
-            paddingTop : "9px"
+            paddingTop : "9px",
+            float: "left",
+            color : "black"
         };
+
+        var ulStyle = {
+            listStyleType: "none",
+            margin: "0",
+            padding: "0 0 0 0"
+        }
         return (
-            <div className="row" style={style}>
+            <div  style={style}>
                 {this.props.items.map(function(item, i) {
                     return (
-                        <NavItem className={item.className} onClick={item.onClick} key={item.key} reflink={item.reflink} text={item.text} style={navStyle}/>
+                        <ul style={ulStyle} >
+                            <NavItem className={item.className} onClick={item.onClick} key={item.key} reflink={item.reflink} text={item.text} style={navStyle}/>
+                        </ul>
                     );
                 })}
             </div>
