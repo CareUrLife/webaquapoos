@@ -14,13 +14,9 @@ class Nav extends Component {
         this._onChange = this._onChange.bind(this);
     } 
 
-    componentWillMount() {
         
-    }
 
-    componentDidUpdate() {
-        this.updatePadding();
-    }
+    
 
     componentDidMount() {
         ResizeStore.addChangeListener(this._onChange);
@@ -59,7 +55,7 @@ class Nav extends Component {
                 <div className="container-fluid">
                     <div className="mNav-root ">
                         <div>
-                            <a className="navbar-brach mNav-branch items " style={{float:"left"}}>AquapoOS</a> 
+                                <a className="navbar-brach mNav-branch items " style={{float:"left"}}>AquapoOS</a> 
                             <ul>
                                 {navAboutItem.map(function (item, i) {
                                     return (

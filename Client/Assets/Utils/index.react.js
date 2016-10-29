@@ -21680,14 +21680,6 @@
 	    }
 
 	    _createClass(Nav, [{
-	        key: 'componentWillMount',
-	        value: function componentWillMount() {}
-	    }, {
-	        key: 'componentDidUpdate',
-	        value: function componentDidUpdate() {
-	            this.updatePadding();
-	        }
-	    }, {
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
 	            ResizeStore.addChangeListener(this._onChange);

@@ -34,13 +34,8 @@
             var scroll = $(window).scrollTop();
             if (scroll != 0){
                 $('div.mNav').addClass('fixable');
-                var paddingW = $('div.row.mNav-root').width() - $('div.mNav-branch').outerWidth() - $('div.mNav-cart').outerWidth() - $('div.mNav-about').outerWidth();
-                $('div#padding').outerWidth(paddingW);
             } else {
                 $('div.mNav').removeClass('fixable');
-                var paddingW = $('div.row.mNav-root').width() - $('div.mNav-branch').outerWidth() - $('div.mNav-cart').outerWidth() - $('div.mNav-about').outerWidth();
-
-                $('div#padding').outerWidth(paddingW);
             }
         });
         
