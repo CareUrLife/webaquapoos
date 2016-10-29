@@ -18,17 +18,6 @@ class Nav extends Component {
         
     }
 
-    updatePadding() {
-        setTimeout(function () {
-            window.requestAnimationFrame(function() {
-                var paddingW = $('div.row.mNav-root').width() - $('div.mNav-branch').outerWidth() - $('div.mNav-cart').outerWidth() - $('div.mNav-about').outerWidth();
-                $('div#padding').outerWidth(paddingW); 
-                console.log("nav padding " + paddingW);
-
-            })
-        }, 0)
-    }
-
     componentDidUpdate() {
         this.updatePadding();
     }
@@ -61,24 +50,30 @@ class Nav extends Component {
         var navAboutItem;
 
         if(this.state.windowSize.width < 768) {
-            navAboutItem = [{reflink:'#', text: 'Menu', key: 'menu', className: "nav-normal items", onClick : () => {var newState = Update(this.state, {$set : {subMenuVisible : !this.state.subMenuVisible}}); this.setState(newState); }}] 
+            navAboutItem = [{reflink:'', text: 'Menu', key: 'menu', className: "nav-normal items", onClick : () => {var newState = Update(this.state, {$set : {subMenuVisible : !this.state.subMenuVisible}}); this.setState(newState); }}] 
         }else {
             navAboutItem = this.props.aboutItems;
         }
         return (
             <div className="mNav">
                 <div className="container-fluid">
-                    <div className="mNav-root row">
-                        <div className="mNav-branch items ">
-                            <a className="navbar-brach">AquapoOS</a> 
+                    <div className="mNav-root ">
+                        <div>
+                            <a className="navbar-brach mNav-branch items " style={{float:"left"}}>AquapoOS</a> 
+                            <ul>
+                                {navAboutItem.map(function (item, i) {
+                                    return (
+                                        <NavItem className={item.className} onClick={item.onClick} key={item.key}       reflink={item.reflink} text={item.text} style={{float:"left"}}/>
+                                    );
+                                })}
+                            </ul>
                         </div>
-                        <NavAbout className="mNav-about row" 
-                            items={navAboutItem}/>
-                        <div id="padding">
-                        </div>
-                        <div className="mNav-cart  row">
-                            <NavItem className="nav-special  items" text="Đặt hàng" reflink="#"/>
-                            <NavCart/>
+                        
+                        <div style={{float : "right"}}>
+                            <ul>
+                                <NavItem className="nav-special  items" text="Đặt hàng" reflink="#" style={{float : "left"}}/>
+                                <NavCart style={{float: "left"}}/>
+                            </ul>
                         </div>
                     </div>
                     {submenu}
@@ -95,9 +90,9 @@ class NavItem extends Component {
 
     render() {
         return (
-            <div className={this.props.className} onClick={this.props.onClick} style={this.props.style}>
+            <li className={this.props.className} onClick={this.props.onClick} style={this.props.style}>
                 <a href={this.props.reflink}>{this.props.text}</a>
-            </div> 
+            </li> 
         );
     }
 }
@@ -109,38 +104,20 @@ class NavCart extends Component {
 
     render() {
         return (
-            <div className="icon ">
+            <li className="icon" style={this.props.style}>
                 <a className="text-center">
                     <span className="fa-stack fa-lg">
                         <i className="fa fa-shopping-basket fa-2x " aria-hidden="true" style={{color: "#fff"}}></i>
                         <i className="fa fa-shopping-basket fa-1x " aria-hidden="true" style={{color: "#fff"}}></i>
                     </span>
                 </a>
-            </div>
+            </li>
         );
         
     }
 }
 
 
-class NavAbout extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return (
-            <div className={this.props.className}>
-                {this.props.items.map(function (item, i) {
-                    return (
-                        <NavItem className={item.className} onClick={item.onClick} key={item.key} reflink={item.reflink} text={item.text}/>
-                    );
-                })}
-            </div> 
-        );
-         
-    }
-}
 
 class NavMenu extends Component {
     constructor(props) {

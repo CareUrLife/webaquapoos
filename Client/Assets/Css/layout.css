@@ -138,23 +138,27 @@ header .container-fluid {
 .mNav {
     width : 100%;
     background-color : #db7070;
+    height : 60px;
 }
 
 .mNav .container-fluid {
     padding-left : 0px;
     padding-right : 0px;
     background-color : #f8f8f8;
+    height : inherit;
 }
 
-.mNav div.items {
+.mNav .items {
     text-align : center;
     padding-top : 16px;
     padding-left : 10px;
     padding-right : 10px;
+    padding-bottom : 16px;
     border-right : 1px solid rgba(0,0,0,0.1);
+    height : inherit;
 }
 
-.mNav div.items:hover {
+.mNav .items:hover {
     background-color : #e0e0e0;
 }
 .mNav .items>a {
@@ -165,32 +169,38 @@ header .container-fluid {
     cursor : pointer;
 }
 
-.mNav .row {
-    margin : 0;
-}
 
-.mNav div.mNav-root.row  {
-    height : 60px;
+.mNav div.mNav-root  {
+    /* display : flex - solution*/
     border-right : 1px solid #db7070;
+    overflow : hidden;
+    width : 100%;
+    text-align : center;
+    height : inherit;
 }
 
-.mNav div.icon>a>span {
+.mNav ul {
+    list-style-type : none;
+    margin : 0;
+    padding : 0 0 0 0;
+}
+
+.mNav ul li {
+}
+
+.mNav li.icon>a>span {
     height : 100%;
     width : 100%;
     padding-top: 12px;
     background-color: #db7070;
     padding-left : 10px;
     padding-right : 10px;
+    padding-bottom : 12px;
 }
 
 .mNav .icon {
     padding-right : 0px;
     float : left;
-}
-
-.mNav .mNav-cart {
-    padding-right : 0px;
-    float : right;
 }
 
 .mNav .icon i.fa-2x {
@@ -206,9 +216,10 @@ header .container-fluid {
 }
 
 
-.mNav .items.mNav-branch>a {
+.mNav .items.mNav-branch {
     color : white;
     font-weight : bold;
+    font-size : 20px;
 }
 
 .mNav .items.mNav-branch {
@@ -216,19 +227,21 @@ header .container-fluid {
 }
 
 @media (min-width : 0px) {
-    .mNav.fixable .col-md-2 {
-        width : 12%;
-        max-width : 12%;
-    }
-
-    .mNav.fixable .col-md-1 {
-        width : 6%; 
-        max-width : 6%;
-    }
+    
     .mNav.fixable .items>a {
         color : #777;
         font-size : 17.5px;
         display : block;
+    }
+
+    .mNav.fixable a.items.mNav-branch {
+        height : 38px;
+    }
+
+    .mNav.fixable .items {
+        padding-top : 7px;
+        padding-bottom : 7px;
+        height : inherit;
     }
 
     .mNav.fixable .items.nav-special>a {
@@ -236,6 +249,13 @@ header .container-fluid {
     }
 
     .mNav.fixable .items.mNav-branch>a {
+        
+    }
+
+    .mNav.fixable .items.mNav-branch {
+        padding-top : 7px;
+        padding-bottom : 7px;
+        background-color : #006600;
         color : #fff;
         font-size : 15px;
         display : block;
@@ -243,23 +263,16 @@ header .container-fluid {
         font-weight : bold;
     }
 
-    .mNav.fixable .items.mNav-branch {
-        padding-top : 7px;
-        background-color : #006600;
-    }
     .mNav.fixable {
         position : fixed;
         z-index : 32;
-        width : inherit;
+        width : 100%;
+        height : 38px;
     }
 
     .mNav.fixable div.items {
         text-align : center;
         padding-top : 5px;
-    }
-
-    .mNav.fixable div.row {
-        height : 38px;
     }
 
     .mNav.fixable .icon i.fa-2x {
@@ -276,23 +289,9 @@ header .container-fluid {
 
 }
 
-@media(min-width : 768px) and (max-width : 1200px) {
-    .mNav .items>a {
-        font-size : 18px;
-    }
-}
-
-@media(max-width : 768px) {
-    .mNav .items>a {
-        font-size : 16px;
-    }
-
-    .mNav .icon {
-        padding-left : 0px;
-    }
 
 
-}
+
 
 
 

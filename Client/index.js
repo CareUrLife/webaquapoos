@@ -45,5 +45,4 @@ class Index extends Component {
 
 ReactDOM.render(<Index/>, document.getElementById('root'));
 
-var paddingW = $('div.row.mNav-root').width() - $('div.mNav-branch').outerWidth() - $('div.mNav-cart').outerWidth() - $('div.mNav-about').outerWidth();
-$('div#padding').outerWidth(paddingW);
+

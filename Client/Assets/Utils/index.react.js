@@ -139,9 +139,6 @@
 
 	_reactDom2.default.render(_react2.default.createElement(Index, null), document.getElementById('root'));
 
-	var paddingW = $('div.row.mNav-root').width() - $('div.mNav-branch').outerWidth() - $('div.mNav-cart').outerWidth() - $('div.mNav-about').outerWidth();
-	$('div#padding').outerWidth(paddingW);
-
 /***/ },
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
@@ -21686,17 +21683,6 @@
 	        key: 'componentWillMount',
 	        value: function componentWillMount() {}
 	    }, {
-	        key: 'updatePadding',
-	        value: function updatePadding() {
-	            setTimeout(function () {
-	                window.requestAnimationFrame(function () {
-	                    var paddingW = $('div.row.mNav-root').width() - $('div.mNav-branch').outerWidth() - $('div.mNav-cart').outerWidth() - $('div.mNav-about').outerWidth();
-	                    $('div#padding').outerWidth(paddingW);
-	                    console.log("nav padding " + paddingW);
-	                });
-	            }, 0);
-	        }
-	    }, {
 	        key: 'componentDidUpdate',
 	        value: function componentDidUpdate() {
 	            this.updatePadding();
@@ -21733,7 +21719,7 @@
 	            var navAboutItem;
 
 	            if (this.state.windowSize.width < 768) {
-	                navAboutItem = [{ reflink: '#', text: 'Menu', key: 'menu', className: "nav-normal items", onClick: function onClick() {
+	                navAboutItem = [{ reflink: '', text: 'Menu', key: 'menu', className: "nav-normal items", onClick: function onClick() {
 	                        var newState = (0, _reactAddonsUpdate2.default)(_this2.state, { $set: { subMenuVisible: !_this2.state.subMenuVisible } });_this2.setState(newState);
 	                    } }];
 	            } else {
@@ -21747,24 +21733,32 @@
 	                    { className: 'container-fluid' },
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'mNav-root row' },
+	                        { className: 'mNav-root ' },
 	                        _react2.default.createElement(
 	                            'div',
-	                            { className: 'mNav-branch items ' },
+	                            null,
 	                            _react2.default.createElement(
 	                                'a',
-	                                { className: 'navbar-brach' },
+	                                { className: 'navbar-brach mNav-branch items ', style: { float: "left" } },
 	                                'AquapoOS'
+	                            ),
+	                            _react2.default.createElement(
+	                                'ul',
+	                                null,
+	                                navAboutItem.map(function (item, i) {
+	                                    return _react2.default.createElement(NavItem, { className: item.className, onClick: item.onClick, key: item.key, reflink: item.reflink, text: item.text, style: { float: "left" } });
+	                                })
 	                            )
 	                        ),
-	                        _react2.default.createElement(NavAbout, { className: 'mNav-about row',
-	                            items: navAboutItem }),
-	                        _react2.default.createElement('div', { id: 'padding' }),
 	                        _react2.default.createElement(
 	                            'div',
-	                            { className: 'mNav-cart  row' },
-	                            _react2.default.createElement(NavItem, { className: 'nav-special  items', text: '\u0110\u1EB7t h\xE0ng', reflink: '#' }),
-	                            _react2.default.createElement(NavCart, null)
+	                            { style: { float: "right" } },
+	                            _react2.default.createElement(
+	                                'ul',
+	                                null,
+	                                _react2.default.createElement(NavItem, { className: 'nav-special  items', text: '\u0110\u1EB7t h\xE0ng', reflink: '#', style: { float: "left" } }),
+	                                _react2.default.createElement(NavCart, { style: { float: "left" } })
+	                            )
 	                        )
 	                    ),
 	                    submenu
@@ -21789,7 +21783,7 @@
 	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement(
-	                'div',
+	                'li',
 	                { className: this.props.className, onClick: this.props.onClick, style: this.props.style },
 	                _react2.default.createElement(
 	                    'a',
@@ -21816,8 +21810,8 @@
 	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement(
-	                'div',
-	                { className: 'icon ' },
+	                'li',
+	                { className: 'icon', style: this.props.style },
 	                _react2.default.createElement(
 	                    'a',
 	                    { className: 'text-center' },
@@ -21835,33 +21829,8 @@
 	    return NavCart;
 	}(_react.Component);
 
-	var NavAbout = function (_Component4) {
-	    _inherits(NavAbout, _Component4);
-
-	    function NavAbout(props) {
-	        _classCallCheck(this, NavAbout);
-
-	        return _possibleConstructorReturn(this, (NavAbout.__proto__ || Object.getPrototypeOf(NavAbout)).call(this, props));
-	    }
-
-	    _createClass(NavAbout, [{
-	        key: 'render',
-	        value: function render() {
-	            return _react2.default.createElement(
-	                'div',
-	                { className: this.props.className },
-	                this.props.items.map(function (item, i) {
-	                    return _react2.default.createElement(NavItem, { className: item.className, onClick: item.onClick, key: item.key, reflink: item.reflink, text: item.text });
-	                })
-	            );
-	        }
-	    }]);
-
-	    return NavAbout;
-	}(_react.Component);
-
-	var NavMenu = function (_Component5) {
-	    _inherits(NavMenu, _Component5);
+	var NavMenu = function (_Component4) {
+	    _inherits(NavMenu, _Component4);
 
 	    function NavMenu(props) {
 	        _classCallCheck(this, NavMenu);

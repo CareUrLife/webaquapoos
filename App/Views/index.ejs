@@ -44,11 +44,11 @@
             }
         });
         
-        $(window).resize(function() {
-            var paddingW = $('div.row.mNav-root').width() - $('div.mNav-branch').outerWidth() - $('div.mNav-cart').outerWidth() - $('div.mNav-about').outerWidth();
-            $('div#padding').outerWidth(paddingW);
-
-        });
+        $(document).ready(function() {
+            if($(window).width() <= 414) {
+                $('div.mNav').addClass('fixable');
+            }
+        }); 
 
         
     //$(document).ready(function() {
