@@ -174,7 +174,6 @@ header .container-fluid {
 
 .mNav div.mNav-root  {
     /* display : flex - solution*/
-    border-right : 1px solid #db7070;
     overflow : hidden;
     width : 100%;
     max-width : 100%;

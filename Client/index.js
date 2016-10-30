@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import Update from 'react-addons-update';
-import Nav from './Module/index.navcustom.js';
-import Header from './Module/index.header.js';
-var ResizeActions = require('./Flux/Actions/resize.actions.js');
+import Nav from './Redux/Components/index.navcustom.js';
+import Header from './Redux/Components/index.header.js';
 
 class Index extends Component {
     constructor(props) {
@@ -19,7 +18,6 @@ class Index extends Component {
             height = w.innerHeight || documentElement.clientHeight || body.clientHeight;
         var newState = Update(this.state, {windowSize: {$set: {width: width, height : height}}});
         this.setState(newState);
-        ResizeActions.setWindowSize(newState.windowSize);
     }
 
 
@@ -35,7 +33,7 @@ class Index extends Component {
     render() {
         return(
             <div className="container-root">
-                <Nav aboutItems={[{reflink:'#', text: 'Tính năng', key: "dk", className: "nav-normal  items"}, {reflink:'#', text: 'Blog', key: "bl", className: "nav-normal items"}, {reflink:'#', text: 'Về chúng tôi', key: "fb", className: "nav-normal items"}]}/>
+                <Nav windowSize={this.state.windowSize} aboutItems={[{reflink:'#', text: 'Tính năng', key: "dk", className: "nav-normal  items"}, {reflink:'#', text: 'Blog', key: "bl", className: "nav-normal items"}, {reflink:'#', text: 'Về chúng tôi', key: "fb", className: "nav-normal items"}]}/>
                 <Header media={{mType : "image", mSrc : "Images/header.jpg"}}/>
             </div>
         );

@@ -1,43 +1,26 @@
 import React, {Component} from 'react';
-var ResizeStore = require('../Flux/Stores/resize.store.js');
 import Update from 'react-addons-update';
 
-function getWindowSize() {
-    return ResizeStore.getWindowSize();
-}
 
 class Nav extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {windowSize : getWindowSize(), subMenuVisible : false};
-        this._onChange = this._onChange.bind(this);
+        this.state = {subMenuVisible : false};
     } 
 
-        
-
-    
-
     componentDidMount() {
-        ResizeStore.addChangeListener(this._onChange);
     }
 
     componentWillUnmount() {
-        ResizeStore.removeChangeListener(this._onChange);
     }
 
-    _onChange() {
-        var newState = Update(this.state, {$set : {windowSize : getWindowSize()}}); 
-        this.setState(newState);
-    }
-
-    
 
     render() {
 
         var submenu;
 
-        if(this.state.windowSize.width < 768 && this.state.subMenuVisible) {
+        if(this.props.windowSize.width < 768 && this.state.subMenuVisible) {
             submenu = <NavMenu items={this.props.aboutItems}/>
         }else{
             submenu = <div></div>
@@ -45,7 +28,7 @@ class Nav extends Component {
 
         var navAboutItem;
 
-        if(this.state.windowSize.width < 768) {
+        if(this.props.windowSize.width < 768) {
             navAboutItem = [{reflink:'#', text: 'Menu', key: 'menu', className: "nav-normal items", onClick : () => {var newState = Update(this.state, {$set : {subMenuVisible : !this.state.subMenuVisible}}); this.setState(newState); }}] 
         }else {
             navAboutItem = this.props.aboutItems;

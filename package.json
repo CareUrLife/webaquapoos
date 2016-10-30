@@ -9,7 +9,9 @@
     "babel-preset-react": "*",
     "babel-preset-es2015": "*",
     "react-addons-update": "*",
-    "object-assign": "*"
+    "object-assign": "*",
+    "redux" : "*",
+    "react-redux" : "*"
   },
   "dependencies": {
     "body-parser": "*",
