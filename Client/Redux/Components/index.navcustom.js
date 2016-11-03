@@ -40,18 +40,20 @@ class Nav extends Component {
                         <div>
                                 <a className="navbar-brach mNav-branch items " style={{float:"left"}}>AquapoOS</a> 
                             <ul>
-                                {navAboutItem.map(function (item, i) {
-                                    return (
-                                        <NavItem className={item.className} onClick={item.onClick} key={item.key}       reflink={item.reflink} text={item.text} style={{float:"left"}}/>
-                                    );
-                                })}
+                                
                             </ul>
                         </div>
                         
                         <div style={{float : "right"}}>
                             <ul>
-                                <NavItem className="nav-special  items" text="Đặt hàng" reflink="#" style={{float : "left"}}/>
-                                <NavCart style={{float: "left"}}/>
+                                <NavCart style={{float: "right"}}/>
+                                <NavItem className="nav-special  items" text="Đặt hàng" reflink="#" style={{float : "right"}}/>
+                                
+                                {navAboutItem.map(function (item, i) {
+                                    return (
+                                        <NavItem className={item.className} onClick={item.onClick} key={item.key}       reflink={item.reflink} text={item.text} style={{float:"left"}}/>
+                                    );
+                                })}
                             </ul>
                         </div>
                     </div>

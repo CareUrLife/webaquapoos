@@ -26,9 +26,13 @@
     <link href="Css/layout.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Josefin+Slab">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato">
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Dosis:medium">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Dosis:regular">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Josefin+Sans">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Vollkorn:regular">
 
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Maven+Pro">
+
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:regular">
     <script>
         $(window).scroll(function() {
             var scroll = $(window).scrollTop();
@@ -40,9 +44,14 @@
         });
         
         $(document).ready(function() {
+            var height = $('div.content-x').height();
+            $('div.content-x').width(height*1.6);
             if($(window).width() <= 414) {
                 $('div.mNav').addClass('fixable');
             }
+            var padding = ($(".mNav li.items").height() - $(".mNav li.items>a").height())/2;
+            $("div.mNav li.items").attr("padding-top",padding);
+            $("div.mNav li.items").attr("padding-bottom",padding);
         }); 
 
         

@@ -24,7 +24,7 @@ class Header extends Component {
                             </div>
                         </div>
                         <div className="shortintro">
-                            <div className="half">
+                            <div className="half content-x">
                                 <h2>Aquapo-OS</h2>
                                 <h3>Brevity Introduction Sentence about Aquapo-OS</h3>
                             </div>

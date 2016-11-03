@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import Update from 'react-addons-update';
 import Nav from './Redux/Components/index.navcustom.js';
 import Header from './Redux/Components/index.header.js';
+import ProductionSpec from './Redux/Components/index.productspec.js'
+import ProductQuote from './Redux/Components/index.quote.js';
+import Footer from './Redux/Components/index.footer.js'
 
 class Index extends Component {
     constructor(props) {
@@ -35,6 +38,8 @@ class Index extends Component {
             <div className="container-root">
                 <Nav windowSize={this.state.windowSize} aboutItems={[{reflink:'#', text: 'Tính năng', key: "dk", className: "nav-normal  items"}, {reflink:'#', text: 'Blog', key: "bl", className: "nav-normal items"}, {reflink:'#', text: 'Về chúng tôi', key: "fb", className: "nav-normal items"}]}/>
                 <Header media={{mType : "image", mSrc : "Images/header.jpg"}}/>
+                <ProductQuote/>
+                <Footer/>
             </div>
         );
     }

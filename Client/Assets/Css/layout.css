@@ -1,11 +1,14 @@
 
 body {
     overflow-x: hidden;
-    font-family: "Dosis", sans-serif;
+    font-family: "Maven Pro", sans-serif;
+    font-size : 20px;
     /*webkit-tap-highlight-color: #3c763d*/
     /*background: url("http://i.imgur.com/HgflTDf.jpg") 50% fixed;*/
     background-size: cover;
     height: 100vh;
+    -webkit-font-smoothing : subpixel-antialiased;
+    background-color : #ffffff;
 }
 
 header {
@@ -24,7 +27,6 @@ header {
 }
 
 header .mediabox {
-    height : inherit;
     width : inherit;
     position : relative;
 }
@@ -32,6 +34,50 @@ header .mediabox {
 header .mediabox img {
     height : inherit;
     width : 100%;
+}
+
+header .container-fluid {
+    padding-left : 0px;
+    padding-right : 0px;
+    text-align : center;
+}
+
+.prodspec {
+    box-sizing : content-box;
+    position : relative; 
+}
+
+.prodspec .container-fluid {
+    padding : 0px;
+}
+
+.prodspec .mediabox.summarize {
+    width : 61.54%;
+    height : inherit;
+}
+
+.mediabox>img {
+    width : 100%;
+    height : inherit;
+}
+
+.prodspec .shortintro {
+    width : 38.46%;
+    height : inherit;
+    display : inline-block;
+}
+
+.colorblack {
+    color : #202020;
+}
+
+
+.left {
+    float : left;
+}
+
+.right {
+    float : right;
 }
 /*
 .container {
@@ -53,22 +99,23 @@ header .mediabox img {
     font-size : 50px;
     font-weight : bold;
     text-align : left;
-    color : #006600;
+    color : white;
     opacity : 0.8;
 }
 
 .shortintro h3 {
     font-size : 30px;
     text-align : left;
-    color : #006600;
+    color : #eee;
     opacity : 0.8;
 }
 
-.shortintro 
 
 .half {
-    height : inherit;
     width : 50%;
+    background-color : rgba(22, 102, 0, 0.7);
+    padding : 10px;
+    border-radius : 10px;
 }
 
 .navbar-custom {
@@ -110,10 +157,63 @@ header .mediabox img {
   width : 100%;
 }
 
-header .container-fluid {
-    padding-left : 0px;
-    padding-right : 0px;
+.prodquote {
+    position : relative;
+    background-color : #ffffff ;
+    box-sizing : border-box;
+    height : auto;
+    padding-top : 30px;
+    padding-bottom : 30px;
 }
+
+.prodquote .container-fluid{
+    color : #3c763d;
+    font-size : 20px;
+    text-align : center;
+}
+
+
+
+.prodquote .quote{
+    position : relative;
+    font-size : 20px;
+    color : #f5f5f5;
+    width : 50%;
+    font-family : inherit;
+    text-align : center;
+    padding-top : 50px;
+    padding-bottom : 10px;
+}
+
+.prodquote h3 {
+    font-size : 30px;
+    font-weight : bold;
+}
+
+.prodquote hr {
+    width : 200px;
+    border-top : 3px solid #8a6d3b;
+}
+
+.prodquote .feature-box .feature-content {
+    padding-top : 50px;
+}
+
+.prodquote .feature-box .feature-content h6 {
+    text-transform : uppercase;
+    font-size : 25px;
+}
+
+.prodquote .feature-box .feature-content p {
+    opacity : 0.64;
+    font-size : 19px;
+}
+
+.prodquote .feature-box .feature-content p:hover {
+    opacity : 1;
+    color : #8a6d3b;
+}
+
 @media (min-width: 768px) {
     .container-root {
         width: 750px;
@@ -138,7 +238,7 @@ header .container-fluid {
 
 .mNav {
     width : inherit;
-    background-color : #db7070;
+    background-color : #444;
     height : 60px;
 }
 
@@ -162,9 +262,19 @@ header .container-fluid {
 
 .mNav .items:hover {
     background-color : #e0e0e0;
+    color : rgba(22,102,0);
 }
+
+hr.hrabove {
+    border-top : 2px solid rgba(22, 102, 0, 0.7);
+}
+
+hr.hrbelow {
+    border-top : 2px solid rgba(22, 102, 0, 0.7);
+}
+
 .mNav .items>a {
-    color : #333;
+    color : inherit;
     font-size : 20px;
     display : block;
     text-decoration : none;
@@ -203,6 +313,7 @@ header .container-fluid {
 .mNav .icon {
     padding-right : 0px;
     float : left;
+    font-size : 14px;
 }
 
 .mNav .icon i.fa-2x {
@@ -269,6 +380,7 @@ header .container-fluid {
         position : fixed;
         z-index : 32;
         height : 38px;
+        max-width : 100%;
     }
 
     .mNav.fixable div.items {
@@ -290,7 +402,148 @@ header .container-fluid {
 
 }
 
+.box-transition {
+    
+}
 
+.box-transition p {
+    padding : 0px;
+    margin : 0px;
+    font-size : inherit;
+}
+
+.box-enter {
+    overflow : hidden;
+    padding-bottom : 1px solid rgba(22, 102, 0, 1);
+    text-align : center;
+    float : left;
+    font-size : inherit;
+    display : inline-block;
+    padding-left : 10px;
+}
+
+.box-enter.box-enter-active {
+    transition : all 0.4s ease-in-out; 
+    overflow : hidden;
+    padding-bottom : 1px solid rgba(22, 102, 0, 1);
+    text-align : center;
+    float : left;
+    font-size : inherit;
+    display : inline-block;
+    padding-left : 10px;
+}
+
+.box-leave {
+    overflow : hidden;
+    padding-bottom : 1px solid rgba(22, 102, 0, 1);
+    text-align : center;
+    float : left;
+    font-size : inherit;
+    display : inline-block;
+    padding-left : 10px;
+}
+
+.box-leave.box-leave-active {
+    overflow : hidden;
+    padding-bottom : 1px solid rgba(22, 102, 0, 1);
+    text-align : center;
+    float : left;
+    font-size : inherit;
+    display : inline-block;
+    padding-left : 10px;
+    transition : all 0.4s ease-in-out; 
+}
+
+.prodquote span {
+    display : inline-block;
+    border-bottom : 2px solid #8a6d3b;
+    height : 38px;
+    overflow : hidden;
+}
+
+
+.prodquote span.span-container {
+    transition: all 0.5s ease-in-out;
+    transition-duration : 0.5s;
+     
+}
+
+.prodquote span.span-container .box-content>p{
+    position : absolute;
+    left : 0;
+    right : 0;
+}
+
+.box-content-enter {
+    opacity : 0;
+    margin-top : 38px;
+}
+
+.box-content-enter.box-content-enter-active {
+    margin-top : 0px;
+    opacity : 1;
+    transition : all 1s ease-in-out;
+}
+
+.box-content-leave {
+    margin-top : 0px;
+    opacity : 1;
+}
+
+.box-content-leave.box-content-leave-active {
+    margin-top : 38px;
+    opacity : 0;
+    transition : all 1s ease-in-out;
+}
+
+footer {
+    position : relative;   
+    overflow : hidden;
+}
+
+footer img {
+    position : absolute;
+    bottom : 0px;
+    width : 100%;
+    filter : blur(10px);
+    z-index : -1;
+}
+footer .describe {
+    text-align : center;
+    padding : 0 6.25% 0 6.25%;
+    padding-top : 80px;
+    background-color : transparent;
+}
+
+footer .describe>p {
+    color : #f2dede;
+}
+
+footer a {
+    cursor : pointer;
+}
+
+footer .describe>div.contact-link-container {
+    border-radius : 10px;
+    padding : 10px;
+    background-color : rgba(242,243,244,0.6);
+    display : inline-block;
+}
+
+footer .digital-contact a {
+    color : #f2dede;
+}
+
+footer .digital-contact {
+    margin : 40px 20% 10% 20%;
+    overflow : visible;
+    position : relative;
+    text-align : center;
+}
+
+footer .copy-right {
+
+}
 
 
 
