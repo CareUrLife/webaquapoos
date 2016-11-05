@@ -1,10 +1,10 @@
 module.exports = {
     entry: [
-        './Client/index.js'
+        './Client/master.js'
     ],
     output: {
         path: './Client/Assets/Utils/',
-        filename: 'index.react.js'
+        filename: 'master.react.js'
     },
     module: {
         loaders: [{
