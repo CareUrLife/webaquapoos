@@ -3,7 +3,7 @@ import Update from 'react-addons-update';
 import UnitBedGrow from './research.unitBedGrow.js';
 
 
-class ContainerBedGrow extends Component {
+class Garden extends Component {
     
     constructor(props) {
         super(props);
