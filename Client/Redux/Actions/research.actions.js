@@ -12,49 +12,47 @@ export function addUnitGrowBed(pH, temp, nitrat) {
     return {
         type: ADD_UNIT_GROW_BED,
         payload : {
-            growBeds : [],
+            beds : [],
             unitStatus : {
                 pH,
                 temp,
                 nitrat
+            },
+            pos : {
+                
             }
         }
     }
 }
 
-export function delUnitGrowBed(unitIndex) {
+export function delUnitGrowBed(pos) {
     return {
         type : DEL_UNIT_GROW_BED,
-        unitIndex 
+        pos
     }
 }
 
-export function addVegetGrowBed(text, unitIndex, growBedIndex) {
+export function addVegetGrowBed(text, pos) {
     return {
         type : ADD_VEGET_GROW_BED,
-        unitIndex,
-        growBedIndex,
-        payload {
-            vegetIndex :, 
-            nameVeget : text
+        payload : {
+            pos,
+            name : text
         }
     }
 }
 
-export function delVegetGrowBed(vegetIndex, unitIndex, growBedIndex, vegetIndex) {
+export function delVegetGrowBed(vegetIndex, pos) {
     return {
         type : DEL_VEGET_GROW_BED,
-        vegetIndex,
-        growBedIndex,
-        unitIndex
+        pos
     }
 } 
 
-export function visibilityGrowBed(growBedIndex, unitIndex) {
+export function visibilityGrowBed(pos) {
     return {
         type : VISIBILITY_GROW_BED,
-        growBedIndex,
-        unitIndex
+        pos
     }
 }
 

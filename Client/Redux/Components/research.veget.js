@@ -1,4 +1,4 @@
-import React, {Component} , {PropTypes} from 'react';
+import React, {Component , PropTypes} from 'react';
 
 class Veget extends Component {
     constructor(props) {
@@ -8,7 +8,7 @@ class Veget extends Component {
     render() {
         return (
             <div>
-                <p>{this.props.nameVeget}</p>
+                <p>{this.props.name}</p>
             </div>
         );
     }

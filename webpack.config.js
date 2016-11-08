@@ -1,6 +1,6 @@
 module.exports = {
     entry: [
-        './Client/master.js'
+        './Client/index.research.js'
     ],
     output: {
         path: './Client/Assets/Utils/',
