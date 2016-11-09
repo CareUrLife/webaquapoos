@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {delUnitGrowBed} from '../../Actions/research.actions.js';
+import {delUnitGrowBed, addUnitGrowBed} from '../../Actions/research.actions.js';
 import Garden from '../research.garden.js';
 
 
@@ -15,8 +15,8 @@ const mapDispatchToProps = (dispatch) => {
         onUnitBarClick: (pos) => {
             dispatch(delUnitGrowBed(pos));
         },
-        onButtonAddClick : () => {
-            dispatch(addUnitGrowBed);
+        onButtonAddClick : (unitName, temp, ph, nitrat) => {
+            dispatch(addUnitGrowBed(unitName, temp, ph, nitrat));
         }
     }
 }

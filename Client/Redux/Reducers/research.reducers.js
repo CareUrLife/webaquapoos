@@ -13,7 +13,27 @@ function ResearchReducers(state, action) {
     switch (action.type) {
         case ADD_UNIT_GROW_BED :
             var newPayload = Object.assign({}, action.payload, {pos : {unit : state.numUnit}});
-            var newState = Object.assign({}, state, {units : [...state.units, action.payload]}, {numUnit : ++state.numUnit});
+            // Khoi tao 4 Bed trong Units, dong bo thong so status
+            // voi Unit
+            var i;
+            for(i = 1 ; i <= 4 ; i++) {
+                var newBed = {
+                    name : "Grow Bed " + i,
+                    vegets : [],
+                    status : {
+                        ph : newPayload.unitStatus.ph,
+                        temp : newPayload.unitStatus.temp,
+                        nitrat : newPayload.unitStatus.nitrat
+                    },
+                    pos : {
+                        unit : newPayload.pos.unit,
+                        bed : (i-1)
+                    }  
+                }
+                newPayload.beds.push(newBed);
+            }
+            var newState = Object.assign({}, state, {units : [...state.units, newPayload]}, {numUnit : ++state.numUnit});
+            console.log(newState); 
             return newState;
         case DEL_UNIT_GROW_BED : 
             var newState = Object.assign({}, state);
@@ -28,9 +48,9 @@ function ResearchReducers(state, action) {
         case ADD_VEGET_GROW_BED :
             var newState = Object.assign({}, state);
             var newPayload = Object.assign({}, action.payload);
-            newPayload.pos.veget = state.units[action.pos.unit].beds[action.pos.bed].numVeget++;
+            newPayload.pos.veget = state.units[newPayload.pos.unit].beds[newPayload.pos.bed].numVeget++;
             
-            newState.units[action.pos.unit].beds[action.pos.bed].vegets.push(action.payload);
+            newState.units[newPayload.pos.unit].beds[newPayload.pos.bed].vegets.push(newPayload);
             
             return newState;
         case DEL_VEGET_GROW_BED : 

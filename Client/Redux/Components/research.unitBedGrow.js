@@ -9,7 +9,7 @@ class UnitBedGrow extends Component {
 
     render() {
         return(
-            <div className="unit-container-bedgrow col-xs-12 col-sm-12 col-md-12 col-lg-12"> 
+            <div  className="unit-container-bedgrow col-xs-12 col-sm-12 col-md-12 col-lg-12"> 
                 <div className="unit-container-bedgrow-title" onClick={()=>this.props.onUnitBarClick(this.props.pos)}>
                     {this.props.name}
                 </div>

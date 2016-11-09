@@ -22530,8 +22530,8 @@
 	        onUnitBarClick: function onUnitBarClick(pos) {
 	            dispatch((0, _researchActions.delUnitGrowBed)(pos));
 	        },
-	        onButtonAddClick: function onButtonAddClick() {
-	            dispatch(addUnitGrowBed);
+	        onButtonAddClick: function onButtonAddClick(unitName, temp, ph, nitrat) {
+	            dispatch((0, _researchActions.addUnitGrowBed)(unitName, temp, ph, nitrat));
 	        }
 	    };
 	};
@@ -23276,13 +23276,14 @@
 	 * Action Creators
 	 */
 
-	function addUnitGrowBed(pH, temp, nitrat) {
+	function addUnitGrowBed(unitName, temp, ph, nitrat) {
 	    return {
 	        type: ADD_UNIT_GROW_BED,
 	        payload: {
+	            name: unitName,
 	            beds: [],
 	            unitStatus: {
-	                pH: pH,
+	                ph: ph,
 	                temp: temp,
 	                nitrat: nitrat
 	            },
@@ -23298,7 +23299,7 @@
 	    };
 	}
 
-	function addVegetGrowBed(text, pos) {
+	function addVegetGrowBed(pos, text) {
 	    return {
 	        type: ADD_VEGET_GROW_BED,
 	        payload: {
@@ -23362,27 +23363,129 @@
 	    function Garden(props) {
 	        _classCallCheck(this, Garden);
 
-	        return _possibleConstructorReturn(this, (Garden.__proto__ || Object.getPrototypeOf(Garden)).call(this, props));
+	        var _this = _possibleConstructorReturn(this, (Garden.__proto__ || Object.getPrototypeOf(Garden)).call(this, props));
+
+	        _this.state = {
+	            inputs: {}
+	        };
+	        return _this;
 	    }
 
 	    _createClass(Garden, [{
+	        key: 'handleInput',
+	        value: function handleInput(event, formId, inputName) {
+	            var newState = Object.assign({}, this.state);
+	            if (typeof newState.inputs[formId] === 'undefined') {
+	                newState.inputs[formId] = {};
+	            }
+	            newState.inputs[formId][inputName] = event.target.value;
+	            this.setState(newState);
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var _this2 = this;
+
 	            return _react2.default.createElement(
 	                'div',
 	                null,
 	                _react2.default.createElement(
 	                    'button',
-	                    { type: 'button', className: 'btn btn-default', onClick: this.props.onButtonAddClick },
+	                    { type: 'button', className: 'btn btn-default', 'data-toggle': 'modal', 'data-target': '#inputUnitInfo' },
 	                    'Add Unit'
 	                ),
 	                this.props.units.map(function (unit, index) {
 	                    return _react2.default.createElement(_researchUnitBedGrow2.default, _extends({
 	                        key: unit.pos.unit
 	                    }, unit, {
-	                        onUnitBarClick: this.props.onUnitBarClick
+	                        onUnitBarClick: _this2.props.onUnitBarClick
 	                    }));
-	                })
+	                }),
+	                _react2.default.createElement(
+	                    'div',
+	                    { id: 'inputUnitInfo', className: 'modal fade', role: 'dialog' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'modal-dialog' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'modal-content' },
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'modal-header' },
+	                                _react2.default.createElement(
+	                                    'button',
+	                                    { type: 'button', className: 'close', 'data-dismiss': 'modal' },
+	                                    '\xD7'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'h4',
+	                                    { className: 'modal-title' },
+	                                    'Unit Bed Grow Input'
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'modal-body' },
+	                                _react2.default.createElement(
+	                                    'label',
+	                                    { htmlFor: 'unitName' },
+	                                    'Unit Name : '
+	                                ),
+	                                _react2.default.createElement('input', { type: 'text', id: 'unitName', onChange: function onChange(event) {
+	                                        return _this2.handleInput(event, "infoUnit", "name");
+	                                    } }),
+	                                _react2.default.createElement(
+	                                    'div',
+	                                    { className: 'row' },
+	                                    _react2.default.createElement(
+	                                        'div',
+	                                        { className: 'col-xs-12 col-sm-12 col-lg-3 col-md-3' },
+	                                        _react2.default.createElement(
+	                                            'label',
+	                                            { htmlFor: 'ph' },
+	                                            'PH : '
+	                                        ),
+	                                        _react2.default.createElement('input', { type: 'text', id: 'ph', onChange: function onChange(event) {
+	                                                return _this2.handleInput(event, "infoUnit", "ph");
+	                                            } })
+	                                    ),
+	                                    _react2.default.createElement(
+	                                        'div',
+	                                        { className: 'col-xs-12 col-sm-12 col-lg-3 col-md-3' },
+	                                        _react2.default.createElement(
+	                                            'label',
+	                                            { htmlFor: 'temp' },
+	                                            'Temp : '
+	                                        ),
+	                                        _react2.default.createElement('input', { type: 'text', id: 'temp', onChange: function onChange(event) {
+	                                                return _this2.handleInput(event, "infoUnit", "temp");
+	                                            } })
+	                                    ),
+	                                    _react2.default.createElement(
+	                                        'div',
+	                                        { className: 'col-xs-12 col-sm-12 col-lg-3 col-md-3' },
+	                                        _react2.default.createElement(
+	                                            'label',
+	                                            { htmlFor: 'ph' },
+	                                            'N03 : '
+	                                        ),
+	                                        _react2.default.createElement('input', { type: 'text', id: 'nitrat', onChange: function onChange(event) {
+	                                                return _this2.handleInput(event, "infoUnit", "nitrat");
+	                                            } })
+	                                    )
+	                                ),
+	                                _react2.default.createElement(
+	                                    'button',
+	                                    { type: 'button', className: 'btn btn-default', onClick: function onClick() {
+	                                            return _this2.props.onButtonAddClick(_this2.state.inputs["infoUnit"]["name"], _this2.state.inputs["infoUnit"]["temp"], _this2.state.inputs["infoUnit"]["ph"], _this2.state.inputs["infoUnit"]["nitrat"]);
+	                                        } },
+	                                    'OK'
+	                                )
+	                            )
+	                        )
+	                    )
+	                )
 	            );
 	        }
 	    }]);
@@ -23559,7 +23662,7 @@
 	        value: function render() {
 	            var _this2 = this;
 
-	            _react2.default.createElement(
+	            return _react2.default.createElement(
 	                'div',
 	                { className: 'bed-grow col-xs-12 col-sm-12 col-lg-3 col-md-3' },
 	                _react2.default.createElement(
@@ -23572,7 +23675,7 @@
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'bed-grow-body' },
-	                    _react2.default.createElement(ContainerAddVeget, null),
+	                    _react2.default.createElement(ContainerAddVeget, { pos: this.props.pos }),
 	                    this.props.vegets.map(function (veget, index) {
 	                        var _this3 = this;
 
@@ -23583,9 +23686,9 @@
 	                ),
 	                _react2.default.createElement(
 	                    'div',
-	                    { className: 'bed-grow-status' },
-	                    this.props.items.map(function (item, index) {
-	                        return _react2.default.createElement(StatusItems, null);
+	                    { className: 'bed-grow-status row' },
+	                    Object.keys(this.props.status).map(function (key, index) {
+	                        return _react2.default.createElement(StatusItems, { key: key, name: key, value: _this2.props.status[key] });
 	                    })
 	                )
 	            );
@@ -23595,17 +23698,49 @@
 	    return BedGrow;
 	}(_react.Component);
 
-	var AddVeget = function (_Component2) {
-	    _inherits(AddVeget, _Component2);
+	var StatusItems = function (_Component2) {
+	    _inherits(StatusItems, _Component2);
+
+	    function StatusItems(props) {
+	        _classCallCheck(this, StatusItems);
+
+	        return _possibleConstructorReturn(this, (StatusItems.__proto__ || Object.getPrototypeOf(StatusItems)).call(this, props));
+	    }
+
+	    _createClass(StatusItems, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'col-md-4 col-lg-4 col-sm-4 col-xs-4' },
+	                _react2.default.createElement(
+	                    'h3',
+	                    null,
+	                    this.props.name
+	                ),
+	                _react2.default.createElement(
+	                    'h3',
+	                    null,
+	                    this.props.value
+	                )
+	            );
+	        }
+	    }]);
+
+	    return StatusItems;
+	}(_react.Component);
+
+	var AddVeget = function (_Component3) {
+	    _inherits(AddVeget, _Component3);
 
 	    function AddVeget(props) {
 	        _classCallCheck(this, AddVeget);
 
-	        var _this4 = _possibleConstructorReturn(this, (AddVeget.__proto__ || Object.getPrototypeOf(AddVeget)).call(this, props));
+	        var _this5 = _possibleConstructorReturn(this, (AddVeget.__proto__ || Object.getPrototypeOf(AddVeget)).call(this, props));
 
-	        _this4.state = { value: '' };
-	        _this4.handleChange = _this4.handleChange.bind(_this4);
-	        return _this4;
+	        _this5.state = { value: '' };
+	        _this5.handleChange = _this5.handleChange.bind(_this5);
+	        return _this5;
 	    }
 
 	    _createClass(AddVeget, [{
@@ -23617,7 +23752,7 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var _this5 = this;
+	            var _this6 = this;
 
 	            var input = void 0;
 
@@ -23628,12 +23763,12 @@
 	                    'form',
 	                    { onSubmit: function onSubmit(e) {
 	                            e.preventDefault();
-	                            if (!_this5.state.value.trim()) {
+	                            if (!_this6.state.value.trim()) {
 	                                return;
 	                            }
-	                            _this5.props.dispatch((0, _researchActions.addVegetGrowBed)(_this5.state.value, _this5.props.pos));
+	                            _this6.props.dispatch((0, _researchActions.addVegetGrowBed)(_this6.props.pos, _this6.props.value));
 	                            var newState = { value: '' };
-	                            _this5.setState(newState);
+	                            _this6.setState(newState);
 	                        } },
 	                    _react2.default.createElement('input', { value: this.state.value, onChange: this.handleChange }),
 	                    _react2.default.createElement(
@@ -23650,25 +23785,6 @@
 	}(_react.Component);
 
 	var ContainerAddVeget = (0, _reactRedux.connect)()(AddVeget);
-
-	var StatusItems = function (_Component3) {
-	    _inherits(StatusItems, _Component3);
-
-	    function StatusItems(props) {
-	        _classCallCheck(this, StatusItems);
-
-	        return _possibleConstructorReturn(this, (StatusItems.__proto__ || Object.getPrototypeOf(StatusItems)).call(this, props));
-	    }
-
-	    _createClass(StatusItems, [{
-	        key: 'render',
-	        value: function render() {
-	            return _react2.default.createElement('div', { 'class': 'bed-grow-status-item' });
-	        }
-	    }]);
-
-	    return StatusItems;
-	}(_react.Component);
 
 	exports.default = BedGrow;
 
@@ -23753,7 +23869,27 @@
 	    switch (action.type) {
 	        case _researchActions.ADD_UNIT_GROW_BED:
 	            var newPayload = Object.assign({}, action.payload, { pos: { unit: state.numUnit } });
-	            var newState = Object.assign({}, state, { units: [].concat(_toConsumableArray(state.units), [action.payload]) }, { numUnit: ++state.numUnit });
+	            // Khoi tao 4 Bed trong Units, dong bo thong so status
+	            // voi Unit
+	            var i;
+	            for (i = 1; i <= 4; i++) {
+	                var newBed = {
+	                    name: "Grow Bed " + i,
+	                    vegets: [],
+	                    status: {
+	                        ph: newPayload.unitStatus.ph,
+	                        temp: newPayload.unitStatus.temp,
+	                        nitrat: newPayload.unitStatus.nitrat
+	                    },
+	                    pos: {
+	                        unit: newPayload.pos.unit,
+	                        bed: i - 1
+	                    }
+	                };
+	                newPayload.beds.push(newBed);
+	            }
+	            var newState = Object.assign({}, state, { units: [].concat(_toConsumableArray(state.units), [newPayload]) }, { numUnit: ++state.numUnit });
+	            console.log(newState);
 	            return newState;
 	        case _researchActions.DEL_UNIT_GROW_BED:
 	            var newState = Object.assign({}, state);
@@ -23768,9 +23904,9 @@
 	        case _researchActions.ADD_VEGET_GROW_BED:
 	            var newState = Object.assign({}, state);
 	            var newPayload = Object.assign({}, action.payload);
-	            newPayload.pos.veget = state.units[action.pos.unit].beds[action.pos.bed].numVeget++;
+	            newPayload.pos.veget = state.units[newPayload.pos.unit].beds[newPayload.pos.bed].numVeget++;
 
-	            newState.units[action.pos.unit].beds[action.pos.bed].vegets.push(action.payload);
+	            newState.units[newPayload.pos.unit].beds[newPayload.pos.bed].vegets.push(newPayload);
 
 	            return newState;
 	        case _researchActions.DEL_VEGET_GROW_BED:

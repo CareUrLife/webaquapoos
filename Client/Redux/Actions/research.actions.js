@@ -8,13 +8,16 @@ export const VISIBILITY_GROW_BED = 'VISIBILITY_GROW_BED';
      * Action Creators
      */
 
-export function addUnitGrowBed(pH, temp, nitrat) {
+export function addUnitGrowBed(unitName, temp, ph, nitrat) {
     return {
         type: ADD_UNIT_GROW_BED,
         payload : {
-            beds : [],
+            name : unitName,
+            beds : [
+                
+            ],
             unitStatus : {
-                pH,
+                ph,
                 temp,
                 nitrat
             },
@@ -32,7 +35,7 @@ export function delUnitGrowBed(pos) {
     }
 }
 
-export function addVegetGrowBed(text, pos) {
+export function addVegetGrowBed(pos, text) {
     return {
         type : ADD_VEGET_GROW_BED,
         payload : {
