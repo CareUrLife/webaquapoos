@@ -3,7 +3,8 @@ import {visibilityGrowBed, addVegetGrowBed, delVegetGrowBed} from '../../Actions
 import BedGrow from '../research.bedGrow.js';
 
 const mapStateToProps = (state, props) => {
-    console.log(state);
+    console.log("state", state);
+    console.log("props", props);
     var tmp = state.units[props.pos.unit].beds[props.pos.bed]; 
     return {
         vegets : tmp.vegets, 

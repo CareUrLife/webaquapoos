@@ -10,8 +10,8 @@
     "babel-preset-es2015": "*",
     "react-addons-update": "*",
     "object-assign": "*",
-    "redux" : "*",
-    "react-redux" : "*"
+    "redux": "*",
+    "react-redux": "*"
   },
   "dependencies": {
     "body-parser": "*",
@@ -22,9 +22,11 @@
     "express-session": "*",
     "mongoose": "*",
     "react": "^15.3.2",
+    "react-addons-css-transition-group": "*",
+    "react-bootstrap": "^0.30.6",
     "react-dom": "^15.3.2",
-    "react-router" : "*",
-    "winston": "*",
-    "react-addons-css-transition-group" : "*"
+    "react-popover": "^0.4.4",
+    "react-router": "*",
+    "winston": "*"
   }
 }

@@ -5,6 +5,7 @@ class Veget extends Component {
         super(props);
     }
 
+
     render() {
         return (
             <div>
@@ -13,3 +14,4 @@ class Veget extends Component {
         );
     }
 }
+export default Veget;

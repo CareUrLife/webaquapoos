@@ -5,21 +5,54 @@ const initialState = {
     units : [],
     numUnit : 0
 }
+var clone = (obj) => {
+    var copy;
 
-function ResearchReducers(state, action) {
-    if(typeof state === 'undefined') {
-        state = initialState;
+    // Handle the 3 simple types, and null or undefined
+    if (null == obj || "object" != typeof obj) return obj;
+
+    // Handle Date
+    if (obj instanceof Date) {
+        copy = new Date();
+        copy.setTime(obj.getTime());
+        return copy;
     }
+
+    // Handle Array
+    if (obj instanceof Array) {
+        copy = [];
+        for (var i = 0, len = obj.length; i < len; i++) {
+            copy[i] = clone(obj[i]);
+        }
+        return copy;
+    }
+
+    // Handle Object
+    if (obj instanceof Object) {
+        copy = {};
+        for (var attr in obj) {
+            if (obj.hasOwnProperty(attr)) copy[attr] = clone(obj[attr]);
+        }
+        return copy;
+    }
+
+    throw new Error("Unable to copy obj! Its type isn't supported.");
+}
+
+function ResearchReducers(state = initialState, action) {
+    
     switch (action.type) {
-        case ADD_UNIT_GROW_BED :
-            var newPayload = Object.assign({}, action.payload, {pos : {unit : state.numUnit}});
+        case ADD_UNIT_GROW_BED : {
+            let newPayload = clone(action.payload);
+            newPayload.pos.unit = state.numUnit;
             // Khoi tao 4 Bed trong Units, dong bo thong so status
             // voi Unit
-            var i;
+            let i;
             for(i = 1 ; i <= 4 ; i++) {
-                var newBed = {
+                let newBed = {
                     name : "Grow Bed " + i,
                     vegets : [],
+                    numVeget : 0,
                     status : {
                         ph : newPayload.unitStatus.ph,
                         temp : newPayload.unitStatus.temp,
@@ -32,48 +65,56 @@ function ResearchReducers(state, action) {
                 }
                 newPayload.beds.push(newBed);
             }
-            var newState = Object.assign({}, state, {units : [...state.units, newPayload]}, {numUnit : ++state.numUnit});
+            let newState = clone(state);
+            newState.units.push(newPayload);
+            newState.numUnit = state.numUnit + 1;
             console.log(newState); 
             return newState;
-        case DEL_UNIT_GROW_BED : 
-            var newState = Object.assign({}, state);
+        }
+        case DEL_UNIT_GROW_BED : { 
+            let newState = clone(state);
             newState.units.splice(action.pos.unit, 1);
-            newState.numUnit = newState.units.size;
-            var i;
-            for(i = action.pos.unit + 1; i < newState.numUnit; i++) {
+            newState.numUnit = newState.units.length;
+            let i;
+            for(i = action.pos.unit; i < newState.numUnit; i++) {
                 newState.units[i].pos.unit--;
             }
+            console.log(newState);
             // Defer Process Index Element
             return newState;
-        case ADD_VEGET_GROW_BED :
-            var newState = Object.assign({}, state);
-            var newPayload = Object.assign({}, action.payload);
-            newPayload.pos.veget = state.units[newPayload.pos.unit].beds[newPayload.pos.bed].numVeget++;
-            
+        }
+        case ADD_VEGET_GROW_BED : {
+            let newState = clone(state); 
+            let newPayload = clone(action.payload); 
+            newPayload.pos.veget = newState.units[newPayload.pos.unit].beds[newPayload.pos.bed].numVeget;
+            console.log(action.payload);
+            newState.units[newPayload.pos.unit].beds[newPayload.pos.bed].numVeget++;
             newState.units[newPayload.pos.unit].beds[newPayload.pos.bed].vegets.push(newPayload);
-            
             return newState;
-        case DEL_VEGET_GROW_BED : 
-            var newState = Object.assign({}, state); 
-            var vegets = newState.units[action.pos.unit].beds[action.pos.bed].vegets;
+        }
+        case DEL_VEGET_GROW_BED : {
+            let newState = clone(state); 
+            let vegets = newState.units[action.pos.unit].beds[action.pos.bed].vegets;
             newState.units[action.pos.unit].beds[action.pos.bed].numVeget--;
             vegets.splice(action.pos.veget, 1);
             
-            var i;
-            for (i = action.pos.bed + 1 ; i < newState.units[paction.pos.unit].beds[action.pos.bed].numVeget ; i++) {
+            let i;
+            for (i = action.pos.bed  ; i < newState.units[paction.pos.unit].beds[action.pos.bed].numVeget ; i++) {
                 vegets[i].pos.veget--;
             }
             // Defer Process Index Element
             return newState;
-        case VISIBILITY_GROW_BED : 
-            var newState = Object.assign({}, state);
-            var growBed = newState.units[action.pos.unit].beds[action.pos.bed];
+        }
+        case VISIBILITY_GROW_BED : {
+            let newState = clone(state); 
+            let growBed = newState.units[action.pos.unit].beds[action.pos.bed];
             if(growBed.visibility) {
                 growBed.visibility = false;
             }else{
                 growBed.visibility = true;
             }
             return newState;
+        }
         default : 
             return state;
                 
