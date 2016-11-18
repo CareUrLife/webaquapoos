@@ -40,3 +40,5 @@ process.once('SIGINT', function() {
     });
 });
 
+// Using data model to create requirement schema
+require('../App/Models/research.model.userAppData.js');

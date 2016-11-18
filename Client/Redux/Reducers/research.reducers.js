@@ -5,6 +5,7 @@ const initialState = {
     units : [],
     numUnit : 0
 }
+
 var clone = (obj) => {
     var copy;
 
