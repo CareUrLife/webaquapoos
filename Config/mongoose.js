@@ -1,8 +1,10 @@
+
+var ResearcherInfoSchema = require('../App/Models/research.model.userAppData.js').ResearcherInfoSchema;
+
 var mongoose = require('mongoose');
-var researchDB_URI = '';
+var researchDB_URI = require('../Config/config.js').db;
 
-
-console.log("Connect to Reserch DB ... ");
+console.log("Connect to Research DB ... ");
 
 var db = mongoose.connect(researchDB_URI);
 
@@ -18,6 +20,7 @@ mongoose.connection.on('disconnected', function() {
     console.log('Mongoose disconnected to ' + researchDB_URI);
 })
 
+var ResearcherInfoModel = mongoose.model('ResearcherInfo', ResearcherInfoSchema);
   
 
 var gracefulShutdown = function(msg, callback) {
@@ -40,5 +43,5 @@ process.once('SIGINT', function() {
     });
 });
 
+
 // Using data model to create requirement schema
-require('../App/Models/research.model.userAppData.js');

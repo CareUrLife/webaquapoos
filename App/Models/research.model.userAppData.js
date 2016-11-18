@@ -2,14 +2,17 @@ var mongoose = require('mongoose');
 
 
 
-var UserInfoSchema = new mongoose.Schema({
+var ResearcherInfoSchema = new mongoose.Schema({
     usrName : String,
     realName : String,
     email : String,
     password: String,
     isAdmin : Boolean
-})
+});
 
+ResearcherInfoSchema.index({usrName : 1}, {unique : true});
+
+exports.ResearcherInfoSchema = ResearcherInfoSchema;
 /*
 var UserGardenSchema = new mongoose.Schema({
     user : Objectid,

@@ -19,7 +19,7 @@ module.exports = function() {
 
     //Body Parser Configuration
     app.use(bodyParser.urlencoded({
-       extended : true 
+       extended : false 
     }));
 
     app.use(bodyParser.json());
@@ -31,7 +31,7 @@ module.exports = function() {
     app.use(session({
         saveUninitialized: true,
         resave: true,
-        secret: config.sessionSecret,
+        secret: config.secret,
         cookie: {secure : config.sessionSecure}
         //store: new MongoStore({mongooseConnection : mongoose.connection})
     }));
@@ -43,6 +43,6 @@ module.exports = function() {
 
     // Router
     require("../App/Routes/index.route.js")(app);
-
+    require("../App/Routes/index.api.route.js")(app);
     return app;
 }
