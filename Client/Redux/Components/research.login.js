@@ -39,7 +39,7 @@ class ResearchLogin extends Component {
             <div>
 				<h2>Login</h2>
              	<Form horizontal onSubmit={this.formProcess.bind(this)}>
-					<FormGroup controlId="usrname">
+					<FormGroup controlId="usrName">
 						<Col componentClass={ControlLabel} sm={2}>
 							Email
   						</Col>

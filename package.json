@@ -25,6 +25,7 @@
     "mongo": "^0.1.0",
     "mongoose": "*",
     "morgan": "^1.7.0",
+    "passport-local": "^1.0.0",
     "react": "^15.3.2",
     "react-addons-css-transition-group": "*",
     "react-bootstrap": "^0.30.6",
