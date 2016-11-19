@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
-
-
+var bcrypt = require('bcrypt-nodejs');
 
 var ResearcherInfoSchema = new mongoose.Schema({
     usrName : String,
@@ -11,6 +10,25 @@ var ResearcherInfoSchema = new mongoose.Schema({
 });
 
 ResearcherInfoSchema.index({usrName : 1}, {unique : true});
+
+ResearcherInfoSchema.methods.comparePassword = function(password, callback) {
+    bcrypt.compare(password, this.password, callback);
+}
+
+ResearcherInfoSchema.pre('save', function(next) {
+    if(!this.isModified('password')) {
+        return next();
+    }
+    bcrypt.genSalt(function(err, salt) {
+        if(err) {return next(err);}
+        bcrypt.hash(this.password, salt, function(err, hash){
+            if(err) {return next(err);}
+
+            this.password = hash;
+            return next();
+        });
+    });
+});
 
 exports.ResearcherInfoSchema = ResearcherInfoSchema;
 /*
