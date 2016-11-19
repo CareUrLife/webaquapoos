@@ -20,7 +20,8 @@ module.exports = function(config) {
                         res.status(401).end();
                     }
 
-                    return next();
+                    return next(); 
+                    // next middleware, in our case, this middleware is router
                 });
             });
         } 
