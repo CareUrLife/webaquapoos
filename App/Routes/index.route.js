@@ -1,5 +1,3 @@
-
-
 module.exports = function(app) {
     var index_render = require('../Controllers/index.controller.js');
     var testusrdb = require('../Controllers/index.database.controller.js').testusrdb;

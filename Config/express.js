@@ -21,7 +21,7 @@ module.exports = function() {
 
     const authCheckMiddleware = require('../App/Controllers/research.autho.controller.js')(config);
 
-    app.use('/api',authCheckMiddleware);
+    require("../App/Routes/research.route.js")(app);
     app.set('superSecret', config.secret); // set secret variable
 
     //Body Parser Configuration
@@ -50,6 +50,6 @@ module.exports = function() {
 
     // Router
     require("../App/Routes/index.route.js")(app);
-    require("../App/Routes/index.api.route.js")(app);
+
     return app;
 }
