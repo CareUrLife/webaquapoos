@@ -21,17 +21,16 @@ router.post('/signup', function(req, res, next) {
 });
 
 router.post('/login', function(req, res, next) {
-    console.log("body parsing", req.body);
+
     passport.authenticate('local-login',  
         function(err, token, researcherData) {
             if(err) {
                 if(err.name === "IncorrectEmailOrPasswordError") {
-                     return res.status(404).json({success : false, message : err.message});
+                    return res.status(404).send({success : false, message : err.message}).end();
                 }
-
-                return res.status(400).json({success : false, message : "Cannot process signup form"});
+                return res.status(400).json({success : false, message : "Cannot process signup form"}).end();
             }
-            res.status(200).json({success : true, message : "Login Successfully",token : token, researcherData : researcherData});
+            return res.status(200).json({success : true, message : "Login Successfully",token : token, researcherData : researcherData}).end();
         })(req, res, next);
 });
 

@@ -8,9 +8,11 @@ module.exports = function(config) {
         passReqToCallback: true,
         session : false
     }, function(req, usrName, password, done) {
-        console.log("aaaaaaaaaaaaaa");
         ResearcherModel.findOne({usrName: usrName}, function(err, researcher) {
-            if(err) {return done(err)}
+            if(err) {
+                console.log(err);
+                return done(err);
+            }
 
             if(!researcher) {
                 let error = new Error("Incorrect email or password");
@@ -19,7 +21,10 @@ module.exports = function(config) {
             }
 
             researcher.comparePassword(password, function(err, isMatch) {
-                if(err) {done(err);}
+                if(err) {
+                    console.log(err);
+                    return done(err);
+                }
 
                 if(!isMatch) {
                     let error = new Error("Incorrect email or password");
