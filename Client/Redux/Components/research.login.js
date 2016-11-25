@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
-import {Form, FormGroup, Col, FormControl, Button} from 'react-bootstrap';
-var Auth = require('../../APIs/Auth.js');
+import {browserHistory} from 'react-router';
+import {Form,FormControl, FormGroup, Col, Input, Button, ControlLabel} from 'react-bootstrap';
+import ReactDOM from 'react-dom';
+import Auth from '../../APIs/Auth.js';
 class ResearchLogin extends Component {
 
     constructor(props) {
@@ -8,18 +10,34 @@ class ResearchLogin extends Component {
         this.state={};
     }
 
-    formProcess(event) {
-        event.preventDefault();
-        let user = 'usrname'+encodeURIComponent(this.refs.usrname.getValue())+
-                    '&password='+encodeURIComponent(this.refs.password.getValue());
+    componentDidMount() {
         let xhr = new XMLHttpRequest();
-        xhr.open('post', '/auth/login');
+        xhr.open('post', '/research/auth');
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.setRequestHeader('Authorization', 'bearer ' + Auth.getToken());
+        xhr.responseType = 'json';
+
+        xhr.onload = function() {
+            if(this.state === 200) {
+                browserHistory.push('/research'); 
+            }
+        }
+    }
+
+    formProcess(event) {
+        console.log("Form Process");
+        event.preventDefault();
+        let user = 'usrName='+encodeURIComponent(ReactDOM.findDOMNode(this.refs.usrname).value)+
+                    '&password='+encodeURIComponent(ReactDOM.findDOMNode(this.refs.password).value);
+        let xhr = new XMLHttpRequest();
+        xhr.open('post', '/research/login');
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         xhr.responseType='json';
         let _this = this;
         xhr.onload = function() {
             let state={};
-            if(this.status == 200) {
+            console.log(this.status);
+            if(this.status === 200) {
                 // success
                 state=Object.assign({}, _this.state, {errorMessage : ''});
                 _this.setState(state);
@@ -44,7 +62,7 @@ class ResearchLogin extends Component {
 							Email
   						</Col>
   						<Col sm={10}>
-							<FormControl ref="usrname" type="text" placeholder="Email" />
+							<FormControl ref="usrname" type="text" placeholder="Your User Name" />
   						</Col>
 					</FormGroup>
 					<FormGroup controlId="password">
@@ -57,7 +75,7 @@ class ResearchLogin extends Component {
 					</FormGroup>
 					<FormGroup>
 						<Col smOffset={2} sm={10}>
-							<Button type="submit">
+							<Button type="submit" onClick={this.formProcess.bind(this)}>
 	  							Sign in
 							</Button>
   						</Col>

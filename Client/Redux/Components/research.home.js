@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Navbar, Nav, NavItem, Link} from 'react-bootstrap';
-var Auth = require('../../APIs/Auth.js');
+import {LinkContainer} from 'react-router-bootstrap';
+import Auth from '../../APIs/Auth.js';
 import {render} from 'react-dom';
 
 class ResearchHome extends Component {
@@ -10,6 +11,12 @@ class ResearchHome extends Component {
         this.state={};
     }
 
+    componentDidMount() {
+        let newState = {};
+        newState.isUserAuthenticated = (localStorage.getItem('token') !== null);
+        this.setState(newState);
+    } 
+    
     render() {
         return (
             <div>
@@ -24,18 +31,29 @@ class ResearchHome extends Component {
                         <Nav>
                             <NavItem eventKey={1} href="#">Introduction</NavItem>
                         </Nav>
-                        <Nav pullRight>
-                            {Auth.isUserAuthenticated() ? (
-                                <NavItem eventKey={2}><Link to="/garden">Your Garden</Link></NavItem>
-                                <NavItem eventKey={3}><Link to="/logout">Log out</Link></NavItem>
-                            ):(
-                                <NavItem eventKey={4}><Link to="/login">Log in</Link></NavItem>
-                                <NavItem eventKey={5}>
-                                    <Link to="/logout">Logout</Link>
-                                </NavItem>
-                            )
-                            }
-                        </Nav>
+                        
+                        {this.state.isUserAuthenticated ? (
+                            <Nav pullRight>
+                                <LinkContainer to={{pathname: "/research/garden"}}>
+                                    <NavItem eventKey={2}>Your Garden</NavItem>
+                                </LinkContainer>
+                                
+                                <LinkContainer to="/research/logout">
+                                    <NavItem eventKey={3}>Log out</NavItem>
+                                </LinkContainer>
+                            </Nav>
+                        ):(
+                            <Nav pullRight>
+                                <LinkContainer to="/research/login">
+                                    <NavItem eventKey={4}>Log in</NavItem>
+                                </LinkContainer>
+                                                            
+                                <LinkContainer to="/research/signup">
+                                    <NavItem eventKey={5}>Signup</NavItem>
+                                </LinkContainer>
+                            </Nav>
+                        )
+                        }
                     </Navbar.Collapse>
                 </Navbar>
             </div>

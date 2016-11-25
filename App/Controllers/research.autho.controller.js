@@ -1,4 +1,4 @@
-const ResearcherModel = require('mongoose').mode('ResearchInfo');
+const ResearcherModel = require('mongoose').model('ResearcherInfo');
 const jwt = require('jsonwebtoken');
 
 module.exports = function(config) {

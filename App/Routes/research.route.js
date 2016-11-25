@@ -1,5 +1,5 @@
-var researchRouter = require('../App/Routes/research.controller.js');
+const researchRouter = require('../Controllers/research.controller.js');
 
 module.exports = function(app) {
-    app.use('/research', researchRouter):
+    app.use('/research', researchRouter);
 }

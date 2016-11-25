@@ -15,6 +15,16 @@ module.exports = function() {
     }else if(process.env.NODE_ENV === "development"){
            
     } 
+
+    //Body Parser Configuration
+    
+    app.use(bodyParser.urlencoded({
+       extended : false 
+    }));
+
+    app.use(bodyParser.json());
+
+    // Passport Configuration
     app.use(passport.initialize());
 
     require('./Passports/research.passport.index.js')(config);
@@ -24,12 +34,7 @@ module.exports = function() {
     require("../App/Routes/research.route.js")(app);
     app.set('superSecret', config.secret); // set secret variable
 
-    //Body Parser Configuration
-    app.use(bodyParser.urlencoded({
-       extended : false 
-    }));
-
-    app.use(bodyParser.json());
+    
 
     // Use morgan to log all requests to console
     app.use(morgan('dev'));
@@ -46,7 +51,7 @@ module.exports = function() {
     // Static Assets
     app.set("views", './App/Views');
     app.set("view engine", 'ejs');
-    app.use(express.static('./Client/Assets'));
+    app.use(express.static('/home/p77u4n/Documents/CodeRespository/Project/CareUrLife/AquapoOs/Client/Assets'));
 
     // Router
     require("../App/Routes/index.route.js")(app);

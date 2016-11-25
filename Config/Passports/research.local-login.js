@@ -1,13 +1,14 @@
-const ResearchModel = require('mongoose').model('ResearcherInfo');
+const ResearcherModel = require('mongoose').model('ResearcherInfo');
 const passportLocalStrategy = require('passport-local').Strategy;
 
 module.exports = function(config) {
     return new passportLocalStrategy({
         usernameField: 'usrName',
         passwordField: 'password',
-        session : false,
-        passReqToCallback: true
+        passReqToCallback: true,
+        session : false
     }, function(req, usrName, password, done) {
+        console.log("aaaaaaaaaaaaaa");
         ResearcherModel.findOne({usrName: usrName}, function(err, researcher) {
             if(err) {return done(err)}
 
@@ -37,8 +38,8 @@ module.exports = function(config) {
                 };
 
                 return done(null, token, researcherData);
-            })
-        })
+            });
+        });
     }
     );
 }

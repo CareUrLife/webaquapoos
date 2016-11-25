@@ -1,6 +1,6 @@
 module.exports = {
     entry: [
-        './Client/index.research.js'
+        './Client/index-client.js'
     ],
     output: {
         path: './Client/Assets/Utils/',
@@ -15,6 +15,12 @@ module.exports = {
                 {
                     presets:['react']
                 }
-        }]
+            },
+            {
+                test: /\.json$/,
+                loader: 'raw-loader'
+            }
+        ]
     }
+    
 };

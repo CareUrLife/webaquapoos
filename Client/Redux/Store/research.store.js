@@ -1,5 +1,6 @@
 import {createStore} from 'redux';
 import researchReducers from '../Reducers/research.reducers.js';
-exports.store = createStore(researchReducers);
+var store = createStore(researchReducers);
+export default store ;
 
 

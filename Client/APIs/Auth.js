@@ -1,5 +1,6 @@
+
 class Auth {
-    static autheticateUser(token) {
+    static authenticateUser(token) {
         localStorage.setItem('token', token);
     }
 
@@ -15,5 +16,6 @@ class Auth {
         return localStorage.getItem('token');
     }
 }
+
 
 export default Auth;
