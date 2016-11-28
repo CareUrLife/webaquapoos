@@ -1,9 +1,13 @@
 import {combineReducers} from 'redux';
-import {ADD_UNIT_GROW_BED, ADD_VEGET_GROW_BED, DEL_UNIT_GROW_BED, DEL_VEGET_GROW_BED,VISIBILITY_GROW_BED} from '../Actions/research.actions.js';
+import {ADD_UNIT_GROW_BED, ADD_VEGET_GROW_BED, DEL_UNIT_GROW_BED, DEL_VEGET_GROW_BED,VISIBILITY_GROW_BED, SET_IS_USER_AUTHENTICATED, SET_USER_INFO, FLUSH_OUT_STATE_DATA} from '../Actions/research.actions.js';
 
 const initialState = {
     units : [],
-    numUnit : 0
+    numUnit : 0,
+    user : {
+        isUserAuthenticated : false,
+        info : {}
+    }
 }
 
 var clone = (obj) => {
@@ -114,6 +118,22 @@ function ResearchReducers(state = initialState, action) {
             }else{
                 growBed.visibility = true;
             }
+            return newState;
+        }
+        case SET_IS_USER_AUTHENTICATED : {
+            let newState = clone(state);
+            newState.user.isUserAuthenticated = action.value;
+            return newState;
+        }
+        case SET_USER_INFO : {
+            let newState = clone(state);
+            newState.user.info = clone(action.payload);
+            return newState;
+        } 
+        case FLUSH_OUT_STATE_DATA : {
+            let newState = clone(state);
+            newState.numUnit = 0;
+            newState.units = [];
             return newState;
         }
         default : 

@@ -11,16 +11,8 @@ class ResearchLogin extends Component {
     }
 
     componentDidMount() {
-        let xhr = new XMLHttpRequest();
-        xhr.open('post', '/research/auth');
-        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        xhr.setRequestHeader('Authorization', 'bearer ' + Auth.getToken());
-        xhr.responseType = 'json';
-
-        xhr.onload = function() {
-            if(this.state === 200) {
-                browserHistory.push('/research'); 
-            }
+        if(Auth.isUserAuthenticated()){
+            this.props.redirect('/research');
         }
     }
 
@@ -42,6 +34,7 @@ class ResearchLogin extends Component {
                 state=Object.assign({}, _this.state, {errorMessage : ''});
                 _this.setState(state);
                 Auth.authenticateUser(this.response.token);
+                _this.props.redirect('/research');
             }else{
                 // failure
                 state=Object.assign({}, _this.state, {errorMessage : this.response.message});
@@ -54,32 +47,26 @@ class ResearchLogin extends Component {
 
     render() {
         return (
-            <div>
-				<h2>Login</h2>
+            <div className="login text-center">
+                <h3 className="login-heading">AQUAPOOS RESEARCHER</h3>
+                <p className="background-line">
+                    <span>Log in</span>
+                </p>
+                <p className="error-message">{this.state.errorMessage}</p>
              	<Form horizontal onSubmit={this.formProcess.bind(this)}>
 					<FormGroup controlId="usrName">
-						<Col componentClass={ControlLabel} sm={2}>
-							Email
-  						</Col>
-  						<Col sm={10}>
 							<FormControl ref="usrname" type="text" placeholder="Your User Name" />
-  						</Col>
 					</FormGroup>
 					<FormGroup controlId="password">
-						<Col componentClass={ControlLabel} sm={2}>
-							Password
-  						</Col>
-  						<Col sm={10}>
 							<FormControl ref="password" type="password" placeholder="Password" />
-  						</Col>
 					</FormGroup>
 					<FormGroup>
-						<Col smOffset={2} sm={10}>
 							<Button type="submit" onClick={this.formProcess.bind(this)}>
-	  							Sign in
+	  							LOG IN
 							</Button>
-  						</Col>
 					</FormGroup>
+                    <hr></hr>
+                    <a>Forgot Password</a>
 				</Form>
             </div>
         );

@@ -7,7 +7,6 @@
     padding : 13px;
     width : inherit;
     text-align : center;
-    background-image : url("../Images/Research/garden-header.jpg");
     padding : 0px;
     position : absolute;
 }
@@ -85,6 +84,189 @@
     position : relative;
 }
 
+.login {
+    max-width : 360px;
+    margin-left : auto;
+    margin-right : auto;
+}
+
+.login .login-heading {
+    margin-top : 60px;
+}
+
+.login .error-message {
+    color : #CA3B27;
+    text-transform : uppercase;
+    font-size : 15px;
+}
+
+.login .form-group {
+    margin-left : 0px;
+    margin-right : 0px;
+    text-align : center;
+}
+
+.login input {
+    width : 100%;
+    padding : 8px 18px;
+    font-size : 14px;
+    background : #FFFFFF;
+    border : 1px solid #E5E5E4;
+    border-radius : 0px;
+    outline : none;
+    height : 50px;
+}
+
+.login button {
+    width : 100%;
+    background-color : #1396AB;
+    border-radius : 0px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    font-size : 16px;
+    font-weight : 600;
+    color : #FFFFFF;
+    padding-top : 15px;
+    padding-bottom : 15px;
+    cursor : pointer;
+}
+
+.login button:hover {
+    background-color : #0a92a8;
+}
+
+
+.background-line {
+    display : table;
+    white-space : nowrap;
+    margin-top : 30px;
+    margin-bottom : 30px;
+}
+
+.background-line span {
+    margin-left : 8px;
+    margin-right : 8px;
+}
+
+.background-line::before, .background-line::after {
+    border-top: 1px solid #C0C0C0;
+    content: '';
+    display: table-cell;
+    position: relative;
+    top: 0.8em;
+    width: 50%;
+}
+
+
+#wrapper {
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled {
+    padding-left: 250px;
+}
+
+#sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    border-right : 5px solid #337ab7;
+    left: 266px;
+    width: 0;
+    height: 100%;
+    margin-left: -266px;
+    overflow-y: auto;
+    background: #FFFFFF;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    width: 266px;
+} 
+
+#wrapper.toggled #page-content-wrapper {
+    position: absolute;
+    margin-right: -266px;
+}
+
+#page-content-wrapper {
+}
 
 
 
+
+
+
+@media(min-width:768px) {
+    #wrapper {
+        padding-left: 266px;
+    }
+
+    #wrapper.toggled {
+        padding-left: 0;
+    }
+
+    #sidebar-wrapper {
+        width: 266px;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        width: 0;
+    }
+
+    #page-content-wrapper {
+        padding: 20px;
+        position: relative;
+    }
+
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+    }
+}
+
+#dashboard-tabs ul>li {
+    border-radius : 0px;
+}
+
+.research-content {
+    margin-top : 51px;
+}
+
+.research-content button {
+    border-radius : 0px;
+}
+
+
+#sidebar-wrapper #nav-tabs-header {
+    font-size : 20px;
+}
+
+#user-info {
+    margin-top : 10px;
+}
+
+#user-info #profile-picture {
+    width : 46px;
+    margin-right : 16px;
+}
+
+.nav-tabs-container {
+    padding-left : 16px; 
+    padding-right : 16px;
+}
+
+#user-info i {
+    padding: 4px 2px 4px 16px;
+}
+
+
+#top-nav {
+    margin : 0px;
+}

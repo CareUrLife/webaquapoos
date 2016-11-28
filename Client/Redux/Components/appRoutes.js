@@ -7,10 +7,7 @@ import NotFoundPage from './NotFoundPage.js';
 export default class AppRoutes extends React.Component {
     render() {
         return (
-            <Router history={browserHistory} onUpdate={()=>window.scrollTo(0,0)}>
-                {routes}
-                <Route path="*" component={NotFoundPage}/>
-            </Router>
+            <Router history={browserHistory} routes={routes} onUpdate={()=>window.scrollTo(0,0)}/>
         );
     }
 }

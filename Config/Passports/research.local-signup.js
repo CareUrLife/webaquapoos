@@ -13,13 +13,12 @@ module.exports = function(config) {
             usrName: usrName,
             password: password,
             realName: req.body.realName,
-            isAdmin : req.body.isAdmin,
-            email : req.body.email
+            email : req.body.email,
+            isAdmin : req.body.isAddmin
         };
         let newResearcher = new ResearcherModel(researcherData);
         newResearcher.save(function(err) {
-            if(err) {return done(err);}
-
+            if(err) { console.log("err"); return done(err);}
             return done(null);
         });
     });

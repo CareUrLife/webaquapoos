@@ -1,6 +1,6 @@
 const ResearcherModel = require('mongoose').model('ResearcherInfo');
 const passportLocalStrategy = require('passport-local').Strategy;
-
+const jwt = require('jsonwebtoken');
 module.exports = function(config) {
     return new passportLocalStrategy({
         usernameField: 'usrName',
@@ -36,7 +36,7 @@ module.exports = function(config) {
                     id : researcher._id
                 };
                 
-                let token = jwt.sign(payload, config.superSecret);
+                let token = jwt.sign(payload, config.secret);
 
                 let researcherData = {
                     usrName : researcher.usrName

@@ -10,7 +10,7 @@ module.exports = function(config) {
         let token = req.headers.authorization.split(' ')[1];
 
         if(token) {
-            jwt.verify(token, config.superSecret, function(err, decoded){
+            jwt.verify(token, config.secret, function(err, decoded){
                 if(err) {return res.status(401).end();}
 
                 let researcherID = decoded.id;
@@ -19,8 +19,7 @@ module.exports = function(config) {
                     if(err || !researcher) {
                         return res.status(401).end();
                     }
-
-                    return next(); 
+                    return res.status(200).end();
                     // next middleware, in our case, this middleware is router
                 });
             });

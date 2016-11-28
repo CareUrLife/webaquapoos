@@ -2,6 +2,7 @@
 var ResearcherInfoSchema = require('../App/Models/research.model.userAppData.js').ResearcherInfoSchema;
 
 var mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 var researchDB_URI = require('../Config/config.js').db;
 
 console.log("Connect to Research DB ... ");

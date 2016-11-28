@@ -4,7 +4,7 @@ const authCheckMiddleware = require('../Controllers/research.autho.controller.js
 const passport = require('passport');
 
 
-router.get('/auth', authCheckMiddleware);
+router.post('/auth', authCheckMiddleware);
 
 router.post('/signup', function(req, res, next) {
     passport.authenticate('local-signup',  function(err ) {

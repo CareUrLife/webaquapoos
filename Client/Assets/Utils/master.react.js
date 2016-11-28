@@ -65,7 +65,7 @@
 
 	var _appRoutes2 = _interopRequireDefault(_appRoutes);
 
-	var _researchStore = __webpack_require__(546);
+	var _researchStore = __webpack_require__(554);
 
 	var _researchStore2 = _interopRequireDefault(_researchStore);
 
@@ -21512,7 +21512,7 @@
 
 	var _routes2 = _interopRequireDefault(_routes);
 
-	var _NotFoundPage = __webpack_require__(545);
+	var _NotFoundPage = __webpack_require__(553);
 
 	var _NotFoundPage2 = _interopRequireDefault(_NotFoundPage);
 
@@ -21536,14 +21536,9 @@
 	    _createClass(AppRoutes, [{
 	        key: 'render',
 	        value: function render() {
-	            return _react2.default.createElement(
-	                _reactRouter.Router,
-	                { history: _reactRouter.browserHistory, onUpdate: function onUpdate() {
-	                        return window.scrollTo(0, 0);
-	                    } },
-	                _routes2.default,
-	                _react2.default.createElement(_reactRouter.Route, { path: '*', component: _NotFoundPage2.default })
-	            );
+	            return _react2.default.createElement(_reactRouter.Router, { history: _reactRouter.browserHistory, routes: _routes2.default, onUpdate: function onUpdate() {
+	                    return window.scrollTo(0, 0);
+	                } });
 	        }
 	    }]);
 
@@ -27974,13 +27969,17 @@
 
 	var _researchSignup2 = _interopRequireDefault(_researchSignup);
 
-	var _researchHome = __webpack_require__(533);
+	var _researchContainerHome = __webpack_require__(533);
 
-	var _researchHome2 = _interopRequireDefault(_researchHome);
+	var _researchContainerHome2 = _interopRequireDefault(_researchContainerHome);
 
-	var _researchDashboard = __webpack_require__(537);
+	var _researchDashboard = __webpack_require__(549);
 
 	var _researchDashboard2 = _interopRequireDefault(_researchDashboard);
+
+	var _researchHomeIndex = __webpack_require__(552);
+
+	var _researchHomeIndex2 = _interopRequireDefault(_researchHomeIndex);
 
 	var _reactRedux = __webpack_require__(180);
 
@@ -27992,8 +27991,8 @@
 	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _indexHome2.default }),
 	    _react2.default.createElement(
 	        _reactRouter.Route,
-	        { path: 'research' },
-	        _react2.default.createElement(_reactRouter.IndexRoute, { component: _researchHome2.default }),
+	        { path: 'research', component: _researchContainerHome2.default },
+	        _react2.default.createElement(_reactRouter.IndexRoute, { component: _researchHomeIndex2.default }),
 	        _react2.default.createElement(_reactRouter.Route, { path: 'login', component: _researchLogin2.default }),
 	        _react2.default.createElement(_reactRouter.Route, { path: 'signup', component: _researchSignup2.default }),
 	        _react2.default.createElement(_reactRouter.Route, { path: 'dashboard', component: _researchDashboard2.default })
@@ -31156,17 +31155,9 @@
 	    _createClass(ResearchLogin, [{
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
-	            var xhr = new XMLHttpRequest();
-	            xhr.open('post', '/research/auth');
-	            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-	            xhr.setRequestHeader('Authorization', 'bearer ' + _Auth2.default.getToken());
-	            xhr.responseType = 'json';
-
-	            xhr.onload = function () {
-	                if (this.state === 200) {
-	                    _reactRouter.browserHistory.push('/research');
-	                }
-	            };
+	            if (_Auth2.default.isUserAuthenticated()) {
+	                this.props.redirect('/research');
+	            }
 	        }
 	    }, {
 	        key: 'formProcess',
@@ -31187,6 +31178,7 @@
 	                    state = Object.assign({}, _this.state, { errorMessage: '' });
 	                    _this.setState(state);
 	                    _Auth2.default.authenticateUser(this.response.token);
+	                    _this.props.redirect('/research');
 	                } else {
 	                    // failure
 	                    state = Object.assign({}, _this.state, { errorMessage: this.response.message });
@@ -31201,11 +31193,25 @@
 	        value: function render() {
 	            return _react2.default.createElement(
 	                'div',
-	                null,
+	                { className: 'login text-center' },
 	                _react2.default.createElement(
-	                    'h2',
-	                    null,
-	                    'Login'
+	                    'h3',
+	                    { className: 'login-heading' },
+	                    'AQUAPOOS RESEARCHER'
+	                ),
+	                _react2.default.createElement(
+	                    'p',
+	                    { className: 'background-line' },
+	                    _react2.default.createElement(
+	                        'span',
+	                        null,
+	                        'Log in'
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'p',
+	                    { className: 'error-message' },
+	                    this.state.errorMessage
 	                ),
 	                _react2.default.createElement(
 	                    _reactBootstrap.Form,
@@ -31213,43 +31219,27 @@
 	                    _react2.default.createElement(
 	                        _reactBootstrap.FormGroup,
 	                        { controlId: 'usrName' },
-	                        _react2.default.createElement(
-	                            _reactBootstrap.Col,
-	                            { componentClass: _reactBootstrap.ControlLabel, sm: 2 },
-	                            'Email'
-	                        ),
-	                        _react2.default.createElement(
-	                            _reactBootstrap.Col,
-	                            { sm: 10 },
-	                            _react2.default.createElement(_reactBootstrap.FormControl, { ref: 'usrname', type: 'text', placeholder: 'Your User Name' })
-	                        )
+	                        _react2.default.createElement(_reactBootstrap.FormControl, { ref: 'usrname', type: 'text', placeholder: 'Your User Name' })
 	                    ),
 	                    _react2.default.createElement(
 	                        _reactBootstrap.FormGroup,
 	                        { controlId: 'password' },
-	                        _react2.default.createElement(
-	                            _reactBootstrap.Col,
-	                            { componentClass: _reactBootstrap.ControlLabel, sm: 2 },
-	                            'Password'
-	                        ),
-	                        _react2.default.createElement(
-	                            _reactBootstrap.Col,
-	                            { sm: 10 },
-	                            _react2.default.createElement(_reactBootstrap.FormControl, { ref: 'password', type: 'password', placeholder: 'Password' })
-	                        )
+	                        _react2.default.createElement(_reactBootstrap.FormControl, { ref: 'password', type: 'password', placeholder: 'Password' })
 	                    ),
 	                    _react2.default.createElement(
 	                        _reactBootstrap.FormGroup,
 	                        null,
 	                        _react2.default.createElement(
-	                            _reactBootstrap.Col,
-	                            { smOffset: 2, sm: 10 },
-	                            _react2.default.createElement(
-	                                _reactBootstrap.Button,
-	                                { type: 'submit', onClick: this.formProcess.bind(this) },
-	                                'Sign in'
-	                            )
+	                            _reactBootstrap.Button,
+	                            { type: 'submit', onClick: this.formProcess.bind(this) },
+	                            'LOG IN'
 	                        )
+	                    ),
+	                    _react2.default.createElement('hr', null),
+	                    _react2.default.createElement(
+	                        'a',
+	                        null,
+	                        'Forgot Password'
 	                    )
 	                )
 	            );
@@ -50021,9 +50011,21 @@
 
 	var _react = __webpack_require__(2);
 
+	var _react2 = _interopRequireDefault(_react);
+
 	var _reactRouter = __webpack_require__(204);
 
 	var _reactBootstrap = __webpack_require__(281);
+
+	var _reactDom = __webpack_require__(33);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var _Auth = __webpack_require__(531);
+
+	var _Auth2 = _interopRequireDefault(_Auth);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -50037,45 +50039,39 @@
 	    function ResearchSignup(props) {
 	        _classCallCheck(this, ResearchSignup);
 
-	        return _possibleConstructorReturn(this, (ResearchSignup.__proto__ || Object.getPrototypeOf(ResearchSignup)).call(this, props));
+	        var _this2 = _possibleConstructorReturn(this, (ResearchSignup.__proto__ || Object.getPrototypeOf(ResearchSignup)).call(this, props));
+
+	        _this2.state = {};
+	        return _this2;
 	    }
 
 	    _createClass(ResearchSignup, [{
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
-	            var xhr = new XMLHttpRequest();
-	            xhr.open('post', '/research/auth');
-	            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-	            xhr.setRequestHeader('Authorization', 'bearer ' + Auth.getToken());
-	            xhr.responseType = 'json';
-
-	            xhr.onload = function () {
-	                if (this.state === 200) {
-	                    _reactRouter.browserHistory.push('/research');
-	                }
-	            };
+	            if (_Auth2.default.isUserAuthenticated()) {
+	                this.props.redirect('/research');
+	            }
 	        }
 	    }, {
 	        key: 'formProcess',
 	        value: function formProcess(event) {
 	            event.preventDefault();
 	            var _this = this;
-	            var newUser = 'usrName=' + encodeURIComponent(this.refs.usrName.getValue()) + '&realName=' + encodeURIComponent(this.refs.realName.getValue()) + '&isAddmin=false' + '&email=' + encodeURIComponent(this.refs.email.getValue()) + '&password=' + encodeURIComponent(this.refs.password1.getValue());
+	            var newUser = 'usrName=' + encodeURIComponent(_reactDom2.default.findDOMNode(this.refs.usrName).value) + '&realName=' + encodeURIComponent(_reactDom2.default.findDOMNode(this.refs.realName).value) + '&isAddmin=false' + '&email=' + encodeURIComponent(_reactDom2.default.findDOMNode(this.refs.email).value) + '&password=' + encodeURIComponent(_reactDom2.default.findDOMNode(this.refs.password1).value);
 	            var xhr = new XMLHttpRequest();
 	            xhr.open('post', '/research/signup');
 	            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 	            xhr.responseType = 'json';
-
 	            xhr.onload = function () {
 	                var state = {};
 
-	                if (this.state === 200) {
+	                if (this.status === 200) {
 	                    state.errorMessage = '';
 	                    state.errors = {};
 
-	                    this.setState(state);
+	                    _this.setState(state);
 
-	                    _reactRouter.browserHistory.push('/login');
+	                    _this.props.redirect('/research/login');
 	                } else {
 	                    state.errorMessage = this.response.message;
 	                    state.errors = this.response.error ? this.response.errors : {};
@@ -50084,104 +50080,60 @@
 	                }
 	            };
 
-	            xhr.send();
+	            xhr.send(newUser);
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            return React.createElement(
-	                _reactBootstrap.Form,
-	                { horizontal: true },
-	                React.createElement(
-	                    _reactBootstrap.FormGroup,
-	                    { controlId: 'usrName' },
-	                    React.createElement(
-	                        _reactBootstrap.Col,
-	                        { componentClass: ControlLabel, sm: 2 },
-	                        'User name'
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'login text-center' },
+	                _react2.default.createElement(
+	                    'p',
+	                    { className: 'background-line' },
+	                    _react2.default.createElement(
+	                        'span',
+	                        null,
+	                        'Sign Up'
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'p',
+	                    { className: 'error-message' },
+	                    this.state.errorMessage
+	                ),
+	                _react2.default.createElement(
+	                    _reactBootstrap.Form,
+	                    { horizontal: true },
+	                    _react2.default.createElement(
+	                        _reactBootstrap.FormGroup,
+	                        { controlId: 'usrName' },
+	                        _react2.default.createElement(_reactBootstrap.FormControl, { ref: 'usrName', type: 'text', placeholder: 'User Name' })
 	                    ),
-	                    React.createElement(
-	                        _reactBootstrap.Col,
-	                        { sm: 10 },
-	                        React.createElement(_reactBootstrap.FormControl, { ref: 'usrName', type: 'text', placeholder: 'User Name' })
-	                    )
-	                ),
-	                React.createElement(
-	                    _reactBootstrap.FormGroup,
-	                    { controlId: 'password1' },
-	                    React.createElement(
-	                        _reactBootstrap.Col,
-	                        { componentClass: ControlLabel, sm: 2 },
-	                        'Password'
+	                    _react2.default.createElement(
+	                        _reactBootstrap.FormGroup,
+	                        { controlId: 'password1' },
+	                        _react2.default.createElement(_reactBootstrap.FormControl, { ref: 'password1', type: 'password', placeholder: 'Password' })
 	                    ),
-	                    React.createElement(
-	                        _reactBootstrap.Col,
-	                        { sm: 10 },
-	                        React.createElement(_reactBootstrap.FormControl, { ref: 'password1', type: 'password', placeholder: 'Password' })
-	                    )
-	                ),
-	                React.createElement(
-	                    _reactBootstrap.FormGroup,
-	                    { controlId: 'password2' },
-	                    React.createElement(
-	                        _reactBootstrap.Col,
-	                        { componentClass: ControlLabel, sm: 2 },
-	                        'Password'
+	                    _react2.default.createElement(
+	                        _reactBootstrap.FormGroup,
+	                        { controlId: 'password2' },
+	                        _react2.default.createElement(_reactBootstrap.FormControl, { ref: 'password2', type: 'password', placeholder: 'Retype Password' })
 	                    ),
-	                    React.createElement(
-	                        _reactBootstrap.Col,
-	                        { sm: 10 },
-	                        React.createElement(_reactBootstrap.FormControl, { ref: 'password2', type: 'password', placeholder: 'Password' })
-	                    )
-	                ),
-	                React.createElement(
-	                    _reactBootstrap.FormGroup,
-	                    { controlId: 'realName' },
-	                    React.createElement(
-	                        _reactBootstrap.Col,
-	                        { componentClass: ControlLabel, sm: 2 },
-	                        'Real name'
+	                    _react2.default.createElement(
+	                        _reactBootstrap.FormGroup,
+	                        { controlId: 'realName' },
+	                        _react2.default.createElement(_reactBootstrap.FormControl, { ref: 'realName', type: 'text', placeholder: 'Real Name' })
 	                    ),
-	                    React.createElement(
-	                        _reactBootstrap.Col,
-	                        { sm: 10 },
-	                        React.createElement(_reactBootstrap.FormControl, { ref: 'realName', type: 'text', placeholder: 'Real Name' })
-	                    )
-	                ),
-	                React.createElement(
-	                    _reactBootstrap.FormGroup,
-	                    { controlId: 'email' },
-	                    React.createElement(
-	                        _reactBootstrap.Col,
-	                        { componentClass: ControlLabel, sm: 2 },
-	                        'Email'
+	                    _react2.default.createElement(
+	                        _reactBootstrap.FormGroup,
+	                        { controlId: 'email' },
+	                        _react2.default.createElement(_reactBootstrap.FormControl, { ref: 'email', type: 'text', placeholder: 'Your Email' })
 	                    ),
-	                    React.createElement(
-	                        _reactBootstrap.Col,
-	                        { sm: 10 },
-	                        React.createElement(_reactBootstrap.FormControl, { ref: 'email', type: 'text', placeholder: 'Your Email' })
-	                    )
-	                ),
-	                React.createElement(
-	                    _reactBootstrap.FormGroup,
-	                    null,
-	                    React.createElement(
-	                        _reactBootstrap.Col,
-	                        { smOffset: 2, sm: 10 },
-	                        React.createElement(
-	                            Checkbox,
-	                            null,
-	                            'Remember me'
-	                        )
-	                    )
-	                ),
-	                React.createElement(
-	                    _reactBootstrap.FormGroup,
-	                    null,
-	                    React.createElement(
-	                        _reactBootstrap.Col,
-	                        { smOffset: 2, sm: 10 },
-	                        React.createElement(
+	                    _react2.default.createElement(
+	                        _reactBootstrap.FormGroup,
+	                        null,
+	                        _react2.default.createElement(
 	                            _reactBootstrap.Button,
 	                            { type: 'submit', onClick: this.formProcess.bind(this) },
 	                            'Sign in'
@@ -50207,6 +50159,533 @@
 	    value: true
 	});
 
+	var _reactRedux = __webpack_require__(180);
+
+	var _reactRouterRedux = __webpack_require__(534);
+
+	var _researchActions = __webpack_require__(539);
+
+	var _researchHome = __webpack_require__(540);
+
+	var _researchHome2 = _interopRequireDefault(_researchHome);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var mapStateToProps = function mapStateToProps(state) {
+	    return {
+	        units: state.units,
+	        numUnit: state.numUnit,
+	        user: state.user
+	    };
+	};
+
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	    return {
+	        onUnitBarClick: function onUnitBarClick(pos) {
+	            dispatch((0, _researchActions.delUnitGrowBed)(pos));
+	        },
+	        onBtnDelVegetClick: function onBtnDelVegetClick(pos) {
+	            dispatch((0, _researchActions.delVegetGrowBed)(pos));
+	        },
+	        onBtnAddVegetClick: function onBtnAddVegetClick(pos, value) {
+	            dispatch((0, _researchActions.addVegetGrowBed)(pos, value));
+	        },
+	        onButtonAddClick: function onButtonAddClick(unitName, temp, ph, nitrat) {
+	            dispatch((0, _researchActions.addUnitGrowBed)(unitName, temp, ph, nitrat));
+	        },
+	        onCheckVisibilityClick: function onCheckVisibilityClick(pos) {
+	            dispatch((0, _researchActions.visibilityGrowBed)(pos));
+	        },
+	        flushOutStateData: function flushOutStateData() {
+	            dispatch((0, _researchActions.flushOutStateData)());
+	        },
+	        setUserInfo: function setUserInfo() {
+	            dispatch((0, _researchActions.setUserInfo)());
+	        },
+	        setIsUserAuthenticated: function setIsUserAuthenticated(value) {
+	            dispatch((0, _researchActions.setIsUserAuthenticated)(value));
+	        },
+	        redirect: function redirect(address) {
+	            dispatch((0, _reactRouterRedux.push)(address));
+	        }
+	    };
+	};
+
+	var ContainerResearch = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_researchHome2.default);
+
+	exports.default = ContainerResearch;
+
+/***/ },
+/* 534 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.routerMiddleware = exports.routerActions = exports.goForward = exports.goBack = exports.go = exports.replace = exports.push = exports.CALL_HISTORY_METHOD = exports.routerReducer = exports.LOCATION_CHANGE = exports.syncHistoryWithStore = undefined;
+
+	var _reducer = __webpack_require__(535);
+
+	Object.defineProperty(exports, 'LOCATION_CHANGE', {
+	  enumerable: true,
+	  get: function get() {
+	    return _reducer.LOCATION_CHANGE;
+	  }
+	});
+	Object.defineProperty(exports, 'routerReducer', {
+	  enumerable: true,
+	  get: function get() {
+	    return _reducer.routerReducer;
+	  }
+	});
+
+	var _actions = __webpack_require__(536);
+
+	Object.defineProperty(exports, 'CALL_HISTORY_METHOD', {
+	  enumerable: true,
+	  get: function get() {
+	    return _actions.CALL_HISTORY_METHOD;
+	  }
+	});
+	Object.defineProperty(exports, 'push', {
+	  enumerable: true,
+	  get: function get() {
+	    return _actions.push;
+	  }
+	});
+	Object.defineProperty(exports, 'replace', {
+	  enumerable: true,
+	  get: function get() {
+	    return _actions.replace;
+	  }
+	});
+	Object.defineProperty(exports, 'go', {
+	  enumerable: true,
+	  get: function get() {
+	    return _actions.go;
+	  }
+	});
+	Object.defineProperty(exports, 'goBack', {
+	  enumerable: true,
+	  get: function get() {
+	    return _actions.goBack;
+	  }
+	});
+	Object.defineProperty(exports, 'goForward', {
+	  enumerable: true,
+	  get: function get() {
+	    return _actions.goForward;
+	  }
+	});
+	Object.defineProperty(exports, 'routerActions', {
+	  enumerable: true,
+	  get: function get() {
+	    return _actions.routerActions;
+	  }
+	});
+
+	var _sync = __webpack_require__(537);
+
+	var _sync2 = _interopRequireDefault(_sync);
+
+	var _middleware = __webpack_require__(538);
+
+	var _middleware2 = _interopRequireDefault(_middleware);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	exports.syncHistoryWithStore = _sync2['default'];
+	exports.routerMiddleware = _middleware2['default'];
+
+/***/ },
+/* 535 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	exports.routerReducer = routerReducer;
+	/**
+	 * This action type will be dispatched when your history
+	 * receives a location change.
+	 */
+	var LOCATION_CHANGE = exports.LOCATION_CHANGE = '@@router/LOCATION_CHANGE';
+
+	var initialState = {
+	  locationBeforeTransitions: null
+	};
+
+	/**
+	 * This reducer will update the state with the most recent location history
+	 * has transitioned to. This may not be in sync with the router, particularly
+	 * if you have asynchronously-loaded routes, so reading from and relying on
+	 * this state is discouraged.
+	 */
+	function routerReducer() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+
+	  var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+	      type = _ref.type,
+	      payload = _ref.payload;
+
+	  if (type === LOCATION_CHANGE) {
+	    return _extends({}, state, { locationBeforeTransitions: payload });
+	  }
+
+	  return state;
+	}
+
+/***/ },
+/* 536 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	/**
+	 * This action type will be dispatched by the history actions below.
+	 * If you're writing a middleware to watch for navigation events, be sure to
+	 * look for actions of this type.
+	 */
+	var CALL_HISTORY_METHOD = exports.CALL_HISTORY_METHOD = '@@router/CALL_HISTORY_METHOD';
+
+	function updateLocation(method) {
+	  return function () {
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+
+	    return {
+	      type: CALL_HISTORY_METHOD,
+	      payload: { method: method, args: args }
+	    };
+	  };
+	}
+
+	/**
+	 * These actions correspond to the history API.
+	 * The associated routerMiddleware will capture these events before they get to
+	 * your reducer and reissue them as the matching function on your history.
+	 */
+	var push = exports.push = updateLocation('push');
+	var replace = exports.replace = updateLocation('replace');
+	var go = exports.go = updateLocation('go');
+	var goBack = exports.goBack = updateLocation('goBack');
+	var goForward = exports.goForward = updateLocation('goForward');
+
+	var routerActions = exports.routerActions = { push: push, replace: replace, go: go, goBack: goBack, goForward: goForward };
+
+/***/ },
+/* 537 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	exports['default'] = syncHistoryWithStore;
+
+	var _reducer = __webpack_require__(535);
+
+	var defaultSelectLocationState = function defaultSelectLocationState(state) {
+	  return state.routing;
+	};
+
+	/**
+	 * This function synchronizes your history state with the Redux store.
+	 * Location changes flow from history to the store. An enhanced history is
+	 * returned with a listen method that responds to store updates for location.
+	 *
+	 * When this history is provided to the router, this means the location data
+	 * will flow like this:
+	 * history.push -> store.dispatch -> enhancedHistory.listen -> router
+	 * This ensures that when the store state changes due to a replay or other
+	 * event, the router will be updated appropriately and can transition to the
+	 * correct router state.
+	 */
+	function syncHistoryWithStore(history, store) {
+	  var _ref = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {},
+	      _ref$selectLocationSt = _ref.selectLocationState,
+	      selectLocationState = _ref$selectLocationSt === undefined ? defaultSelectLocationState : _ref$selectLocationSt,
+	      _ref$adjustUrlOnRepla = _ref.adjustUrlOnReplay,
+	      adjustUrlOnReplay = _ref$adjustUrlOnRepla === undefined ? true : _ref$adjustUrlOnRepla;
+
+	  // Ensure that the reducer is mounted on the store and functioning properly.
+	  if (typeof selectLocationState(store.getState()) === 'undefined') {
+	    throw new Error('Expected the routing state to be available either as `state.routing` ' + 'or as the custom expression you can specify as `selectLocationState` ' + 'in the `syncHistoryWithStore()` options. ' + 'Ensure you have added the `routerReducer` to your store\'s ' + 'reducers via `combineReducers` or whatever method you use to isolate ' + 'your reducers.');
+	  }
+
+	  var initialLocation = void 0;
+	  var isTimeTraveling = void 0;
+	  var unsubscribeFromStore = void 0;
+	  var unsubscribeFromHistory = void 0;
+	  var currentLocation = void 0;
+
+	  // What does the store say about current location?
+	  var getLocationInStore = function getLocationInStore(useInitialIfEmpty) {
+	    var locationState = selectLocationState(store.getState());
+	    return locationState.locationBeforeTransitions || (useInitialIfEmpty ? initialLocation : undefined);
+	  };
+
+	  // Init initialLocation with potential location in store
+	  initialLocation = getLocationInStore();
+
+	  // If the store is replayed, update the URL in the browser to match.
+	  if (adjustUrlOnReplay) {
+	    var handleStoreChange = function handleStoreChange() {
+	      var locationInStore = getLocationInStore(true);
+	      if (currentLocation === locationInStore || initialLocation === locationInStore) {
+	        return;
+	      }
+
+	      // Update address bar to reflect store state
+	      isTimeTraveling = true;
+	      currentLocation = locationInStore;
+	      history.transitionTo(_extends({}, locationInStore, {
+	        action: 'PUSH'
+	      }));
+	      isTimeTraveling = false;
+	    };
+
+	    unsubscribeFromStore = store.subscribe(handleStoreChange);
+	    handleStoreChange();
+	  }
+
+	  // Whenever location changes, dispatch an action to get it in the store
+	  var handleLocationChange = function handleLocationChange(location) {
+	    // ... unless we just caused that location change
+	    if (isTimeTraveling) {
+	      return;
+	    }
+
+	    // Remember where we are
+	    currentLocation = location;
+
+	    // Are we being called for the first time?
+	    if (!initialLocation) {
+	      // Remember as a fallback in case state is reset
+	      initialLocation = location;
+
+	      // Respect persisted location, if any
+	      if (getLocationInStore()) {
+	        return;
+	      }
+	    }
+
+	    // Tell the store to update by dispatching an action
+	    store.dispatch({
+	      type: _reducer.LOCATION_CHANGE,
+	      payload: location
+	    });
+	  };
+	  unsubscribeFromHistory = history.listen(handleLocationChange);
+
+	  // support history 3.x
+	  if (history.getCurrentLocation) {
+	    handleLocationChange(history.getCurrentLocation());
+	  }
+
+	  // The enhanced history uses store as source of truth
+	  return _extends({}, history, {
+	    // The listeners are subscribed to the store instead of history
+	    listen: function listen(listener) {
+	      // Copy of last location.
+	      var lastPublishedLocation = getLocationInStore(true);
+
+	      // Keep track of whether we unsubscribed, as Redux store
+	      // only applies changes in subscriptions on next dispatch
+	      var unsubscribed = false;
+	      var unsubscribeFromStore = store.subscribe(function () {
+	        var currentLocation = getLocationInStore(true);
+	        if (currentLocation === lastPublishedLocation) {
+	          return;
+	        }
+	        lastPublishedLocation = currentLocation;
+	        if (!unsubscribed) {
+	          listener(lastPublishedLocation);
+	        }
+	      });
+
+	      // History listeners expect a synchronous call. Make the first call to the
+	      // listener after subscribing to the store, in case the listener causes a
+	      // location change (e.g. when it redirects)
+	      listener(lastPublishedLocation);
+
+	      // Let user unsubscribe later
+	      return function () {
+	        unsubscribed = true;
+	        unsubscribeFromStore();
+	      };
+	    },
+
+
+	    // It also provides a way to destroy internal listeners
+	    unsubscribe: function unsubscribe() {
+	      if (adjustUrlOnReplay) {
+	        unsubscribeFromStore();
+	      }
+	      unsubscribeFromHistory();
+	    }
+	  });
+	}
+
+/***/ },
+/* 538 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports['default'] = routerMiddleware;
+
+	var _actions = __webpack_require__(536);
+
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+	/**
+	 * This middleware captures CALL_HISTORY_METHOD actions to redirect to the
+	 * provided history object. This will prevent these actions from reaching your
+	 * reducer or any middleware that comes after this one.
+	 */
+	function routerMiddleware(history) {
+	  return function () {
+	    return function (next) {
+	      return function (action) {
+	        if (action.type !== _actions.CALL_HISTORY_METHOD) {
+	          return next(action);
+	        }
+
+	        var _action$payload = action.payload,
+	            method = _action$payload.method,
+	            args = _action$payload.args;
+
+	        history[method].apply(history, _toConsumableArray(args));
+	      };
+	    };
+	  };
+	}
+
+/***/ },
+/* 539 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.addUnitGrowBed = addUnitGrowBed;
+	exports.delUnitGrowBed = delUnitGrowBed;
+	exports.addVegetGrowBed = addVegetGrowBed;
+	exports.delVegetGrowBed = delVegetGrowBed;
+	exports.visibilityGrowBed = visibilityGrowBed;
+	exports.setIsUserAuthenticated = setIsUserAuthenticated;
+	exports.setUserInfo = setUserInfo;
+	exports.flushOutStateData = flushOutStateData;
+	var ADD_UNIT_GROW_BED = exports.ADD_UNIT_GROW_BED = 'ADD_UNIT_GROW_BED';
+	var ADD_VEGET_GROW_BED = exports.ADD_VEGET_GROW_BED = 'ADD_VEGET_GROW_BED';
+	var DEL_UNIT_GROW_BED = exports.DEL_UNIT_GROW_BED = 'DEL_UNIT_GROW_BED';
+	var DEL_VEGET_GROW_BED = exports.DEL_VEGET_GROW_BED = 'DEL_VEGET_GROW_BED';
+	var VISIBILITY_GROW_BED = exports.VISIBILITY_GROW_BED = 'VISIBILITY_GROW_BED';
+	var SET_IS_USER_AUTHENTICATED = exports.SET_IS_USER_AUTHENTICATED = 'SET_IS_USER_AUTHENTICATED';
+	var FLUSH_OUT_STATE_DATA = exports.FLUSH_OUT_STATE_DATA = 'FLUSH_OUT_STATE_DATA';
+	var SET_USER_INFO = exports.SET_USER_INFO = 'SET_USER_INFO';
+	/*
+	 * Action Creators
+	 */
+
+	function addUnitGrowBed(unitName, temp, ph, nitrat) {
+	    return {
+	        type: ADD_UNIT_GROW_BED,
+	        payload: {
+	            name: unitName,
+	            beds: [],
+	            unitStatus: {
+	                ph: ph,
+	                temp: temp,
+	                nitrat: nitrat
+	            },
+	            pos: {}
+	        }
+	    };
+	}
+
+	function delUnitGrowBed(pos) {
+	    return {
+	        type: DEL_UNIT_GROW_BED,
+	        pos: pos
+	    };
+	}
+
+	function addVegetGrowBed(pos, text) {
+	    return {
+	        type: ADD_VEGET_GROW_BED,
+	        payload: {
+	            pos: pos,
+	            name: text
+	        }
+	    };
+	}
+
+	function delVegetGrowBed(vegetIndex, pos) {
+	    return {
+	        type: DEL_VEGET_GROW_BED,
+	        pos: pos
+	    };
+	}
+
+	function visibilityGrowBed(pos) {
+	    return {
+	        type: VISIBILITY_GROW_BED,
+	        pos: pos
+	    };
+	}
+
+	function setIsUserAuthenticated(value) {
+	    return {
+	        type: SET_IS_USER_AUTHENTICATED,
+	        value: value
+	    };
+	}
+
+	function setUserInfo(payload) {
+	    return {
+	        type: SET_USER_INFO,
+	        payload: payload
+	    };
+	}
+
+	function flushOutStateData() {
+	    return {
+	        type: FLUSH_OUT_STATE_DATA
+	    };
+	}
+
+/***/ },
+/* 540 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(2);
@@ -50215,13 +50694,27 @@
 
 	var _reactBootstrap = __webpack_require__(281);
 
-	var _reactRouterBootstrap = __webpack_require__(534);
+	var _reactRouterBootstrap = __webpack_require__(541);
 
 	var _Auth = __webpack_require__(531);
 
 	var _Auth2 = _interopRequireDefault(_Auth);
 
-	var _reactDom = __webpack_require__(33);
+	var _reactAddonsTestUtils = __webpack_require__(544);
+
+	var _reactAddonsTestUtils2 = _interopRequireDefault(_reactAddonsTestUtils);
+
+	var _researchGarden = __webpack_require__(545);
+
+	var _researchGarden2 = _interopRequireDefault(_researchGarden);
+
+	var _researchDashboard = __webpack_require__(549);
+
+	var _researchDashboard2 = _interopRequireDefault(_researchDashboard);
+
+	var _researchHomeIndex = __webpack_require__(552);
+
+	var _researchHomeIndex2 = _interopRequireDefault(_researchHomeIndex);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -50237,28 +50730,76 @@
 	    function ResearchHome(props) {
 	        _classCallCheck(this, ResearchHome);
 
-	        var _this = _possibleConstructorReturn(this, (ResearchHome.__proto__ || Object.getPrototypeOf(ResearchHome)).call(this, props));
+	        var _this2 = _possibleConstructorReturn(this, (ResearchHome.__proto__ || Object.getPrototypeOf(ResearchHome)).call(this, props));
 
-	        _this.state = {};
-	        return _this;
+	        _this2.state = {};
+	        return _this2;
 	    }
 
 	    _createClass(ResearchHome, [{
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
-	            var newState = {};
-	            newState.isUserAuthenticated = localStorage.getItem('token') !== null;
-	            this.setState(newState);
+	            var _this3 = this;
+
+	            if (_Auth2.default.isUserAuthenticated()) {
+	                (function () {
+
+	                    var xhr = new XMLHttpRequest();
+	                    var _this = _this3;
+	                    xhr.open('post', '/research/auth');
+	                    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	                    xhr.setRequestHeader('Authorization', 'bearer ' + _Auth2.default.getToken());
+	                    xhr.responseType = 'json';
+
+	                    xhr.onload = function () {
+	                        if (this.status === 200) {
+	                            _this.props.setIsUserAuthenticated(true);
+	                        } else {
+	                            _this.props.setIsUserAuthenticated(false);
+	                        }
+	                    };
+
+	                    xhr.send();
+	                })();
+	            } else {
+	                this.props.setIsUserAuthenticated(false);
+	            }
+	        }
+	    }, {
+	        key: 'logOut',
+	        value: function logOut() {
+	            _Auth2.default.deauthenticateUser();
+	            this.props.setIsUserAuthenticated(false);
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var children = void 0;
+	            if (this.props.children !== null && this.props.children !== undefined) {
+	                if (_reactAddonsTestUtils2.default.isElementOfType(this.props.children, _researchDashboard2.default)) {
+	                    children = _react2.default.cloneElement(this.props.children, { units: this.props.units,
+	                        numUnit: this.props.numUnit,
+	                        user: this.props.user,
+	                        onUnitBarClick: this.props.onUnitBarClick,
+	                        onBtnAddVegetClick: this.props.onBtnAddVegetClick,
+	                        onBtnDelVegetClick: this.props.onBtnDelVegetClick,
+	                        onButtonAddClick: this.props.onButtonAddClick,
+	                        onCheckVisibilityClick: this.props.onCheckVisibilityClick
+	                    });
+	                } else if (_reactAddonsTestUtils2.default.isElementOfType(this.props.children, _researchHomeIndex2.default)) {
+	                    children = _react2.default.cloneElement(this.props.children, { setIsUserAuthenticated: this.props.setIsUserAuthenticated,
+	                        user: this.props.user
+	                    });
+	                } else {
+	                    children = _react2.default.cloneElement(this.props.children, { redirect: this.props.redirect });
+	                }
+	            }
 	            return _react2.default.createElement(
 	                'div',
 	                null,
 	                _react2.default.createElement(
 	                    _reactBootstrap.Navbar,
-	                    { inverse: true, collapseOnSelect: true },
+	                    { inverse: true, collapseOnSelect: true, id: 'top-nav', fixedTop: true },
 	                    _react2.default.createElement(
 	                        _reactBootstrap.Navbar.Header,
 	                        null,
@@ -50285,12 +50826,12 @@
 	                                'Introduction'
 	                            )
 	                        ),
-	                        this.state.isUserAuthenticated ? _react2.default.createElement(
+	                        this.props.user.isUserAuthenticated ? _react2.default.createElement(
 	                            _reactBootstrap.Nav,
 	                            { pullRight: true },
 	                            _react2.default.createElement(
 	                                _reactRouterBootstrap.LinkContainer,
-	                                { to: { pathname: "/research/garden" } },
+	                                { to: { pathname: "/research/dashboard" } },
 	                                _react2.default.createElement(
 	                                    _reactBootstrap.NavItem,
 	                                    { eventKey: 2 },
@@ -50298,13 +50839,9 @@
 	                                )
 	                            ),
 	                            _react2.default.createElement(
-	                                _reactRouterBootstrap.LinkContainer,
-	                                { to: '/research/logout' },
-	                                _react2.default.createElement(
-	                                    _reactBootstrap.NavItem,
-	                                    { eventKey: 3 },
-	                                    'Log out'
-	                                )
+	                                _reactBootstrap.NavItem,
+	                                { eventKey: 3, onClick: this.logOut.bind(this) },
+	                                'Log out'
 	                            )
 	                        ) : _react2.default.createElement(
 	                            _reactBootstrap.Nav,
@@ -50329,6 +50866,11 @@
 	                            )
 	                        )
 	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'research-content' },
+	                    children
 	                )
 	            );
 	        }
@@ -50340,7 +50882,7 @@
 	exports.default = ResearchHome;
 
 /***/ },
-/* 534 */
+/* 541 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -50348,11 +50890,11 @@
 	exports.__esModule = true;
 	exports.LinkContainer = exports.IndexLinkContainer = undefined;
 
-	var _IndexLinkContainer2 = __webpack_require__(535);
+	var _IndexLinkContainer2 = __webpack_require__(542);
 
 	var _IndexLinkContainer3 = _interopRequireDefault(_IndexLinkContainer2);
 
-	var _LinkContainer2 = __webpack_require__(536);
+	var _LinkContainer2 = __webpack_require__(543);
 
 	var _LinkContainer3 = _interopRequireDefault(_LinkContainer2);
 
@@ -50362,7 +50904,7 @@
 	exports.LinkContainer = _LinkContainer3.default;
 
 /***/ },
-/* 535 */
+/* 542 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -50375,7 +50917,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _LinkContainer = __webpack_require__(536);
+	var _LinkContainer = __webpack_require__(543);
 
 	var _LinkContainer2 = _interopRequireDefault(_LinkContainer);
 
@@ -50411,7 +50953,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 536 */
+/* 543 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -50546,186 +51088,13 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 537 */
+/* 544 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _researchContainerGarden = __webpack_require__(538);
-
-	var _researchContainerGarden2 = _interopRequireDefault(_researchContainerGarden);
-
-	var _researchDetailStatus = __webpack_require__(544);
-
-	var _researchDetailStatus2 = _interopRequireDefault(_researchDetailStatus);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var ResearchDashboard = function (_Component) {
-	    _inherits(ResearchDashboard, _Component);
-
-	    function ResearchDashboard(props) {
-	        _classCallCheck(this, ResearchDashboard);
-
-	        return _possibleConstructorReturn(this, (ResearchDashboard.__proto__ || Object.getPrototypeOf(ResearchDashboard)).call(this, props));
-	    }
-
-	    _createClass(ResearchDashboard, [{
-	        key: 'render',
-	        value: function render() {
-	            return _react2.default.createElement(
-	                'div',
-	                null,
-	                _react2.default.createElement(_researchContainerGarden2.default, null)
-	            );
-	        }
-	    }]);
-
-	    return ResearchDashboard;
-	}(_react.Component);
-
-	exports.default = ResearchDashboard;
+	module.exports = __webpack_require__(270);
 
 /***/ },
-/* 538 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _reactRedux = __webpack_require__(180);
-
-	var _researchActions = __webpack_require__(539);
-
-	var _researchGarden = __webpack_require__(540);
-
-	var _researchGarden2 = _interopRequireDefault(_researchGarden);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var mapStateToProps = function mapStateToProps(state) {
-	    return {
-	        units: state.units,
-	        numUnit: state.numUnit
-	    };
-	};
-
-	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-	    return {
-	        onUnitBarClick: function onUnitBarClick(pos) {
-	            dispatch((0, _researchActions.delUnitGrowBed)(pos));
-	        },
-	        onBtnDelVegetClick: function onBtnDelVegetClick(pos) {
-	            dispatch((0, _researchActions.delVegetGrowBed)(pos));
-	        },
-	        onBtnAddVegetClick: function onBtnAddVegetClick(pos, value) {
-	            dispatch((0, _researchActions.addVegetGrowBed)(pos, value));
-	        },
-	        onButtonAddClick: function onButtonAddClick(unitName, temp, ph, nitrat) {
-	            dispatch((0, _researchActions.addUnitGrowBed)(unitName, temp, ph, nitrat));
-	        },
-	        onCheckVisibilityClick: function onCheckVisibilityClick(pos) {
-	            dispatch((0, _researchActions.visibilityGrowBed)(pos));
-	        }
-	    };
-	};
-
-	var ContainerGarden = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_researchGarden2.default);
-
-	exports.default = ContainerGarden;
-
-/***/ },
-/* 539 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.addUnitGrowBed = addUnitGrowBed;
-	exports.delUnitGrowBed = delUnitGrowBed;
-	exports.addVegetGrowBed = addVegetGrowBed;
-	exports.delVegetGrowBed = delVegetGrowBed;
-	exports.visibilityGrowBed = visibilityGrowBed;
-	var ADD_UNIT_GROW_BED = exports.ADD_UNIT_GROW_BED = 'ADD_UNIT_GROW_BED';
-	var ADD_VEGET_GROW_BED = exports.ADD_VEGET_GROW_BED = 'ADD_VEGET_GROW_BED';
-	var DEL_UNIT_GROW_BED = exports.DEL_UNIT_GROW_BED = 'DEL_UNIT_GROW_BED';
-	var DEL_VEGET_GROW_BED = exports.DEL_VEGET_GROW_BED = 'DEL_VEGET_GROW_BED';
-	var VISIBILITY_GROW_BED = exports.VISIBILITY_GROW_BED = 'VISIBILITY_GROW_BED';
-
-	/*
-	 * Action Creators
-	 */
-
-	function addUnitGrowBed(unitName, temp, ph, nitrat) {
-	    return {
-	        type: ADD_UNIT_GROW_BED,
-	        payload: {
-	            name: unitName,
-	            beds: [],
-	            unitStatus: {
-	                ph: ph,
-	                temp: temp,
-	                nitrat: nitrat
-	            },
-	            pos: {}
-	        }
-	    };
-	}
-
-	function delUnitGrowBed(pos) {
-	    return {
-	        type: DEL_UNIT_GROW_BED,
-	        pos: pos
-	    };
-	}
-
-	function addVegetGrowBed(pos, text) {
-	    return {
-	        type: ADD_VEGET_GROW_BED,
-	        payload: {
-	            pos: pos,
-	            name: text
-	        }
-	    };
-	}
-
-	function delVegetGrowBed(vegetIndex, pos) {
-	    return {
-	        type: DEL_VEGET_GROW_BED,
-	        pos: pos
-	    };
-	}
-
-	function visibilityGrowBed(pos) {
-	    return {
-	        type: VISIBILITY_GROW_BED,
-	        pos: pos
-	    };
-	}
-
-/***/ },
-/* 540 */
+/* 545 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -50746,7 +51115,7 @@
 
 	var _reactAddonsUpdate2 = _interopRequireDefault(_reactAddonsUpdate);
 
-	var _researchUnitBedGrow = __webpack_require__(541);
+	var _researchUnitBedGrow = __webpack_require__(546);
 
 	var _researchUnitBedGrow2 = _interopRequireDefault(_researchUnitBedGrow);
 
@@ -50921,7 +51290,7 @@
 	exports.default = Garden;
 
 /***/ },
-/* 541 */
+/* 546 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -50938,7 +51307,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _researchBedGrow = __webpack_require__(542);
+	var _researchBedGrow = __webpack_require__(547);
 
 	var _researchBedGrow2 = _interopRequireDefault(_researchBedGrow);
 
@@ -51033,7 +51402,7 @@
 	exports.default = UnitBedGrow;
 
 /***/ },
-/* 542 */
+/* 547 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -51050,7 +51419,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _researchVeget = __webpack_require__(543);
+	var _researchVeget = __webpack_require__(548);
 
 	var _researchVeget2 = _interopRequireDefault(_researchVeget);
 
@@ -51212,7 +51581,7 @@
 	exports.default = BedGrow;
 
 /***/ },
-/* 543 */
+/* 548 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -51265,13 +51634,364 @@
 	exports.default = Veget;
 
 /***/ },
-/* 544 */
+/* 549 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactBootstrap = __webpack_require__(281);
+
+	var _researchContainerGarden = __webpack_require__(550);
+
+	var _researchContainerGarden2 = _interopRequireDefault(_researchContainerGarden);
+
+	var _researchDetailStatus = __webpack_require__(551);
+
+	var _researchDetailStatus2 = _interopRequireDefault(_researchDetailStatus);
+
+	var _Auth = __webpack_require__(531);
+
+	var _Auth2 = _interopRequireDefault(_Auth);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ResearchDashboard = function (_Component) {
+	    _inherits(ResearchDashboard, _Component);
+
+	    function ResearchDashboard(props) {
+	        _classCallCheck(this, ResearchDashboard);
+
+	        return _possibleConstructorReturn(this, (ResearchDashboard.__proto__ || Object.getPrototypeOf(ResearchDashboard)).call(this, props));
+	    }
+
+	    _createClass(ResearchDashboard, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var _this = this;
+	            if (_Auth2.default.getToken() !== null && _Auth2.default.getToken() !== undefined) {
+	                var xhr = new XMLHttpRequest();
+	                xhr.open('post', '/research/auth');
+	                xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	                xhr.setRequestHeader('Authorization', 'bearer ' + _Auth2.default.getToken());
+	                xhr.responseType = 'json';
+
+	                xhr.onload = function () {
+	                    if (this.status === 200) {
+	                        //get data
+	                    } else {
+	                        _this.props.redirect('/research/login');
+	                    }
+	                };
+
+	                xhr.send();
+	            } else {
+	                this.props.redirect('/research/login');
+	            }
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(
+	                    _reactBootstrap.Tab.Container,
+	                    { id: 'wrapper', defaultActiveKey: 'first' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        null,
+	                        _react2.default.createElement(
+	                            'div',
+	                            { id: 'sidebar-wrapper' },
+	                            _react2.default.createElement(UserInfoBox, { className: 'nav-tabs-container' }),
+	                            _react2.default.createElement('hr', null),
+	                            _react2.default.createElement(
+	                                'div',
+	                                { id: 'nav-tabs-header', className: 'nav-tabs-container' },
+	                                _react2.default.createElement(
+	                                    'h3',
+	                                    null,
+	                                    'Dashboard'
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                _reactBootstrap.Nav,
+	                                { bsStyle: 'pills', stacked: true },
+	                                _react2.default.createElement(
+	                                    _reactBootstrap.NavItem,
+	                                    { eventKey: 'first', className: 'nav-tabs-container' },
+	                                    _react2.default.createElement('i', { className: 'fa fa-1x fa-pagelines', 'aria-hidden': 'true' }),
+	                                    _react2.default.createElement(
+	                                        'span',
+	                                        { style: { paddingLeft: "8px" } },
+	                                        'Your Garden'
+	                                    )
+	                                ),
+	                                _react2.default.createElement(
+	                                    _reactBootstrap.NavItem,
+	                                    { eventKey: 'second', className: 'nav-tabs-container' },
+	                                    _react2.default.createElement('i', { className: 'fa fa-1x fa-line-chart', 'aria-hidden': 'true' }),
+	                                    _react2.default.createElement(
+	                                        'span',
+	                                        { style: { paddingLeft: "8px" } },
+	                                        'Statistic'
+	                                    )
+	                                ),
+	                                _react2.default.createElement(
+	                                    _reactBootstrap.NavItem,
+	                                    { eventKey: 'third', className: 'nav-tabs-container' },
+	                                    _react2.default.createElement('i', { className: 'fa fa-1x fa-university', 'aria-hidden': 'true' }),
+	                                    _react2.default.createElement(
+	                                        'span',
+	                                        { style: { paddingLeft: "8px" } },
+	                                        'News Feed'
+	                                    )
+	                                )
+	                            )
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { id: 'page-content-wrapper' },
+	                            _react2.default.createElement(
+	                                _reactBootstrap.Tab.Content,
+	                                { animation: true },
+	                                _react2.default.createElement(
+	                                    _reactBootstrap.Tab.Pane,
+	                                    { eventKey: 'first' },
+	                                    _react2.default.createElement(_researchContainerGarden2.default, null)
+	                                ),
+	                                _react2.default.createElement(
+	                                    _reactBootstrap.Tab.Pane,
+	                                    { eventKey: 'second' },
+	                                    'Statistical'
+	                                ),
+	                                _react2.default.createElement(
+	                                    _reactBootstrap.Tab.Pane,
+	                                    { eventKey: 'third' },
+	                                    'News Feed'
+	                                )
+	                            )
+	                        )
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return ResearchDashboard;
+	}(_react.Component);
+
+	var UserInfoBox = function (_Component2) {
+	    _inherits(UserInfoBox, _Component2);
+
+	    function UserInfoBox(props) {
+	        _classCallCheck(this, UserInfoBox);
+
+	        return _possibleConstructorReturn(this, (UserInfoBox.__proto__ || Object.getPrototypeOf(UserInfoBox)).call(this, props));
+	    }
+
+	    _createClass(UserInfoBox, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                { id: 'user-info', className: this.props.className },
+	                _react2.default.createElement(
+	                    _reactBootstrap.Row,
+	                    null,
+	                    _react2.default.createElement(
+	                        _reactBootstrap.Col,
+	                        { sm: 4, md: 4, xs: 4 },
+	                        _react2.default.createElement('img', { className: 'img-circle', id: 'profile-picture', src: '/Images/Research/user-face.jpg' })
+	                    ),
+	                    _react2.default.createElement(
+	                        _reactBootstrap.Col,
+	                        { sm: 8, md: 8, xs: 8 },
+	                        _react2.default.createElement(
+	                            'span',
+	                            null,
+	                            'Welcome, ',
+	                            _react2.default.createElement(
+	                                'strong',
+	                                null,
+	                                'Bang'
+	                            )
+	                        ),
+	                        _react2.default.createElement('br', null),
+	                        _react2.default.createElement('i', { className: 'fa fa-bell', 'aria-hidden': 'true' }),
+	                        _react2.default.createElement('i', { className: 'fa fa-cog', 'aria-hidden': 'true' })
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return UserInfoBox;
+	}(_react.Component);
+
+	exports.default = ResearchDashboard;
+
+/***/ },
+/* 550 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _reactRedux = __webpack_require__(180);
+
+	var _researchActions = __webpack_require__(539);
+
+	var _researchGarden = __webpack_require__(545);
+
+	var _researchGarden2 = _interopRequireDefault(_researchGarden);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var mapStateToProps = function mapStateToProps(state) {
+	    return {
+	        units: state.units,
+	        numUnit: state.numUnit
+	    };
+	};
+
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	    return {
+	        onUnitBarClick: function onUnitBarClick(pos) {
+	            dispatch((0, _researchActions.delUnitGrowBed)(pos));
+	        },
+	        onBtnDelVegetClick: function onBtnDelVegetClick(pos) {
+	            dispatch((0, _researchActions.delVegetGrowBed)(pos));
+	        },
+	        onBtnAddVegetClick: function onBtnAddVegetClick(pos, value) {
+	            dispatch((0, _researchActions.addVegetGrowBed)(pos, value));
+	        },
+	        onButtonAddClick: function onButtonAddClick(unitName, temp, ph, nitrat) {
+	            dispatch((0, _researchActions.addUnitGrowBed)(unitName, temp, ph, nitrat));
+	        },
+	        onCheckVisibilityClick: function onCheckVisibilityClick(pos) {
+	            dispatch((0, _researchActions.visibilityGrowBed)(pos));
+	        }
+	    };
+	};
+
+	var ContainerGarden = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_researchGarden2.default);
+
+	exports.default = ContainerGarden;
+
+/***/ },
+/* 551 */
 /***/ function(module, exports) {
 
 	"use strict";
 
 /***/ },
-/* 545 */
+/* 552 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _Auth = __webpack_require__(531);
+
+	var _Auth2 = _interopRequireDefault(_Auth);
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ResearchHomeIndex = function (_Component) {
+	    _inherits(ResearchHomeIndex, _Component);
+
+	    function ResearchHomeIndex(props) {
+	        _classCallCheck(this, ResearchHomeIndex);
+
+	        return _possibleConstructorReturn(this, (ResearchHomeIndex.__proto__ || Object.getPrototypeOf(ResearchHomeIndex)).call(this, props));
+	    }
+
+	    _createClass(ResearchHomeIndex, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var _this3 = this;
+
+	            if (_Auth2.default.isUserAuthenticated()) {
+	                (function () {
+
+	                    var xhr = new XMLHttpRequest();
+	                    var _this = _this3;
+	                    xhr.open('post', '/research/auth');
+	                    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	                    xhr.setRequestHeader('Authorization', 'bearer ' + _Auth2.default.getToken());
+	                    xhr.responseType = 'json';
+
+	                    xhr.onload = function () {
+	                        if (this.status === 200) {
+	                            _this.props.setIsUserAuthenticated(true);
+	                        } else {
+	                            _this.props.setIsUserAuthenticated(false);
+	                        }
+	                    };
+
+	                    xhr.send();
+	                })();
+	            } else {
+	                this.props.setIsUserAuthenticated(false);
+	            }
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'container-fluid' },
+	                _react2.default.createElement(
+	                    'h3',
+	                    null,
+	                    'Welcome to Song He Laboratory'
+	                )
+	            );
+	        }
+	    }]);
+
+	    return ResearchHomeIndex;
+	}(_react.Component);
+
+	exports.default = ResearchHomeIndex;
+
+/***/ },
+/* 553 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -51324,7 +52044,7 @@
 	exports.default = NotFoundPage;
 
 /***/ },
-/* 546 */
+/* 554 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -51335,17 +52055,22 @@
 
 	var _redux = __webpack_require__(187);
 
-	var _researchReducers = __webpack_require__(547);
+	var _reactRouterRedux = __webpack_require__(534);
+
+	var _reactRouter = __webpack_require__(204);
+
+	var _researchReducers = __webpack_require__(555);
 
 	var _researchReducers2 = _interopRequireDefault(_researchReducers);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var store = (0, _redux.createStore)(_researchReducers2.default);
+	var middleware = (0, _reactRouterRedux.routerMiddleware)(_reactRouter.browserHistory);
+	var store = (0, _redux.createStore)(_researchReducers2.default, (0, _redux.applyMiddleware)(middleware));
 	exports.default = store;
 
 /***/ },
-/* 547 */
+/* 555 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -51362,7 +52087,11 @@
 
 	var initialState = {
 	    units: [],
-	    numUnit: 0
+	    numUnit: 0,
+	    user: {
+	        isUserAuthenticated: false,
+	        info: {}
+	    }
 	};
 
 	var clone = function clone(obj) {
@@ -51482,6 +52211,25 @@
 	                    growBed.visibility = true;
 	                }
 	                return _newState4;
+	            }
+	        case _researchActions.SET_IS_USER_AUTHENTICATED:
+	            {
+	                var _newState5 = clone(state);
+	                _newState5.user.isUserAuthenticated = action.value;
+	                return _newState5;
+	            }
+	        case _researchActions.SET_USER_INFO:
+	            {
+	                var _newState6 = clone(state);
+	                _newState6.user.info = clone(action.payload);
+	                return _newState6;
+	            }
+	        case _researchActions.FLUSH_OUT_STATE_DATA:
+	            {
+	                var _newState7 = clone(state);
+	                _newState7.numUnit = 0;
+	                _newState7.units = [];
+	                return _newState7;
 	            }
 	        default:
 	            return state;

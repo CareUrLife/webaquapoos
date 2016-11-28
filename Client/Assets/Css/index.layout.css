@@ -9,6 +9,7 @@ body {
     height: 100vh;
     -webkit-font-smoothing : subpixel-antialiased;
     background-color : #ffffff;
+    height: 100%;
 }
 
 header {
