@@ -14,7 +14,8 @@ module.exports = function(config) {
             password: password,
             realName: req.body.realName,
             email : req.body.email,
-            isAdmin : req.body.isAddmin
+            isAdmin : req.body.isAddmin,
+            description : req.body.description
         };
         let newResearcher = new ResearcherModel(researcherData);
         newResearcher.save(function(err) {

@@ -32,8 +32,8 @@ const mapDispatchToProps = (dispatch) => {
         flushOutStateData : () => {
             dispatch(flushOutStateData());
         },
-        setUserInfo : () => {
-            dispatch(setUserInfo());
+        setUserInfo : (userinfo) => {
+            dispatch(setUserInfo(userinfo));
         },
         setIsUserAuthenticated : (value) => {
             dispatch(setIsUserAuthenticated(value));

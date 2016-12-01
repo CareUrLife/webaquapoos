@@ -39,7 +39,11 @@ module.exports = function(config) {
                 let token = jwt.sign(payload, config.secret);
 
                 let researcherData = {
-                    usrName : researcher.usrName
+                    usrName : researcher.usrName,
+                    realName : researcher.realName,
+                    email : researcher.email,
+                    isAdmin : researcher.isAdmin,
+                    description : researcher.description
                 };
 
                 return done(null, token, researcherData);

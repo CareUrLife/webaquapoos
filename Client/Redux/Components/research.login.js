@@ -34,6 +34,7 @@ class ResearchLogin extends Component {
                 state=Object.assign({}, _this.state, {errorMessage : ''});
                 _this.setState(state);
                 Auth.authenticateUser(this.response.token);
+                _this.props.setUserInfo(this.response.researcherData);
                 _this.props.redirect('/research');
             }else{
                 // failure

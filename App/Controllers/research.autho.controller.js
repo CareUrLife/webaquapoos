@@ -19,7 +19,14 @@ module.exports = function(config) {
                     if(err || !researcher) {
                         return res.status(401).end();
                     }
-                    return res.status(200).end();
+                    researcherData = {
+                        usrName : researcher.usrName,
+                        realName : researcher.realName,
+                        email : researcher.email,
+                        isAdmin : researcher.isAdmin,
+                        description : researcher.description 
+                    }
+                    return res.status(200).json(researcherData : researcherData);
                     // next middleware, in our case, this middleware is router
                 });
             });

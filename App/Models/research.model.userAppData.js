@@ -6,7 +6,8 @@ var ResearcherInfoSchema = new mongoose.Schema({
     realName : String,
     email : String,
     password: String,
-    isAdmin : Boolean
+    isAdmin : Boolean,
+    description : String
 });
 
 ResearcherInfoSchema.index({usrName : 1}, {unique : true});

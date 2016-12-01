@@ -4,16 +4,20 @@ var config = require('./config'),
     session = require('express-session'),
     morgan = require('morgan'),
     jwt = require('jsonwebtoken'),
-    passport = require('passport');
+    passport = require('passport'),
+    webpackDevHelper = require('../webpack.dev-helper.js');
 
 
 module.exports = function() {
     var app = express();
 
     if(process.env.NODE_ENV === "production") {
-    
+        console.log("PRODUCTION ENVIRONMENT");
+        var compression = require('compression');
+        app.use(compression());
     }else if(process.env.NODE_ENV === "development"){
-           
+        console.log("DEVELOPMENT ENVIRONMENT"); 
+        webpackDevHelper.useWebpackMiddleware(app);
     } 
 
     //Body Parser Configuration

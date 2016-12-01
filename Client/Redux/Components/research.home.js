@@ -6,6 +6,7 @@ import ReactTestUtils from 'react-addons-test-utils';
 import Garden from './research.garden.js';
 import ResearchDashboard from './research.dashboard.js';
 import ResearchHomeIndex from './research.home.index.js';
+import Login from './research.login.js';
 
 class ResearchHome extends Component {
 
@@ -62,6 +63,11 @@ class ResearchHome extends Component {
                         {   setIsUserAuthenticated : this.props.setIsUserAuthenticated,
                             user : this.props.user
                         });
+            }else if(ReactTestUtils.isElementOfType(this.props.children, Login)){
+                children = React.cloneElement(this.props.children, {
+                    redirect : this.props.redirect,
+                    setUserInfo : this.props.setUserInfo 
+                })
             }else{
                 children = React.cloneElement(this.props.children, 
                         {   redirect : this.props.redirect});

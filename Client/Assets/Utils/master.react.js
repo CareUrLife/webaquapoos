@@ -65,7 +65,7 @@
 
 	var _appRoutes2 = _interopRequireDefault(_appRoutes);
 
-	var _researchStore = __webpack_require__(554);
+	var _researchStore = __webpack_require__(557);
 
 	var _researchStore2 = _interopRequireDefault(_researchStore);
 
@@ -21512,7 +21512,7 @@
 
 	var _routes2 = _interopRequireDefault(_routes);
 
-	var _NotFoundPage = __webpack_require__(553);
+	var _NotFoundPage = __webpack_require__(556);
 
 	var _NotFoundPage2 = _interopRequireDefault(_NotFoundPage);
 
@@ -27977,7 +27977,7 @@
 
 	var _researchDashboard2 = _interopRequireDefault(_researchDashboard);
 
-	var _researchHomeIndex = __webpack_require__(552);
+	var _researchHomeIndex = __webpack_require__(555);
 
 	var _researchHomeIndex2 = _interopRequireDefault(_researchHomeIndex);
 
@@ -31178,6 +31178,7 @@
 	                    state = Object.assign({}, _this.state, { errorMessage: '' });
 	                    _this.setState(state);
 	                    _Auth2.default.authenticateUser(this.response.token);
+	                    _this.props.setUserInfo(this.response.researcherData);
 	                    _this.props.redirect('/research');
 	                } else {
 	                    // failure
@@ -50057,7 +50058,7 @@
 	        value: function formProcess(event) {
 	            event.preventDefault();
 	            var _this = this;
-	            var newUser = 'usrName=' + encodeURIComponent(_reactDom2.default.findDOMNode(this.refs.usrName).value) + '&realName=' + encodeURIComponent(_reactDom2.default.findDOMNode(this.refs.realName).value) + '&isAddmin=false' + '&email=' + encodeURIComponent(_reactDom2.default.findDOMNode(this.refs.email).value) + '&password=' + encodeURIComponent(_reactDom2.default.findDOMNode(this.refs.password1).value);
+	            var newUser = 'usrName=' + encodeURIComponent(_reactDom2.default.findDOMNode(this.refs.usrName).value) + '&realName=' + encodeURIComponent(_reactDom2.default.findDOMNode(this.refs.realName).value) + '&isAddmin=false' + '&email=' + encodeURIComponent(_reactDom2.default.findDOMNode(this.refs.email).value) + '&password=' + encodeURIComponent(_reactDom2.default.findDOMNode(this.refs.password1).value) + '&description=' + encodeURIComponent(_reactDom2.default.findDOMNode(this.refs.description).value);
 	            var xhr = new XMLHttpRequest();
 	            xhr.open('post', '/research/signup');
 	            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -50132,6 +50133,16 @@
 	                    ),
 	                    _react2.default.createElement(
 	                        _reactBootstrap.FormGroup,
+	                        { controlId: 'formControlsTextarea' },
+	                        _react2.default.createElement(
+	                            _reactBootstrap.ControlLabel,
+	                            null,
+	                            'Write something about you'
+	                        ),
+	                        _react2.default.createElement(_reactBootstrap.FormControl, { componentClass: 'textarea', placeholder: 'sth about you...' })
+	                    ),
+	                    _react2.default.createElement(
+	                        _reactBootstrap.FormGroup,
 	                        null,
 	                        _react2.default.createElement(
 	                            _reactBootstrap.Button,
@@ -50199,8 +50210,8 @@
 	        flushOutStateData: function flushOutStateData() {
 	            dispatch((0, _researchActions.flushOutStateData)());
 	        },
-	        setUserInfo: function setUserInfo() {
-	            dispatch((0, _researchActions.setUserInfo)());
+	        setUserInfo: function setUserInfo(userinfo) {
+	            dispatch((0, _researchActions.setUserInfo)(userinfo));
 	        },
 	        setIsUserAuthenticated: function setIsUserAuthenticated(value) {
 	            dispatch((0, _researchActions.setIsUserAuthenticated)(value));
@@ -50712,9 +50723,13 @@
 
 	var _researchDashboard2 = _interopRequireDefault(_researchDashboard);
 
-	var _researchHomeIndex = __webpack_require__(552);
+	var _researchHomeIndex = __webpack_require__(555);
 
 	var _researchHomeIndex2 = _interopRequireDefault(_researchHomeIndex);
+
+	var _researchLogin = __webpack_require__(280);
+
+	var _researchLogin2 = _interopRequireDefault(_researchLogin);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -50789,6 +50804,11 @@
 	                } else if (_reactAddonsTestUtils2.default.isElementOfType(this.props.children, _researchHomeIndex2.default)) {
 	                    children = _react2.default.cloneElement(this.props.children, { setIsUserAuthenticated: this.props.setIsUserAuthenticated,
 	                        user: this.props.user
+	                    });
+	                } else if (_reactAddonsTestUtils2.default.isElementOfType(this.props.children, _researchLogin2.default)) {
+	                    children = _react2.default.cloneElement(this.props.children, {
+	                        redirect: this.props.redirect,
+	                        setUserInfo: this.props.setUserInfo
 	                    });
 	                } else {
 	                    children = _react2.default.cloneElement(this.props.children, { redirect: this.props.redirect });
@@ -51340,30 +51360,32 @@
 
 	            var delUnitAlertConfirm = _react2.default.createElement(
 	                _reactBootstrap.Popover,
-	                { id: 'delUnitAlertConfirm', title: '\u0110km ch\u1EAFc x\xF3a ch\u1EDB ?' },
+	                { id: "delUnitAlertConfirm" + this.props.pos.unit, title: '\u0110km ch\u1EAFc x\xF3a ch\u1EDB ?' },
 	                _react2.default.createElement(
 	                    _reactBootstrap.ButtonGroup,
 	                    null,
 	                    _react2.default.createElement(
 	                        _reactBootstrap.Button,
 	                        { className: 'delButton', onClick: function onClick() {
-	                                return _this2.props.onUnitBarClick(_this2.props.pos);
+	                                _this2.props.onUnitBarClick(_this2.props.pos);
+	                                _this2.refs.overlay.hide();
 	                            } },
 	                        'Co'
 	                    ),
 	                    _react2.default.createElement(
 	                        _reactBootstrap.Button,
 	                        { className: 'backButton', onClick: function onClick() {
-	                                return _this2.refs.overlay1.hide();
+	                                return _this2.refs.overlay.hide();
 	                            } },
 	                        'Khong'
 	                    )
 	                )
 	            );
 
-	            var overlayProps1 = {
+	            var overlayProps = {
 	                container: this,
-	                overlay: delUnitAlertConfirm
+	                overlay: delUnitAlertConfirm,
+	                rootClose: true
 	            };
 	            return _react2.default.createElement(
 	                'div',
@@ -51378,7 +51400,7 @@
 	                    ),
 	                    _react2.default.createElement(
 	                        _reactBootstrap.OverlayTrigger,
-	                        _extends({}, overlayProps1, { trigger: 'click', ref: 'overlay1', placement: 'left' }),
+	                        _extends({}, overlayProps, { trigger: 'click', ref: 'overlay', placement: 'left' }),
 	                        _react2.default.createElement('i', { className: 'fa fa-window-close fa-3', 'aria-hidden': 'true', type: 'button' })
 	                    )
 	                ),
@@ -51655,9 +51677,25 @@
 
 	var _researchContainerGarden2 = _interopRequireDefault(_researchContainerGarden);
 
+	var _researchGarden = __webpack_require__(545);
+
+	var _researchGarden2 = _interopRequireDefault(_researchGarden);
+
 	var _researchDetailStatus = __webpack_require__(551);
 
 	var _researchDetailStatus2 = _interopRequireDefault(_researchDetailStatus);
+
+	var _researchDashboardUserinfo = __webpack_require__(552);
+
+	var _researchDashboardUserinfo2 = _interopRequireDefault(_researchDashboardUserinfo);
+
+	var _researchDashboardStatistic = __webpack_require__(553);
+
+	var _researchDashboardStatistic2 = _interopRequireDefault(_researchDashboardStatistic);
+
+	var _researchDashboardNewsfeed = __webpack_require__(554);
+
+	var _researchDashboardNewsfeed2 = _interopRequireDefault(_researchDashboardNewsfeed);
 
 	var _Auth = __webpack_require__(531);
 
@@ -51677,10 +51715,31 @@
 	    function ResearchDashboard(props) {
 	        _classCallCheck(this, ResearchDashboard);
 
-	        return _possibleConstructorReturn(this, (ResearchDashboard.__proto__ || Object.getPrototypeOf(ResearchDashboard)).call(this, props));
+	        var _this2 = _possibleConstructorReturn(this, (ResearchDashboard.__proto__ || Object.getPrototypeOf(ResearchDashboard)).call(this, props));
+
+	        _this2.state = { contentTabs: [], activeTab: 0 };
+	        var contentTabs = _this2.state.contentTabs;
+	        contentTabs[0] = _react2.default.createElement(_researchGarden2.default, { onUnitBarClick: _this2.props.onUnitBarClick,
+	            onBtnAddVegetClick: _this2.props.onBtnAddVegetClick,
+	            onBtnDelVegetClick: _this2.props.onBtnDelVegetClick,
+	            onButtonAddClick: _this2.props.onButtonAddClick,
+	            onCheckVisibilityClick: _this2.props.onCheckVisibilityClick });
+	        contentTabs[1] = _react2.default.createElement(_researchDashboardStatistic2.default);
+	        contentTabs[2] = _react2.default.createElement(_researchDashboardNewsfeed2.default);
+	        contentTabs[3] = _react2.default.createElement(_researchDashboardUserinfo2.default, { user: _this2.props.user });
+
+	        _this2.toggleTab = _this2.toggleTab.bind(_this2);
+	        return _this2;
 	    }
 
 	    _createClass(ResearchDashboard, [{
+	        key: 'toggleTab',
+	        value: function toggleTab(eventId) {
+	            var newState = {};
+	            newState = Object.assign({}, this.state, { activeTab: eventId });
+	            this.setState(newState);
+	        }
+	    }, {
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
 	            var _this = this;
@@ -51707,11 +51766,13 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var _this3 = this;
+
 	            return _react2.default.createElement(
 	                'div',
 	                null,
 	                _react2.default.createElement(
-	                    _reactBootstrap.Tab.Container,
+	                    'div',
 	                    { id: 'wrapper', defaultActiveKey: 'first' },
 	                    _react2.default.createElement(
 	                        'div',
@@ -51719,7 +51780,9 @@
 	                        _react2.default.createElement(
 	                            'div',
 	                            { id: 'sidebar-wrapper' },
-	                            _react2.default.createElement(UserInfoBox, { className: 'nav-tabs-container' }),
+	                            _react2.default.createElement(UserInfoBox, { className: 'nav-tabs-container', toggleTabs: [null, null, function () {
+	                                    return _this3.toggleTab(3);
+	                                }] }),
 	                            _react2.default.createElement('hr', null),
 	                            _react2.default.createElement(
 	                                'div',
@@ -51735,7 +51798,9 @@
 	                                { bsStyle: 'pills', stacked: true },
 	                                _react2.default.createElement(
 	                                    _reactBootstrap.NavItem,
-	                                    { eventKey: 'first', className: 'nav-tabs-container' },
+	                                    { eventKey: 'first', className: 'nav-tabs-container', onClick: function onClick() {
+	                                            return _this3.toggleTab(0);
+	                                        } },
 	                                    _react2.default.createElement('i', { className: 'fa fa-1x fa-pagelines', 'aria-hidden': 'true' }),
 	                                    _react2.default.createElement(
 	                                        'span',
@@ -51745,7 +51810,9 @@
 	                                ),
 	                                _react2.default.createElement(
 	                                    _reactBootstrap.NavItem,
-	                                    { eventKey: 'second', className: 'nav-tabs-container' },
+	                                    { eventKey: 'second', className: 'nav-tabs-container', onClick: function onClick() {
+	                                            return _this3.toggleTab(1);
+	                                        } },
 	                                    _react2.default.createElement('i', { className: 'fa fa-1x fa-line-chart', 'aria-hidden': 'true' }),
 	                                    _react2.default.createElement(
 	                                        'span',
@@ -51755,7 +51822,9 @@
 	                                ),
 	                                _react2.default.createElement(
 	                                    _reactBootstrap.NavItem,
-	                                    { eventKey: 'third', className: 'nav-tabs-container' },
+	                                    { eventKey: 'third', className: 'nav-tabs-container', onClick: function onClick() {
+	                                            return _this3.toggleTab(2);
+	                                        } },
 	                                    _react2.default.createElement('i', { className: 'fa fa-1x fa-university', 'aria-hidden': 'true' }),
 	                                    _react2.default.createElement(
 	                                        'span',
@@ -51765,29 +51834,7 @@
 	                                )
 	                            )
 	                        ),
-	                        _react2.default.createElement(
-	                            'div',
-	                            { id: 'page-content-wrapper' },
-	                            _react2.default.createElement(
-	                                _reactBootstrap.Tab.Content,
-	                                { animation: true },
-	                                _react2.default.createElement(
-	                                    _reactBootstrap.Tab.Pane,
-	                                    { eventKey: 'first' },
-	                                    _react2.default.createElement(_researchContainerGarden2.default, null)
-	                                ),
-	                                _react2.default.createElement(
-	                                    _reactBootstrap.Tab.Pane,
-	                                    { eventKey: 'second' },
-	                                    'Statistical'
-	                                ),
-	                                _react2.default.createElement(
-	                                    _reactBootstrap.Tab.Pane,
-	                                    { eventKey: 'third' },
-	                                    'News Feed'
-	                                )
-	                            )
-	                        )
+	                        _react2.default.createElement(TabContent, { units: this.props.units, numUnit: this.props.numUnit, content: this.state.contentTabs[this.state.activeTab] })
 	                    )
 	                )
 	            );
@@ -51834,8 +51881,9 @@
 	                            )
 	                        ),
 	                        _react2.default.createElement('br', null),
-	                        _react2.default.createElement('i', { className: 'fa fa-bell', 'aria-hidden': 'true' }),
-	                        _react2.default.createElement('i', { className: 'fa fa-cog', 'aria-hidden': 'true' })
+	                        _react2.default.createElement('i', { className: 'fa fa-bell', 'aria-hidden': 'true', onClick: this.props.toggleTabs[0] }),
+	                        _react2.default.createElement('i', { className: 'fa fa-cog', 'aria-hidden': 'true', onClick: this.props.toggleTabs[1] }),
+	                        _react2.default.createElement('i', { className: 'fa fa-user', 'aria-hidden': 'true', style: { cursor: "pointer" }, onClick: this.props.toggleTabs[2] })
 	                    )
 	                )
 	            );
@@ -51843,6 +51891,33 @@
 	    }]);
 
 	    return UserInfoBox;
+	}(_react.Component);
+
+	var TabContent = function (_Component3) {
+	    _inherits(TabContent, _Component3);
+
+	    function TabContent(props) {
+	        _classCallCheck(this, TabContent);
+
+	        return _possibleConstructorReturn(this, (TabContent.__proto__ || Object.getPrototypeOf(TabContent)).call(this, props));
+	    }
+
+	    _createClass(TabContent, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'page-content-wrapper' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'container-fluid' },
+	                    _react2.default.cloneElement(this.props.content, { units: this.props.units, numUnit: this.props.numUnit })
+	                )
+	            );
+	        }
+	    }]);
+
+	    return TabContent;
 	}(_react.Component);
 
 	exports.default = ResearchDashboard;
@@ -51906,6 +51981,234 @@
 
 /***/ },
 /* 552 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var UserInfo = function (_Component) {
+	    _inherits(UserInfo, _Component);
+
+	    function UserInfo(props) {
+	        _classCallCheck(this, UserInfo);
+
+	        return _possibleConstructorReturn(this, (UserInfo.__proto__ || Object.getPrototypeOf(UserInfo)).call(this, props));
+	    }
+
+	    _createClass(UserInfo, [{
+	        key: "render",
+	        value: function render() {
+	            return _react2.default.createElement(
+	                "div",
+	                { className: "fluid-container" },
+	                _react2.default.createElement(
+	                    "div",
+	                    { id: "userinfo-box-header" },
+	                    _react2.default.createElement(
+	                        "h4",
+	                        null,
+	                        "PROFILE"
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    "div",
+	                    { className: "container row", id: "userinfo-box-body" },
+	                    _react2.default.createElement(
+	                        "div",
+	                        { className: "col-md-8 col-lg-8 col-sm-12 row" },
+	                        _react2.default.createElement(
+	                            "div",
+	                            { className: "col-md-3 col-lg-3 col-sm-3" },
+	                            _react2.default.createElement("img", { className: "img-circle", id: "profile-picture", src: "/Images/Research/user-face.jps" })
+	                        ),
+	                        _react2.default.createElement(
+	                            "div",
+	                            { className: "col-md-9 col-lg-9 col-sm-9" },
+	                            _react2.default.createElement(
+	                                "h4",
+	                                null,
+	                                _react2.default.createElement(
+	                                    "strong",
+	                                    null,
+	                                    this.props.user.info.realName
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                "div",
+	                                { className: "user-description" },
+	                                this.props.user.info.description
+	                            )
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        "div",
+	                        { className: "col-md-4 col-lg-4 col-sm-12" },
+	                        _react2.default.createElement(
+	                            "div",
+	                            { className: "user-props-list" },
+	                            _react2.default.createElement(
+	                                "span",
+	                                { className: "user-props" },
+	                                "User Name"
+	                            ),
+	                            ":",
+	                            _react2.default.createElement(
+	                                "span",
+	                                { className: "user-props-detail" },
+	                                this.props.user.info.usrName
+	                            )
+	                        ),
+	                        _react2.default.createElement(
+	                            "div",
+	                            { className: "user-props-list" },
+	                            _react2.default.createElement(
+	                                "span",
+	                                { className: "user-props" },
+	                                "Email"
+	                            ),
+	                            ":",
+	                            _react2.default.createElement(
+	                                "span",
+	                                { className: "user-props-detail" },
+	                                this.props.user.info.email
+	                            )
+	                        )
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return UserInfo;
+	}(_react.Component);
+
+	exports.default = UserInfo;
+
+/***/ },
+/* 553 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Statistic = function (_Component) {
+	    _inherits(Statistic, _Component);
+
+	    function Statistic(props) {
+	        _classCallCheck(this, Statistic);
+
+	        return _possibleConstructorReturn(this, (Statistic.__proto__ || Object.getPrototypeOf(Statistic)).call(this, props));
+	    }
+
+	    _createClass(Statistic, [{
+	        key: "render",
+	        value: function render() {
+	            return _react2.default.createElement(
+	                "div",
+	                { className: "fluid-container" },
+	                _react2.default.createElement(
+	                    "h4",
+	                    null,
+	                    "Statistic Page"
+	                )
+	            );
+	        }
+	    }]);
+
+	    return Statistic;
+	}(_react.Component);
+
+	exports.default = Statistic;
+
+/***/ },
+/* 554 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var NewsFeed = function (_Component) {
+	    _inherits(NewsFeed, _Component);
+
+	    function NewsFeed(props) {
+	        _classCallCheck(this, NewsFeed);
+
+	        return _possibleConstructorReturn(this, (NewsFeed.__proto__ || Object.getPrototypeOf(NewsFeed)).call(this, props));
+	    }
+
+	    _createClass(NewsFeed, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(
+	                    'h4',
+	                    null,
+	                    'News Feed'
+	                )
+	            );
+	        }
+	    }]);
+
+	    return NewsFeed;
+	}(_react.Component);
+
+	exports.default = NewsFeed;
+
+/***/ },
+/* 555 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -51991,7 +52294,7 @@
 	exports.default = ResearchHomeIndex;
 
 /***/ },
-/* 553 */
+/* 556 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -52044,7 +52347,7 @@
 	exports.default = NotFoundPage;
 
 /***/ },
-/* 554 */
+/* 557 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -52059,7 +52362,7 @@
 
 	var _reactRouter = __webpack_require__(204);
 
-	var _researchReducers = __webpack_require__(555);
+	var _researchReducers = __webpack_require__(558);
 
 	var _researchReducers2 = _interopRequireDefault(_researchReducers);
 
@@ -52070,7 +52373,7 @@
 	exports.default = store;
 
 /***/ },
-/* 555 */
+/* 558 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

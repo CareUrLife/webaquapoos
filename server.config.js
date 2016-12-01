@@ -1,5 +1,5 @@
 var svConfig = {
-    Port : 80
+    Port : 8080
 }
 
 module.exports = svConfig;

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {browserHistory} from 'react-router';
-import {Form, FormGroup, Col, FormControl, Button, Checkbox} from 'react-bootstrap';
+import {Form, FormGroup, Col, FormControl, Button, Checkbox, ControlLabel} from 'react-bootstrap';
 import ReactDOM from 'react-dom';
 import Auth from '../../APIs/Auth.js';
 class ResearchSignup extends Component {
@@ -23,7 +23,7 @@ class ResearchSignup extends Component {
             '&realName=' + encodeURIComponent(ReactDOM.findDOMNode(this.refs.realName).value) +
             '&isAddmin=false' + 
             '&email=' + encodeURIComponent(ReactDOM.findDOMNode(this.refs.email).value) +
-            '&password=' + encodeURIComponent(ReactDOM.findDOMNode(this.refs.password1).value);
+            '&password=' + encodeURIComponent(ReactDOM.findDOMNode(this.refs.password1).value) + '&description=' + encodeURIComponent(ReactDOM.findDOMNode(this.refs.description).value);
         let xhr =new XMLHttpRequest();
         xhr.open('post', '/research/signup');
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -76,7 +76,11 @@ class ResearchSignup extends Component {
                     <FormGroup controlId="email">
                             <FormControl ref="email" type="text" placeholder="Your Email" />
                     </FormGroup>
-
+                    
+                    <FormGroup controlId="formControlsTextarea">
+                        <ControlLabel>Write something about you</ControlLabel>
+                        <FormControl componentClass="textarea" placeholder="sth about you..." />
+                    </FormGroup>
                     
                     <FormGroup>
                         <Button type="submit" onClick={this.formProcess.bind(this)}>

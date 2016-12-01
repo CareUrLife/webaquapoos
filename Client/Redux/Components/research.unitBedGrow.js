@@ -12,31 +12,31 @@ class UnitBedGrow extends Component {
     render() {
         
         const delUnitAlertConfirm = (
-            <Popover id="delUnitAlertConfirm" title="Đkm chắc xóa chớ ?"  >
+            <Popover id={"delUnitAlertConfirm" + this.props.pos.unit} title="Đkm chắc xóa chớ ?"  >
                 <ButtonGroup>
-                    <Button className="delButton" onClick={()=>this.props.onUnitBarClick(this.props.pos)}>Co</Button>
-                    <Button className="backButton" onClick={()=>this.refs.overlay1.hide()}>
+                    <Button className="delButton" onClick={()=>{this.props.onUnitBarClick(this.props.pos);
+                                                                this.refs.overlay.hide();}}>Co</Button>
+                    <Button className="backButton" onClick={()=>this.refs.overlay.hide()}>
                         Khong
                     </Button>
                 </ButtonGroup>
             </Popover>
         )
 
-        const overlayProps1 = {
+        const overlayProps = {
             container : this,
-            overlay : delUnitAlertConfirm
+            overlay : delUnitAlertConfirm,
+            rootClose : true
         }   
         return(
             <div  className="unit-bedgrow-section col-xs-12 col-sm-12 col-md-12 col-lg-12"> 
                 <div className="unit-bedgrow-section-header" >
 
                     <span>{this.props.name}</span>
-                    
-                        <OverlayTrigger {...overlayProps1} trigger="click" ref="overlay1" placement="left">
+                        <OverlayTrigger {...overlayProps} trigger="click" ref="overlay" placement="left">
                             <i className="fa fa-window-close fa-3" aria-hidden="true" type="button" >
                             </i>
                         </OverlayTrigger>
-                    
                 </div>
                 <div className="unit-bedgrow-section-body">
                     {this.props.beds.map((bed, index) => {
