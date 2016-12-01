@@ -43,4 +43,8 @@ Tập trung cải thiện infrastructure dành cho công việc developing bao g
  * Tham khảo : <a href="https://github.com/gaearon/react-hot-boilerplate">react-hot-boilerplate</a> và <a href="https://github.com/christianalfoni/webpack-express-boilerplate">webpack-express-boilerplate</a>
 
 2. Tôi ưu hóa webpack compress size bằng cách thêm các plugin webpack thông qua cấu hình webpack.config.prod.js
-
+ ```javascript
+ new webpack.optimize.DedupePlugin(), //dedupe similar code
+ new webpack.optimize.UglifyJsPlugin(), //minify everything
+ new webpack.optimize.AggressiveMergingPlugin() //merger chunks 
+ ```
