@@ -63,7 +63,7 @@ so you cannot find any output file of reloading on hard disk.
 
 3. After modified the path and publicPath, HRM worked correctly. HRM worked correctly when we had publicPath and browser path of output file have
   same value string, as they are in webpack documentation : http://webpack.github.io/docs/configuration.html#output-publicpath
-	![alt text](http://imgur.com/f1x1qgf "HRM works")
+	![Imgur](http://i.imgur.com/f1x1qgf.png)
 
 ###Reference###
 
