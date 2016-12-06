@@ -19,7 +19,7 @@ module.exports = function(config) {
                     if(err || !researcher) {
                         return res.status(401).end();
                     }
-                    researcherData = {
+                    let researcherData = {
                         usrName : researcher.usrName,
                         realName : researcher.realName,
                         email : researcher.email,

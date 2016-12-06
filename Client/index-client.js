@@ -7,4 +7,8 @@ import {Provider} from 'react-redux';
 
 window.onload = ()=> {
     ReactDOM.render(<Provider store={store}><AppRoutes/></Provider>, document.getElementById('root'));
+    module.hot.accept();
 };
+
+
+

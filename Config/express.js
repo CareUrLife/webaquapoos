@@ -15,6 +15,7 @@ module.exports = function() {
         console.log("PRODUCTION ENVIRONMENT");
         var compression = require('compression');
         app.use(compression());
+        require("nodejs-dashboard");
     }else if(process.env.NODE_ENV === "development"){
         console.log("DEVELOPMENT ENVIRONMENT"); 
         webpackDevHelper.useWebpackMiddleware(app);
@@ -55,7 +56,7 @@ module.exports = function() {
     // Static Assets
     app.set("views", './App/Views');
     app.set("view engine", 'ejs');
-    app.use(express.static('/home/p77u4n/Documents/CodeRespository/Project/CareUrLife/AquapoOs/Client/Assets'));
+    app.use( express.static('/home/p77u4n/Documents/CodeRespository/Project/CareUrLife/AquapoOs/Client/Assets'));
 
     // Router
     require("../App/Routes/index.route.js")(app);

@@ -2,13 +2,15 @@ var webpack = require('webpack');
 var path = require('path');
 
 module.exports = {
+    context : __dirname,
     entry: [
-        './Client/index-client.js'
+        'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
+        path.join(__dirname, 'Client/index-client.js')
     ],
     output: {
-        path: path.join(__dirname, 'Client/Assets/Utils/'),
-        filename: 'master.react.js',
-        publicPath: './Client/Assets/'
+        path: path.resolve(__dirname, 'Client/Assets/Utils/'),
+        filename: 'bundle.js',
+        publicPath: '/Utils/'
     },
     module: {
         loaders: [{
@@ -27,8 +29,8 @@ module.exports = {
         ]
     },
     plugins : [
-        new webpack.HotModuleReplacementPlugin(),
         new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV' : JSON.stringify('development')

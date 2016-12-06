@@ -7,6 +7,7 @@ import Signup from './Redux/Components/research.signup.js';
 import ContainerResearch from './Redux/Components/Containers/research.container.home.js';
 import ResearchDashboard from './Redux/Components/research.dashboard.js';
 import ResearchHomeIndex from './Redux/Components/research.home.index.js';
+import User from './Redux/Components/research.userinfo.js';
 import {Provider} from 'react-redux';
 
 const routes = (
@@ -17,6 +18,7 @@ const routes = (
             <Route path="login" component={Login}/>
             <Route path="signup" component={Signup}/>
             <Route path="dashboard" component={ResearchDashboard}/>
+            <Route path="user" component={User}/>
         </Route>
     </Route>
 );

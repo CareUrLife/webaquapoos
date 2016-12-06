@@ -77,9 +77,9 @@ class ResearchSignup extends Component {
                             <FormControl ref="email" type="text" placeholder="Your Email" />
                     </FormGroup>
                     
-                    <FormGroup controlId="formControlsTextarea">
+                    <FormGroup controlId="description">
                         <ControlLabel>Write something about you</ControlLabel>
-                        <FormControl componentClass="textarea" placeholder="sth about you..." />
+                        <FormControl ref="description" placeholder="sth about you..." />
                     </FormGroup>
                     
                     <FormGroup>

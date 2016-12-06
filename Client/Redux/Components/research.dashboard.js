@@ -3,7 +3,6 @@ import {Tab, Row, Col, Nav, NavItem} from 'react-bootstrap';
 import ContainerGarden from './Containers/research.container.garden.js';
 import Garden from './research.garden.js';
 import DetailStatus from './research.detailStatus.js';
-import UserInfo from './research.dashboard.userinfo.js';
 import Statistic from './research.dashboard.statistic.js';
 import NewsFeed from './research.dashboard.newsfeed.js';
 import Auth from '../../APIs/Auth.js';
@@ -21,7 +20,6 @@ class ResearchDashboard extends Component {
                                  onCheckVisibilityClick = {this.props.onCheckVisibilityClick}/>;
         contentTabs[1] = React.createElement(Statistic);
         contentTabs[2] = React.createElement(NewsFeed);
-        contentTabs[3] = React.createElement(UserInfo, {user : this.props.user});
  
         this.toggleTab = this.toggleTab.bind(this);
     }
@@ -57,36 +55,25 @@ class ResearchDashboard extends Component {
     }
 
     render() {
-        
+        let iconStyle = {marginRight : "5px"} 
         return(
-            <div>
-            <div id="wrapper" defaultActiveKey="first">
-                <div>
-                  <div id="sidebar-wrapper">
-                      <UserInfoBox className="nav-tabs-container" toggleTabs={[null, null, ()=>this.toggleTab(3)]}/>
-                    <hr></hr>
-                    <div id="nav-tabs-header" className="nav-tabs-container">
-                          <h3>Dashboard</h3>
-                    </div>
-                    <Nav bsStyle="pills" stacked>
-                        <NavItem eventKey="first" className="nav-tabs-container" onClick={() => this.toggleTab(0)}>
-                            <i className="fa fa-1x fa-pagelines" aria-hidden="true"></i>
-                            <span style={{paddingLeft : "8px"}}>Your Garden</span>
-                      </NavItem>
-                      <NavItem eventKey="second" className="nav-tabs-container" onClick={() => this.toggleTab(1)}>
-                            <i className="fa fa-1x fa-line-chart" aria-hidden="true"></i>
-                            <span style={{paddingLeft : "8px"}}>Statistic</span>
-                      </NavItem>
-                      <NavItem eventKey="third" className="nav-tabs-container" onClick={() => this.toggleTab(2)}>
-                            <i className="fa fa-1x fa-university" aria-hidden="true"></i>
-                            <span style={{paddingLeft : "8px"}}>News Feed</span>
-                      </NavItem>
-                    </Nav>
-                </div>
-                <TabContent units={this.props.units} numUnit={this.props.numUnit} content={this.state.contentTabs[this.state.activeTab]}/>
-            </div>
-              </div> 
-            </div>
+        <div>
+            <nav className="cd-side-nav">
+                <ul>
+                    <li className="cd-label">Main</li>
+                    <li className={this.state.activeTab == 0 ? "active" : ""} onClick={() => this.toggleTab(0)}>
+                        <a><i style={iconStyle} className="fa fa-paw"></i>Your Garden</a>
+                    </li>
+                    <li className={this.state.activeTab == 1 ? "active" : ""} onClick={() => this.toggleTab(1)} >
+                        <a><i style={iconStyle} className="fa fa-pie-chart"></i>Statistic</a>
+                    </li>
+                    <li className={this.state.activeTab == 2 ? "active" : ""} onClick={() => this.toggleTab(2)} >
+                        <a><i style={iconStyle} className="fa fa-university"></i>News Feed</a>
+                    </li>
+                </ul>
+            </nav>
+            <TabContent units={this.props.units} numUnit={this.props.numUnit} content={this.state.contentTabs[this.state.activeTab]}/>
+        </div>
         ); 
     }
 }
@@ -101,10 +88,10 @@ class UserInfoBox extends Component {
         return (
             <div id="user-info" className={this.props.className}>
                 <Row>
-                    <Col sm={4} md={4} xs={4}>
+                    <Col sm={4} md={4} xs={12}>
                         <img className="img-circle" id="profile-picture" src="/Images/Research/user-face.jpg"></img>
                     </Col>
-                    <Col sm={8} md={8} xs={8}>
+                    <Col id="user-detail" sm={8} md={8} xs={12}>
                         <span>Welcome, <strong>Bang</strong></span>
                         <br></br>
                         <i className="fa fa-bell" aria-hidden="true" onClick={this.props.toggleTabs[0]}></i>
@@ -125,7 +112,7 @@ class TabContent extends Component {
 
     render() {
         return (
-            <div className="page-content-wrapper">
+            <div className="content-wrapper">
                 <div className="container-fluid">
                     {React.cloneElement(this.props.content, {units : this.props.units, numUnit : this.props.numUnit})}
                 </div>

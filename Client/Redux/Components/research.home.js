@@ -76,45 +76,63 @@ class ResearchHome extends Component {
         }
                 return (
             <div>
-                <Navbar inverse collapseOnSelect id="top-nav" fixedTop={true}>
-                    <Navbar.Header>
-                        <Navbar.Brand>
-                            <a href="#">AquapoOS Researcher</a>
-                        </Navbar.Brand>
-                        <Navbar.Toggle/>
-                    </Navbar.Header>
-                    <Navbar.Collapse>
-                        <Nav>
-                            <NavItem eventKey={1} href="#">Introduction</NavItem>
-                        </Nav>
-                        
-                        {this.props.user.isUserAuthenticated ? (
-                            <Nav pullRight>
-                                <LinkContainer to={{pathname: "/research/dashboard"}}>
-                                    <NavItem eventKey={2}>Your Garden</NavItem>
-                                </LinkContainer>
-                                
-                                
-                                <NavItem eventKey={3} onClick={this.logOut.bind(this)}>Log out</NavItem>
+                <header className="cd-main-header">
+                    <a href="#0" className="cd-logo"><img src="/Images/cd-logo.svg" alt="Logo"/></a>
+
+                    <a href="#0" className="cd-nav-trigger">Menu<span></span></a>
+                    <nav className="cd-nav">
+                         
                             
-                            </Nav>
-                        ):(
-                            <Nav pullRight>
-                                <LinkContainer to="/research/login">
-                                    <NavItem eventKey={4}>Log in</NavItem>
-                                </LinkContainer>
+                            {this.props.user.isUserAuthenticated ? (
+                                <ul className="cd-top-nav">
+                                     <li>
+                                        <a href="#">Introduction</a>
+                                    </li>
+                                    
+                                    <li>
+                                            <LinkContainer to="/research/dashboard">
+                                                <a>Your Garden</a>
+                                             </LinkContainer>
+                                    </li>
+
+                                    <li className="has-children">
+                                        <a><img src="/Images/Research/user-face.jpg"/>Account</a>
+                                        <ul>
+                                            <LinkContainer to="/research/user">
+                                                <li>Your Account</li>
+                                            </LinkContainer>
+                                            <li onClick={this.logOut.bind(this)}>
+                                                <a>Log out</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    
+                                    <li onClick={this.logOut.bind(this)}>
+                                        <a>Log out</a>
+                                    </li>
+                                </ul>
+                            ):(
+                            <ul className="cd-top-nav">
+                                <li>
+                                    <a href="#">Introduction</a>
+                                </li>
+                                <li>
+                                    <LinkContainer to="/research/login"><a>Log in</a></LinkContainer>
+                                </li>
                                                             
-                                <LinkContainer to="/research/signup">
-                                    <NavItem eventKey={5}>Signup</NavItem>
-                                </LinkContainer>
-                            </Nav>
-                        )
-                        }
-                    </Navbar.Collapse>
-                </Navbar>
-                <div className="research-content">
+                                <li href="/research/signup">
+                                    <LinkContainer to="/research/signup"><a>Signup</a></LinkContainer>
+                                </li>
+
+                            </ul>
+                            
+                            )
+                            }
+                    </nav>
+                </header>
+                <main className="cd-main-content">
                     {children}
-                </div>
+                </main>
             </div>
 
         )

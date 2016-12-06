@@ -1,8 +1,11 @@
+html {
+  font-size: 62.5%;
+}
 
 body {
     overflow-x: hidden;
-    font-family: "Maven Pro", sans-serif;
-    font-size : 20px;
+    font-family: "Open Sans", sans-serif;
+    font-size : 1.6rem;
     /*webkit-tap-highlight-color: #3c763d*/
     /*background: url("http://i.imgur.com/HgflTDf.jpg") 50% fixed;*/
     background-size: cover;

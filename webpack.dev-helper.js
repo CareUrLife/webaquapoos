@@ -5,11 +5,12 @@ var webpack = require('webpack'),
     webpackcompiler = webpack(webpackconfig);
 
 function useWebpackMiddleware(app) {
+    console.log(webpackconfig.output.path);
     app.use(webpackDevMiddleware(webpackcompiler, {
         publicPath : webpackconfig.output.publicPath,
             stats: {
+                chunk: false,
                 colors: true,
-                chunks: false,
                 'error-only': true // this reduces the amount of stuff You see
             }
     }));
