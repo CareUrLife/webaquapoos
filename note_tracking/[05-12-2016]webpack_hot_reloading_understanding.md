@@ -65,3 +65,7 @@ so you cannot find any output file of reloading on hard disk.
   same value string, as they are in webpack documentation : http://webpack.github.io/docs/configuration.html#output-publicpath
 	![alt text](http://imgur.com/f1x1qgf "HRM works")
 
+###Reference###
+
+* https://medium.com/@rajaraodv/webpack-the-confusing-parts-58712f8fcad9#.iwvm7acfa
+* http://code.fitness/post/2016/02/webpack-public-path-and-hot-reload.html
