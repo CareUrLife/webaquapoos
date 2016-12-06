@@ -30,7 +30,7 @@
 3. Sau khi chỉnh sửa path và publicPath của webpack configuration, hành động get file Utils/bundle.js đã được trả
  về là thành công. publicPath và browserPath của tệp output phải là giống nhau.
 
-![HRM work](https://imgur.com/f1x1qgf)
+![HRM work]("https://imgur.com/f1x1qgf")
 
 
 ###English Version###
