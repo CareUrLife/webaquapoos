@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Auth from '../../APIs/Auth.js';
 
 class UserInfo extends Component {
     
