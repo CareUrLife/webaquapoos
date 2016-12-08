@@ -61,6 +61,7 @@ so you cannot find any output file of reloading on hard disk.
 	 the CDN when running in production.
 	* Some plugins of webpack is publicPath-sensitive (React-hot-loading is an example of such plugins).
 
+<<<<<<< HEAD
 3. After modified the path and publicPath, HRM worked correctly. HRM worked correctly when we had publicPath and browser path of output file have
   same value string, as they are in webpack documentation : http://webpack.github.io/docs/configuration.html#output-publicpath
 	![Imgur](http://i.imgur.com/f1x1qgf.png)
@@ -68,4 +69,12 @@ so you cannot find any output file of reloading on hard disk.
 ###Reference###
 
 [1]:  https://medium.com/@rajaraodv/webpack-the-confusing-parts-58712f8fcad9#.iwvm7acfa
+=======
+3. After modified the path and publicPath, HRM worked correctly. HRM worked correctly when we had publicPath and browser path of output file have same value string, as they are in webpack documentation : <http://webpack.github.io/docs/configuration.html#output-publicpath>
+<img src="https://i.imgur.com/f1x1qgf.png">
+
+###Reference###
+
+[1]: https://medium.com/@rajaraodv/webpack-the-confusing-parts-58712f8fcad9#.iwvm7acfa
+>>>>>>> 0be1baba8d2e7c9ca2fce3ed61dcc9d9575dc35d
 [2]: http://code.fitness/post/2016/02/webpack-public-path-and-hot-reload.html
