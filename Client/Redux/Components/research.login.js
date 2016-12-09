@@ -51,7 +51,7 @@ class ResearchLogin extends Component {
             <div className="login text-center">
                 <h3 className="login-heading">AQUAPOOS RESEARCHER</h3>
                 <p className="background-line">
-                    <span>Log in</span>
+                    <span>Log in AquapoRes</span>
                 </p>
                 <p className="error-message">{this.state.errorMessage}</p>
              	<Form horizontal onSubmit={this.formProcess.bind(this)}>

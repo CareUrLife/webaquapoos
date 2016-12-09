@@ -5,7 +5,7 @@ var webpack = require('webpack'),
     webpackcompiler = webpack(webpackconfig);
 
 function useWebpackMiddleware(app) {
-    console.log(webpackconfig.output.path);
+    console.log(webpackconfig.output.publicPath);
     app.use(webpackDevMiddleware(webpackcompiler, {
         
         publicPath : webpackconfig.output.publicPath,

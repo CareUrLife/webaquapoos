@@ -4,6 +4,6 @@ import {browserHistory} from 'react-router';
 import researchReducers from '../Reducers/research.reducers.js';
 const middleware = routerMiddleware(browserHistory);
 var store = createStore(researchReducers, applyMiddleware(middleware));
-export default store ;
+module.exports =  store ;
 
 

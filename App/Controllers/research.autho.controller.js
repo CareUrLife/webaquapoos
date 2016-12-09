@@ -26,7 +26,7 @@ module.exports = function(config) {
                         isAdmin : researcher.isAdmin,
                         description : researcher.description 
                     }
-                    return res.status(200).json(researcherData : researcherData);
+                    return res.status(200).json({researcherData : researcherData});
                     // next middleware, in our case, this middleware is router
                 });
             });

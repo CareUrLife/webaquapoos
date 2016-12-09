@@ -19,6 +19,7 @@
     "babel-cli": "*",
     "babel-core": "*",
     "babel-loader": "*",
+    "babel-plugin-react-transform": "^2.0.2",
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-react": "*",
     "babel-preset-react-hmre": "*",
@@ -27,6 +28,7 @@
     "react-addons-update": "*",
     "react-hot-loader": "^1.3.1",
     "react-redux": "*",
+    "react-transform-hmr": "^1.0.4",
     "redux": "*",
     "webpack": "^1.13.3",
     "webpack-dev-middleware": "^1.8.4",
@@ -62,7 +64,8 @@
     "winston": "*"
   },
   "scripts": {
-    "start": "nodemon server.js --exec babel-node --presets es2015,react",
+    "dev": "babel-node server ",
+    "start": "node server.js",
     "build": "webpack --config webpack.config.prod.js -p"
   }
 }

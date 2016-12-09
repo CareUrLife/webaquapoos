@@ -13,6 +13,7 @@ class ResearchHomeIndex extends Component {
             
             let xhr = new XMLHttpRequest();
             let _this = this;
+            console.log(this.props);
             xhr.open('post', '/research/auth');
             xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
             xhr.setRequestHeader('Authorization', 'bearer ' + Auth.getToken());
@@ -35,7 +36,7 @@ class ResearchHomeIndex extends Component {
     render() {
         return (
             <div className="container-fluid">
-                <h3>Welcome to Song He Laboratory</h3>
+                <h3>Welcome to Song He Lab Research Area Online , Hello {this.props.user.info.userName} </h3>
             </div>
         );
     }

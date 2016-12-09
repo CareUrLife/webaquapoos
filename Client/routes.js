@@ -23,4 +23,4 @@ const routes = (
     </Route>
 );
 
-export default routes;
+module.exports = routes;

@@ -4,19 +4,24 @@ var path = require('path');
 module.exports = {
     context : __dirname,
     entry: [
-        'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
-        path.join(__dirname, 'Client/index-client.js')
+        'webpack-hot-middleware/client',
+        './Client/index-client.js'
     ],
     output: {
-        path: path.resolve(__dirname, 'Client/Assets/Utils/'),
+        path: path.join(__dirname, 'Client/Assets/Dist/'),
         filename: 'bundle.js',
-        publicPath: '/Utils/'
+        publicPath: '/Dist/'
     },
     module: {
         loaders: [{
-            test: /\.jsx?$/,
-            exclude: /node_modules/,
-            loaders: ['react-hot', 'babel?presets[]=react-hmre'],
+                test: /\.jsx?$/,
+                exclude: /node_modules/,
+                loaders: ['react-hot', 'babel-loader'],
+            },
+            {
+                test: /\.js$/,
+                loaders: ['react-hot', 'babel-loader'],
+                exclude: /node_modules/
             },
             {
                 test: /\.json$/,

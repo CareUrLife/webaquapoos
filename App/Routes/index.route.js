@@ -1,10 +1,11 @@
-import {match, RouterContext} from 'react-router';
-import {Provider} from 'react-redux';
-import React from 'react';
-import reactDOMServer from 'react-dom/server';
-import NotFoundPage from '../../Client/Redux/Components/NotFoundPage.js';
-import routes from '../../Client/routes.js';
-import store from '../../Client/Redux/Store/research.store.js';
+var match = require('react-router').match;
+var RouterContext = require('react-router').RouterContext;
+var Provider = require('react-redux').Provider;
+var React = require('react');
+var reactDOMServer = require('react-dom/server');
+var NotFoundPage = require('../../Client/Redux/Components/NotFoundPage.js');
+var routes = require('../../Client/routes.js');
+var store = require('../../Client/Redux/Store/research.store.js');
 module.exports = function(app) {
     app.get('*', (req, res) => {
         match({ routes, location : req.url}, (error, redirectLocation, renderProps) => {

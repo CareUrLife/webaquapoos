@@ -27,6 +27,7 @@ class ResearchHome extends Component {
         this.state={};
         this.handleTouchTap = this.handleTouchTap.bind(this);
         this.handleRequestClose = this.handleRequestClose.bind(this);
+        this.logOut = this.logOut.bind(this);
     }
 
     componentDidMount() {
@@ -41,9 +42,12 @@ class ResearchHome extends Component {
 
             xhr.onload = function() {
                 if(this.status === 200) {
-                    _this.props.setIsUserAuthenticated(true); 
+                    _this.props.setUserInfo(this.response.researcherData);
+                    console.log(this.response);
+                    _this.props.setIsUserAuthenticated(true);
                 }else{
                     _this.props.setIsUserAuthenticated(false);
+                    Auth.deauthenticateUser();
                 }
             }
 
@@ -151,7 +155,7 @@ class ResearchHome extends Component {
                 return (
                     <div>
                         
-                        <FlatButton label="Your Garden" secondary={true} labelStyle={{paddingBottom : "25px"}} onTouchTap={(event)=>{this.handleTouchTap(event, 1)}}/>
+                        <FlatButton label="Your Garden" secondary={true} style={{bottom : "12px"}} onTouchTap={(event)=>{this.handleTouchTap(event, 1)}}/>
                         
                         <IconButton 
                             onTouchTap={(event)=>{this.handleTouchTap(event, 2)}}
@@ -174,8 +178,8 @@ class ResearchHome extends Component {
                             onRequestClose={this.handleRequestClose}
                             animation={PopoverAnimationVertical}>
                             <Menu>
-                                <MenuItem primaryText="Your Account" />
-                                <MenuItem primaryText="Log Out" />
+                                <MenuItem primaryText="Account" />
+                                <MenuItem primaryText="Log Out" onTouchTap={this.logOut}/>
                             </Menu>
                         </Popover> 
                         
@@ -200,6 +204,7 @@ class ResearchHome extends Component {
 
         return (
             <MuiThemeProvider muiTheme={muiTheme}>
+                <div>
                 <AppBar
                     title={<span style={styles.title}>AQUA-RES</span>}
                     iconElementLeft={<IconButton style={{paddingTop : "14px"}}><FontIcon className="material-icons" color={pink400}>format_list_bulleted</FontIcon></IconButton>}
@@ -207,6 +212,10 @@ class ResearchHome extends Component {
                     style={styles.navbar}>
                     {appBarRightChildren(this.props.user.isUserAuthenticated)}
                 </AppBar>
+                <div>
+                    {children}
+                </div>
+                </div>
             </MuiThemeProvider>
         )
     }
