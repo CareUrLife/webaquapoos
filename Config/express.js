@@ -5,7 +5,8 @@ var config = require('./config'),
     morgan = require('morgan'),
     jwt = require('jsonwebtoken'),
     passport = require('passport'),
-    webpackDevHelper = require('../webpack.dev-helper.js');
+    webpackDevHelper = require('../webpack.dev-helper.js'),
+    chokidar = require('chokidar');
 
 
 module.exports = function() {
@@ -15,10 +16,10 @@ module.exports = function() {
         console.log("PRODUCTION ENVIRONMENT");
         var compression = require('compression');
         app.use(compression());
-        require("nodejs-dashboard");
     }else if(process.env.NODE_ENV === "development"){
         console.log("DEVELOPMENT ENVIRONMENT"); 
         webpackDevHelper.useWebpackMiddleware(app);
+        require("nodejs-dashboard");
     } 
 
     //Body Parser Configuration
@@ -36,7 +37,6 @@ module.exports = function() {
 
     const authCheckMiddleware = require('../App/Controllers/research.autho.controller.js')(config);
 
-    require("../App/Routes/research.route.js")(app);
     app.set('superSecret', config.secret); // set secret variable
 
     
@@ -61,5 +61,15 @@ module.exports = function() {
     // Router
     require("../App/Routes/index.route.js")(app);
 
+    const watcher = chokidar.watch('./express.js');
+
+    watcher.on('ready', function() {
+        watcher.on('all', function() {
+            console.log("Clearing /server/ module cache from server " + require.cache);
+            Object.keys(require.cache).forEach(function(id) {
+                if (/[\/\\]express[\/\\]/.test(id)) delete require.cache[id];
+            });
+        });
+    });
     return app;
 }

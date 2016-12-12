@@ -1,7 +1,7 @@
 import {render} from 'react-dom';
 import React from 'react';
 import { Route, Link, browserHistory, IndexRoute} from 'react-router';
-import Index from './index.home.js';
+import Index from './Redux/Components/index.home.js';
 import Login from './Redux/Components/research.login.js';
 import Signup from './Redux/Components/research.signup.js';
 import ContainerResearch from './Redux/Components/Containers/research.container.home.js';

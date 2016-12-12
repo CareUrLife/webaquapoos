@@ -1,0 +1,8 @@
+{
+    "uid": "appAquapoos",
+    "append": true,
+    "watch": true,
+    "script": "server.js",
+    "sourceDir": "../AquapoOs"
+}
+

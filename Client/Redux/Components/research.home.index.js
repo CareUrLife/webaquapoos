@@ -36,7 +36,7 @@ class ResearchHomeIndex extends Component {
     render() {
         return (
             <div className="container-fluid">
-                <h3>Welcome to Song He Lab Research Area Online , Hello {this.props.user.info.userName} </h3>
+                <h3>Welcome to Song He Lab Research Area Online , Hi {this.props.user.info.userName} </h3>
             </div>
         );
     }

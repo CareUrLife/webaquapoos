@@ -14,7 +14,7 @@ module.exports = function(config) {
                 if(err) {return res.status(401).end();}
 
                 let researcherID = decoded.id;
-                
+
                 ResearcherModel.findOne({_id : researcherID}, function(err, researcher) {
                     if(err || !researcher) {
                         return res.status(401).end();

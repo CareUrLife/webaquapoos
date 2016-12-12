@@ -64,8 +64,31 @@
     "winston": "*"
   },
   "scripts": {
-    "dev": "babel-node server ",
-    "start": "node server.js",
-    "build": "webpack --config webpack.config.prod.js -p"
+    "start": "npm run start-prod",
+    "start-prod" : "better-npm-run start-prod",
+    "build" : "better-npm-run build",
+    "dev" : "npm run start-dev",
+    "start-dev" : "better-npm-run start-dev"
+  },
+  "betterScripts": {
+    "start-prod": {
+        "command" : "node server.js",
+        "env" : {
+            "NODE_ENV": "production"
+        }
+    },
+    "start-dev": {
+        "command" : " node server.js",
+        "env" : {
+            "NODE_ENV" : "development",
+            "PORT" : 8080
+        }
+    },
+    "build" : {
+        "command" : "webpack --config webpack.config.prod.js -p",
+        "env": {
+            "NODE_ENV" : "production"
+        }
+    }
   }
 }

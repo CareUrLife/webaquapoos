@@ -1,5 +1,5 @@
 module.exports = {
-    db: 'mongodb://localhost:27017/aquapos',
+    db: 'mongodb://admin:p77u4naquapoos@ds129038.mlab.com:29038/aquapoos',
     secret: 'developmentSessionSecret',
-    sessionSecure : true
+    sessionSecure : true,
 };

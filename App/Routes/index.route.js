@@ -6,6 +6,7 @@ var reactDOMServer = require('react-dom/server');
 var NotFoundPage = require('../../Client/Redux/Components/NotFoundPage.js');
 var routes = require('../../Client/routes.js');
 var store = require('../../Client/Redux/Store/research.store.js');
+var researchController = require('../Controllers/research.controller.js');
 module.exports = function(app) {
     app.get('*', (req, res) => {
         match({ routes, location : req.url}, (error, redirectLocation, renderProps) => {
@@ -29,4 +30,6 @@ module.exports = function(app) {
             return res.render('index', {markup});
         }) 
     });
+
+    app.use('/research', researchController);
 }
