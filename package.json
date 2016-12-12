@@ -35,8 +35,7 @@
     "webpack-hot-middleware": "^2.13.2"
   },
   "dependencies": {
-    "bcrypt": "^1.0.0",
-    "bcrypt-nodejs": "0.0.3",
+    "bcrypt" : "^1.0.0",
     "body-parser": "*",
     "compression": "*",
     "connect-mongo": "*",
@@ -65,30 +64,30 @@
   },
   "scripts": {
     "start": "npm run start-prod",
-    "start-prod" : "better-npm-run start-prod",
-    "build" : "better-npm-run build",
-    "dev" : "npm run start-dev",
-    "start-dev" : "better-npm-run start-dev"
+    "start-prod": "better-npm-run start-prod",
+    "build": "better-npm-run build",
+    "dev": "npm run start-dev",
+    "start-dev": "better-npm-run start-dev"
   },
   "betterScripts": {
     "start-prod": {
-        "command" : "node server.js",
-        "env" : {
-            "NODE_ENV": "production"
-        }
+      "command": "node server.js",
+      "env": {
+        "NODE_ENV": "production"
+      }
     },
     "start-dev": {
-        "command" : " node server.js",
-        "env" : {
-            "NODE_ENV" : "development",
-            "PORT" : 8080
-        }
+      "command": " node server.js",
+      "env": {
+        "NODE_ENV": "development",
+        "PORT": 8080
+      }
     },
-    "build" : {
-        "command" : "webpack --config webpack.config.prod.js -p",
-        "env": {
-            "NODE_ENV" : "production"
-        }
+    "build": {
+      "command": "webpack --config webpack.config.prod.js -p",
+      "env": {
+        "NODE_ENV": "production"
+      }
     }
   }
 }
