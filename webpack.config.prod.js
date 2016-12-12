@@ -5,7 +5,7 @@ module.exports = {
         './Client/index-client.js'
     ],
     output: {
-        path: './Client/Assets/Utils/',
+        path: './Client/Assets/Dist/',
         filename: 'bundle.js'
     },
     module: {

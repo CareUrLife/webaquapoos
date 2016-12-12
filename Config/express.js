@@ -6,7 +6,8 @@ var config = require('./config'),
     jwt = require('jsonwebtoken'),
     passport = require('passport'),
     webpackDevHelper = require('../webpack.dev-helper.js'),
-    chokidar = require('chokidar');
+    chokidar = require('chokidar'),
+    path = require('path');
 
 
 module.exports = function() {
@@ -56,7 +57,7 @@ module.exports = function() {
     // Static Assets
     app.set("views", './App/Views');
     app.set("view engine", 'ejs');
-    app.use( express.static('/home/p77u4n/Documents/CodeRespository/Project/CareUrLife/AquapoOs/Client/Assets'));
+    app.use(express.static(path.join(__dirname, '..', 'Client/Assets')));
 
     // Router
     require("../App/Routes/index.route.js")(app);

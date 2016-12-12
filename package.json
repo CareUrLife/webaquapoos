@@ -35,7 +35,7 @@
     "webpack-hot-middleware": "^2.13.2"
   },
   "dependencies": {
-    "bcrypt" : "^1.0.0",
+    "bcrypt": "^1.0.1",
     "body-parser": "*",
     "compression": "*",
     "connect-mongo": "*",
