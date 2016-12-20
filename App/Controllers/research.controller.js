@@ -10,27 +10,27 @@ router.post('/signup', function(req, res, next) {
     passport.authenticate('local-signup',  function(err ) {
         if(err) {
             if(err.name === 'MongoError' && err.code === 11000) {
-                return res.status(409).json({success : false, message: "This email is already taken"});
+                return res.status(409).json({success : false, message: {main : "This email is already taken"}});
             }
 
-            return res.status(400).json({sucess : false, message : "Cannot process login form"});
+            return res.status(400).json({sucess : false, message : {main : "Cannot process login form"}});
         }
 
-        res.status(200).json({success : true, message : "Signup Successfully"});
+        res.status(200).json({success : true, message : {main : "Signup Successfully"}});
     })(req, res, next);
 });
 
 router.post('/login', function(req, res, next) {
 
     passport.authenticate('local-login',  
-        function(err, token, researcherData) {
+        function(err, token, researcherData, appData) {
             if(err) {
                 if(err.name === "IncorrectEmailOrPasswordError") {
-                    return res.status(404).send({success : false, message : err.message}).end();
+                    return res.status(406).send({success : false, message : {main: err.message}}).end();
                 }
-                return res.status(400).json({success : false, message : "Cannot process signup form"}).end();
+                return res.status(400).json({success : false, message : {main : "Cannot process signup form"}}).end();
             }
-            return res.status(200).json({success : true, message : "Login Successfully",token : token, researcherData : researcherData}).end();
+            return res.status(200).json({success : true, message : {main : "Login Successfully"},token : token, researcherData, appData}).end();
         })(req, res, next);
 });
 

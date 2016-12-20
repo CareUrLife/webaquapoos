@@ -10,6 +10,7 @@ class NewsFeed extends Component {
         return (
             <div >
                 <h4>News Feed</h4>
+               
             </div>
         );
     }

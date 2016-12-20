@@ -1,36 +1,37 @@
 import React, {Component} from 'react';
-import {Tab, Row, Col, Nav, NavItem} from 'react-bootstrap';
-import ContainerGarden from './Containers/research.container.garden.js';
-import Garden from './research.garden.js';
-import DetailStatus from './research.detailStatus.js';
+import Garden from './research.dashboard.garden.js';
 import Statistic from './research.dashboard.statistic.js';
 import NewsFeed from './research.dashboard.newsfeed.js';
 import Auth from '../../APIs/Auth.js';
+import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
+import {Toolbar, ToolbarGroup} from 'material-ui/Toolbar';
+import Paper from 'material-ui/Paper';
+import FontIcon from 'material-ui/FontIcon';
+
+const contentTabs = [];
+
+
+
 
 class ResearchDashboard extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {contentTabs : [], activeTab : 0};
-        let contentTabs = this.state.contentTabs;
-        contentTabs[0] = <Garden onUnitBarClick = {this.props.onUnitBarClick}
-                                 onBtnAddVegetClick = {this.props.onBtnAddVegetClick}
-                                 onBtnDelVegetClick = {this.props.onBtnDelVegetClick}
-                                 onButtonAddClick = {this.props.onButtonAddClick}
-                                 onCheckVisibilityClick = {this.props.onCheckVisibilityClick}/>;
-        contentTabs[1] = React.createElement(Statistic);
-        contentTabs[2] = React.createElement(NewsFeed);
- 
-        this.toggleTab = this.toggleTab.bind(this);
+        this.state = { selectedIndex : 0};
+         
+        this.select = this.select.bind(this);
     }
+
+
     
-    toggleTab(eventId) {
+    select(eventId) {
         let newState = {};
-        newState = Object.assign({}, this.state, {activeTab : eventId});
+        newState = Object.assign({}, this.state, {selectedIndex : eventId});
         this.setState(newState);
     }
 
     componentDidMount() {
+        /* 
         let _this = this;
         if(Auth.getToken() !== null && Auth.getToken() !== undefined) {
             let xhr = new XMLHttpRequest();
@@ -52,28 +53,37 @@ class ResearchDashboard extends Component {
         }else{
             this.props.redirect('/research/login');
         }
+        */
+        contentTabs[0] = <Garden onUnitBarClick = {this.props.onUnitBarClick}
+                                        onBtnAddVegetClick = {this.props.onBtnAddVegetClick}
+                                        onBtnDelVegetClick = {this.props.onBtnDelVegetClick}
+                                        onButtonAddClick = {this.props.onButtonAddClick}
+                                        onCheckVisibilityClick = {this.props.onCheckVisibilityClick}
+                                        units = {this.props.units}
+                                        numUnit = {this.props.numUnit}
+                                        user = {this.props.user}
+                                        appData = {this.props.appData}
+                                        />;
+        contentTabs[1] = React.createElement(Statistic);
+        contentTabs[2] = React.createElement(NewsFeed);
     }
 
     render() {
         let iconStyle = {marginRight : "5px"} 
+        const gardenIcon = <FontIcon className="material-icons">local_florist</FontIcon>;
+        const statisticIcon = <FontIcon className="material-icons">assessment</FontIcon>;
+        const newFeedIcon = <FontIcon className="material-icons">book</FontIcon>;
         return(
-        <div>
-            <nav className="cd-side-nav">
-                <ul>
-                    <li className="cd-label">Main</li>
-                    <li className={this.state.activeTab == 0 ? "active" : ""} onClick={() => this.toggleTab(0)}>
-                        <a><i style={iconStyle} className="fa fa-paw"></i>Your Garden</a>
-                    </li>
-                    <li className={this.state.activeTab == 1 ? "active" : ""} onClick={() => this.toggleTab(1)} >
-                        <a><i style={iconStyle} className="fa fa-pie-chart"></i>Statistic</a>
-                    </li>
-                    <li className={this.state.activeTab == 2 ? "active" : ""} onClick={() => this.toggleTab(2)} >
-                        <a><i style={iconStyle} className="fa fa-university"></i>News Feed</a>
-                    </li>
-                </ul>
-            </nav>
-            <TabContent units={this.props.units} numUnit={this.props.numUnit} content={this.state.contentTabs[this.state.activeTab]}/>
-        </div>
+            <div>
+                {contentTabs[this.state.selectedIndex]}
+                <Paper zDepth={1} style={{bottom:'0px', position: 'fixed', width : '100%'}}>
+                    <BottomNavigation selectedIndex={this.state.selectedIndex}>
+                        <BottomNavigationItem label="Your Garden" icon={gardenIcon} onTouchTap={()=>this.select(0)}/>
+                        <BottomNavigationItem label="Statistic" icon={statisticIcon} onTouchTap={()=>this.select(1)}/>
+                        <BottomNavigationItem label="Resources" icon={newFeedIcon} onTouchTap={()=>this.select(2)}/>
+                    </BottomNavigation>
+                </Paper>
+            </div>
         ); 
     }
 }
@@ -85,8 +95,10 @@ class UserInfoBox extends Component {
     }
 
     render() {
+        
         return (
             <div id="user-info" className={this.props.className}>
+                
                 <Row>
                     <Col sm={4} md={4} xs={12}>
                         <img className="img-circle" id="profile-picture" src="/Images/Research/user-face.jpg"></img>
@@ -105,21 +117,6 @@ class UserInfoBox extends Component {
     }
 }
 
-class TabContent extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return (
-            <div className="content-wrapper">
-                <div className="container-fluid">
-                    {React.cloneElement(this.props.content, {units : this.props.units, numUnit : this.props.numUnit})}
-                </div>
-            </div>
-        )
-    }
-}
 export default ResearchDashboard;
 
 

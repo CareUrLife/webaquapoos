@@ -2,13 +2,22 @@ export const ADD_UNIT_GROW_BED = 'ADD_UNIT_GROW_BED';
 export const ADD_VEGET_GROW_BED = 'ADD_VEGET_GROW_BED';
 export const DEL_UNIT_GROW_BED = 'DEL_UNIT_GROW_BED';
 export const DEL_VEGET_GROW_BED = 'DEL_VEGET_GROW_BED';
-export const VISIBILITY_GROW_BED = 'VISIBILITY_GROW_BED';
+export const ADD_GROW_BED = 'ADD_GROW_BED';
+export const DEL_GROW_BED = 'DEL_GROW_BED';
 export const SET_IS_USER_AUTHENTICATED = 'SET_IS_USER_AUTHENTICATED';
 export const FLUSH_OUT_STATE_DATA = 'FLUSH_OUT_STATE_DATA';
 export const SET_USER_INFO = 'SET_USER_INFO';
+export const SET_INITIAL_STATE = 'SET_INITIAL_STATE';
     /*
      * Action Creators
      */
+
+export function setInitialState(state) {
+    return {
+        type : SET_INITIAL_STATE,
+        state
+    }
+}
 
 export function addUnitGrowBed(unitName, temp, ph, nitrat) {
     return {
@@ -18,6 +27,7 @@ export function addUnitGrowBed(unitName, temp, ph, nitrat) {
             beds : [
                 
             ],
+            numBed : 0,
             unitStatus : {
                 ph,
                 temp,
@@ -37,12 +47,34 @@ export function delUnitGrowBed(pos) {
     }
 }
 
+export function addGrowBed(pos, material) {
+    return {
+        type : ADD_GROW_BED,
+        payload : {
+            pos,
+            material,
+            vegets : [],
+            status : {},
+            numVeget : 0
+        }
+    }
+}
+
+export function delGrowBed(pos) {
+    return {
+        type : DEL_GROW_BED,
+        pos
+    }
+}
+                           
+
 export function addVegetGrowBed(pos, text) {
     return {
         type : ADD_VEGET_GROW_BED,
         payload : {
             pos,
-            name : text
+            name : text,
+            status : {}
         }
     }
 }
@@ -53,13 +85,6 @@ export function delVegetGrowBed(vegetIndex, pos) {
         pos
     }
 } 
-
-export function visibilityGrowBed(pos) {
-    return {
-        type : VISIBILITY_GROW_BED,
-        pos
-    }
-}
 
 export function setIsUserAuthenticated(value) {
     return {

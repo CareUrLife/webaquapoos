@@ -1,6 +1,10 @@
 var webpack = require('webpack');
 var path = require('path');
 
+require.extensions['.css'] = () => {
+  return;
+};
+
 module.exports = {
     context : __dirname,
     entry: [
@@ -15,13 +19,13 @@ module.exports = {
     module: {
         loaders: [{
                 test: /\.jsx?$/,
-                exclude: /node_modules/,
+                exclude: path.join(__dirname, 'node_modules'),
                 loaders: ['react-hot', 'babel-loader'],
             },
             {
                 test: /\.js$/,
                 loaders: ['react-hot', 'babel-loader'],
-                exclude: /node_modules/
+                exclude: path.join(__dirname, 'node_modules')
             },
             {
                 test: /\.json$/,
@@ -29,7 +33,8 @@ module.exports = {
             },
             {
                 test : /\.css$/,
-                loader: 'style!css'           
+                loader: 'style-loader!css-loader?module',
+                include: /flexboxgrid/
             }
         ]
     },

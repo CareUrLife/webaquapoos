@@ -10,7 +10,10 @@ var ResearcherInfoSchema = new mongoose.Schema({
     description : String
 });
 
+
 ResearcherInfoSchema.index({usrName : 1}, {unique : true});
+
+
 
 ResearcherInfoSchema.methods.comparePassword = function(password, callback) {
     bcrypt.compare(password, this.password, callback);

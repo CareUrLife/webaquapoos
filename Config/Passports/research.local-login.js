@@ -1,4 +1,5 @@
 const ResearcherModel = require('mongoose').model('ResearcherInfo');
+const FishInfoModel = require('mongoose').model('FishInfo');
 const passportLocalStrategy = require('passport-local').Strategy;
 const jwt = require('jsonwebtoken');
 module.exports = function(config) {
@@ -32,12 +33,8 @@ module.exports = function(config) {
                     return done(error);
                 }
 
-                let payload = {
-                    id : researcher._id
-                };
-                
-                let token = jwt.sign(payload, config.secret);
-
+                let token = jwt.sign({id : researcher._id}, config.secret);
+                var appData = {fishListNames : []};
                 let researcherData = {
                     usrName : researcher.usrName,
                     realName : researcher.realName,
@@ -45,8 +42,15 @@ module.exports = function(config) {
                     isAdmin : researcher.isAdmin,
                     description : researcher.description
                 };
+                FishInfoModel.find().exec(function(err, docs) {
+                    if(err) return done(err); 
+                    docs.forEach(function(fish) {
+                        appData.fishListNames.push(fish.name);
+                    })
+                    return done(null,token, researcherData, appData);
+                })
+                
 
-                return done(null, token, researcherData);
             });
         });
     }

@@ -1,0 +1,26 @@
+{
+	"1" : {
+		"name" : "Cá rô phi",
+		"description" : "Cá rô phi là tên gọi chỉ chung cho các loài cá nước ngọt phổ biến, sống tại các sông suối, kênh rạch, ao hồ,[1] đây là giống cá thuộc họ Cichlidae gồm có nhiều chủng, có nguồn gốc phát sinh từ châu Phi và Trung Đông. Một trong những loài đặc hữu của họ cá này là Cá rô phi đỏ (Oreochromis sp), cá rô phi xanh (Oreochromis aureus) và rô phi vằn (Oreochromis niloticus). Là loài cá có giá trị kinh tế và thông dụng trong bữa ăn, cá rô phi được du nhập đi nhiều nơi và nhiều loài đã trở thành loài xâm lấn.",
+		"references" : {
+			"Wikipedia" : "https://vi.wikipedia.org/wiki/C%C3%A1_r%C3%B4_phi"
+		},
+		"specificInfo" : {}
+    	      },
+	"2" : {
+		"name" : "Cá rô đồng",
+		"description" : "Cá rô đồng (gọi đơn giản là cá rô) (danh pháp hai phần: Anabas testudineus) là loại cá sống ở môi trường nước ngọt, nước lợ. Chúng có thịt béo, thơm, dai, ngon, có giá trị thương phẩm cao tuy rằng hơi nhiều xương. Kích thước cực đại của chúng có thể tới 250 mm.",
+		"references" : {
+			"Wikipedia" : "https://vi.wikipedia.org/wiki/C%C3%A1_r%C3%B4_%C4%91%E1%BB%93ng"
+		},
+		"specificInfo" : {}
+	      },
+	"3" : {
+		"name" : "Cá chạch bông bé",
+		"description" : "Cá chạch bông bé (Danh pháp khoa học: Macrognathus aculeatus) là một loài cá trong họ Cá chạch sông (Mastacembelidae). Đây là loài cá nước ngọt bản địa của vùng Đông Nam Á. Đây là loài cá nước ngọt chủ yếu sóngtrong các con sông lớn, nhưng cũng gặp tại các vùng đầm lầy vùng đất thấp hay những nơi có lượng bùn nhiều.",
+		"references" : {
+			"Wikipedia" : "https://vi.wikipedia.org/wiki/Macrognathus_aculeatus"
+		},
+		"specificInfo" : {}
+	      }
+}

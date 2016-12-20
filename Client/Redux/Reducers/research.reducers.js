@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import {ADD_UNIT_GROW_BED, ADD_VEGET_GROW_BED, DEL_UNIT_GROW_BED, DEL_VEGET_GROW_BED,VISIBILITY_GROW_BED, SET_IS_USER_AUTHENTICATED, SET_USER_INFO, FLUSH_OUT_STATE_DATA} from '../Actions/research.actions.js';
+import {ADD_UNIT_GROW_BED, ADD_VEGET_GROW_BED, DEL_UNIT_GROW_BED, DEL_VEGET_GROW_BED,ADD_GROW_BED, DEL_GROW_BED, SET_IS_USER_AUTHENTICATED, SET_USER_INFO, FLUSH_OUT_STATE_DATA, SET_INITIAL_STATE} from '../Actions/research.actions.js';
 
 const initialState = {
     units : [],
@@ -7,6 +7,9 @@ const initialState = {
     user : {
         isUserAuthenticated : false,
         info : {}
+    },
+    appData : {
+    
     }
 }
 
@@ -47,29 +50,17 @@ var clone = (obj) => {
 function ResearchReducers(state = initialState, action) {
     
     switch (action.type) {
+        case SET_INITIAL_STATE : {
+            let newState = clone(action.state);
+            return newState; 
+        }
         case ADD_UNIT_GROW_BED : {
             let newPayload = clone(action.payload);
             newPayload.pos.unit = state.numUnit;
             // Khoi tao 4 Bed trong Units, dong bo thong so status
             // voi Unit
             let i;
-            for(i = 1 ; i <= 4 ; i++) {
-                let newBed = {
-                    name : "Grow Bed " + i,
-                    vegets : [],
-                    numVeget : 0,
-                    status : {
-                        ph : newPayload.unitStatus.ph,
-                        temp : newPayload.unitStatus.temp,
-                        nitrat : newPayload.unitStatus.nitrat
-                    },
-                    pos : {
-                        unit : newPayload.pos.unit,
-                        bed : (i-1)
-                    }  
-                }
-                newPayload.beds.push(newBed);
-            }
+            
             let newState = clone(state);
             newState.units.push(newPayload);
             newState.numUnit = state.numUnit + 1;
@@ -86,6 +77,28 @@ function ResearchReducers(state = initialState, action) {
             }
             console.log(newState);
             // Defer Process Index Element
+            return newState;
+        }
+
+        case ADD_GROW_BED : {
+            let newState = clone(state);
+            let newPayload = clone(action.payload);
+            newPayload.pos.bed = newState.units[newPayload.pos.unit].numBed++;
+            newState.units[newPayload.pos.unit].numBed++;
+            newState.units[newPayload.pos.unit].beds.push(newPayload);
+            return newState;
+        }
+
+        case DEL_GROW_BED : {
+            let newState = clone(state);
+            let unit = newState.units[action.pos.unit];
+            unit.beds.splice(action.pos.bed, 1);
+            unit.numBed--;
+            let  newNumbed = newState.units[action.pos.unit].numBed;
+            for(let i = action.pos.bed; i < newNumbed; i++) {
+                unit.beds[i].pos.bed--; 
+            }
+
             return newState;
         }
         case ADD_VEGET_GROW_BED : {
@@ -110,16 +123,7 @@ function ResearchReducers(state = initialState, action) {
             // Defer Process Index Element
             return newState;
         }
-        case VISIBILITY_GROW_BED : {
-            let newState = clone(state); 
-            let growBed = newState.units[action.pos.unit].beds[action.pos.bed];
-            if(growBed.visibility) {
-                growBed.visibility = false;
-            }else{
-                growBed.visibility = true;
-            }
-            return newState;
-        }
+        
         case SET_IS_USER_AUTHENTICATED : {
             let newState = clone(state);
             newState.user.isUserAuthenticated = action.value;

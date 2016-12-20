@@ -1,5 +1,10 @@
 var webpack = require('webpack');
 
+require.extensions['.css'] = () => {
+  return;
+};
+
+
 module.exports = {
     entry: [
         './Client/index-client.js'
